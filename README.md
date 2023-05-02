@@ -3,4 +3,4 @@ https://sonarcloud.io/summary/overall?id=examly-test_dfb2b829-c870-4917-8b23-6ca
 
 
 Charan - Backend 
-Harsha -frontend
+
