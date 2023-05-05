@@ -14,7 +14,7 @@
 	<name>Education-Loan-Portal</name>
 	<description>The objective of an Education Loan Portal is to provide a centralized platform for students to apply for education loans online, simplifying and streamlining the loan application process. The portal aims to make it easier for students to obtain financing for their education and for financial institutions to manage and process loan applications.</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -55,5 +55,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
