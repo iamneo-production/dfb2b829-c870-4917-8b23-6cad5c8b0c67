@@ -1,22 +1,40 @@
 package EducationLoanPortal.Education.Loan.Portal.model;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
     private Long id;
- private String firstName;
- private String lastName;
- private String email;
- private String password;
- private String address;
- private String phoneNumber;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String address;
+    private String phoneNumber;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<LoanApplication> loanApplicationList;
+
+    public User(Long id, String firstName, String lastName, String email, String password, String address,
+                String phoneNumber) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public User() {
+        super();
+    }
 
     public Long getId() {
         return id;
@@ -74,10 +92,17 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public List<LoanApplication> getLoanApplicationList() {
+        return loanApplicationList;
+    }
+
+    public void setLoanApplicationList(List<LoanApplication> loanApplicationList) {
+        this.loanApplicationList = loanApplicationList;
+    }
+
     @Override
     public String toString() {
-    return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-            + ", password=" + password + ", address=" + address + ", phoneNumber=" + phoneNumber + "]";
+        return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+                + ", password=" + password + ", address=" + address + ", phoneNumber=" + phoneNumber + "]";
     }
-    
 }
