@@ -10,4 +10,7 @@ public class EducationLoanPortalApplication {
 		SpringApplication.run(EducationLoanPortalApplication.class, args);
 	}
 
+	// config the cors headers
+
+
 }

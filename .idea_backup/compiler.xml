@@ -9,11 +9,5 @@
         <module name="iamneo-production_dfb2b829-c870-4917-8b23-6cad5c8b0c67" />
       </profile>
     </annotationProcessing>
-
-=======
-    <bytecodeTargetLevel>
-      <module name="iamneo-production_dfb2b829-c870-4917-8b23-6cad5c8b0c67" target="1.8" />
-    </bytecodeTargetLevel>
->>>>>>> 7c2f87900ecf64cdbb41520adb2533be42a1a5cb
   </component>
 </project>
