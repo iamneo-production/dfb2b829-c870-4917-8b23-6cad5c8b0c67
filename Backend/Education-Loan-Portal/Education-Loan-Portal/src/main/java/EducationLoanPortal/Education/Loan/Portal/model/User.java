@@ -21,8 +21,11 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<LoanApplication> loanApplicationList;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Loan> loanList;
+
     public User(Long id, String firstName, String lastName, String email, String password, String address,
-                String phoneNumber) {
+            String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
