@@ -1,24 +1,21 @@
+package EducationLoanPortal.Education.Loan.Portal.controler;
+
+import EducationLoanPortal.Education.Loan.Portal.model.LoanApplication;
+import EducationLoanPortal.Education.Loan.Portal.service.LoanApplicationService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/loanApplication")
+@RequestMapping("/loan-applications")
 public class LoanApplicationController {
-
     private final LoanApplicationService loanApplicationService;
 
     public LoanApplicationController(LoanApplicationService loanApplicationService) {
         this.loanApplicationService = loanApplicationService;
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<List<LoanApplication>> getAllLoanApplications() {
-        List<LoanApplication> loanApplications = loanApplicationService.findAllLoanApplications();
-        return new ResponseEntity<>(loanApplications, HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<LoanApplication> getLoanApplicationById(@PathVariable("id") Long id) {
-        LoanApplication loanApplication = loanApplicationService.findLoanApplicationById(id);
-        return new ResponseEntity<>(loanApplication, HttpStatus.OK);
     }
 
     @PostMapping("")
@@ -27,16 +24,40 @@ public class LoanApplicationController {
         return new ResponseEntity<>(newLoanApplication, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<LoanApplication> updateLoanApplication(@RequestBody LoanApplication loanApplication) {
-        LoanApplication updateLoanApplication = loanApplicationService.updateLoanApplication(loanApplication);
-        return new ResponseEntity<>(updateLoanApplication, HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<LoanApplication> getLoanApplicationById(@PathVariable("id") Long id) {
+        Optional<LoanApplication> loanApplication = loanApplicationService.findLoanApplicationById(id);
+        if (loanApplication.isPresent()) {
+            return new ResponseEntity<>(loanApplication.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteLoanApplication(@PathVariable("id") Long id) {
-        loanApplicationService.deleteLoanApplication(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    // @PutMapping("/{id}")
+    // public ResponseEntity<LoanApplication> updateLoanApplication(@RequestBody
+    // LoanApplication loanApplication) {
+    // LoanApplication updateLoanApplication =
+    // loanApplicationService.updateLoanApplication(loanApplication);
+    // return new ResponseEntity<>(updateLoanApplication, HttpStatus.OK);
+    // }
+
+    @GetMapping
+    public ResponseEntity<?> getAllLoanApplications(
+            @RequestParam(required = false) Long user,
+            @RequestParam(required = false) String status) {
+
+        if (user != null) {
+            Optional<LoanApplication> loanApplications = loanApplicationService.findAllByUserId(user);
+            return ResponseEntity.ok(loanApplications);
+        } else if (status != null) {
+            Optional<LoanApplication> loanApplications = loanApplicationService.findAllByStatus(status);
+            return ResponseEntity.ok(loanApplications);
+        } else {
+            // Return an error response
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Either 'user' or 'status' parameter is required");
+        }
     }
+
 
 }
