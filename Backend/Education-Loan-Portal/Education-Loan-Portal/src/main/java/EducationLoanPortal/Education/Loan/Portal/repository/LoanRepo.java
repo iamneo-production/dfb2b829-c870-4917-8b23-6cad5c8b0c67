@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-
-
 @Repository
 public interface LoanRepo extends JpaRepository<Loan, Long> {
 
@@ -20,9 +18,6 @@ public interface LoanRepo extends JpaRepository<Loan, Long> {
     // Get Loan by id
 
     Optional<Loan> getLoanById(Long id);
-
-    // update loan by id
-
 
     // delete loan by id
     Optional<Loan> deleteLoanById(Long id);

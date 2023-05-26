@@ -110,4 +110,5 @@ public class LoanApplication implements Serializable {
                 ", user_id=" + user_id +
                 '}';
     }
+
 }

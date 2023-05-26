@@ -16,6 +16,7 @@ public interface LoanApplicationRepo extends JpaRepository<LoanApplication, Long
     // add loan application
     LoanApplication save(LoanApplication loanApplication);
 
+    // get all loan applications by user id
     Optional<LoanApplication> findAllByUserId(Long id);
 
     Optional<LoanApplication> findAllByStatus(String status);
