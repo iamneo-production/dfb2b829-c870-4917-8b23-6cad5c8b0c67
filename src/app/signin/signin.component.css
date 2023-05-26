@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300&display=swap');
+
+
+.login-block{
+    text-align: center;
+  border: 3px solid black;
+  margin:auto;
+    width:400px;
+    height:370px;
+    background-color: white;
+    font-family: 'Figtree',sans-serif;
+  }
+  .attri{
+    text-align:left;
+    font-size:20px;
+    padding-left:50px ;
+  }
+  input{
+    outline: none;
+  }
+  .box1{
+    width:250px;
+    border-style: none none solid none;
+    border-color:gold;
+    font-size:20px;
+  }
+  .text-danger{
+     font-size:15px;
+     color:red;
+  }
+  .button{
+    background-color:  #f6e75e;
+    border: 3px solid white;
+    outline:none;
+    width:150px;
+    height:50px;
+    font-size:20px;
+    cursor:pointer;
+    font-family: 'Figtree',sans-serif;
+}
+
+.button:hover{
+    background-color: gold;
+}
+.bg {
+  background-image: url('https://cdn.pixabay.com/photo/2016/12/18/02/41/background-1914910_1280.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+ }
+
+ .title{
+  text-align:center;
+  padding-top:100px;
+  background-image: url('https://cdn.pixabay.com/photo/2016/03/17/23/07/abstract-1264071_1280.png');
+
+  height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  font-family: 'Figtree', sans-serif;
+  
+ 
+ }
+ 
