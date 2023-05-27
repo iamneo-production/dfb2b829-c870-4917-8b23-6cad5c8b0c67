@@ -1,0 +1,50 @@
+
+<body class="bg">
+    <app-navbar></app-navbar>
+    <div class="title">
+        <h1>Education Loan Portal</h1>
+        <h3>Get for your dream,enhance your dream!!!</h3>
+        </div>
+        <br><br><br>
+
+    <div class="login-block">
+        <h2>Login Here</h2>
+<form #f="ngForm" novalidate (ngSubmit)="f.form.valid&&onSubmit()">
+    <div class="form-group">
+    <div class="attri">
+    <label for="uname" >Username</label><br>
+    
+    <input type="text" class="form-control box1" id="uname" name="uname" [(ngModel)]="formdata.uname" #uname="ngModel" required >
+    <br>
+    <span class="text-danger" *ngIf="this.submit&&uname.errors?.['required']" >
+        Username is required.
+    </span>
+    </div>
+    </div>
+    <br><br><br>
+    <div class="form-group">
+    <div class="attri">
+    <label for="pwd">Password</label><br>
+    
+    <input type="password" class="form-control box1" id="pwd" name="pwd" [(ngModel)]="formdata.pwd" #pwd="ngModel" required><br>
+    
+    <span class="text-danger" *ngIf="this.submit&&pwd.errors?.['required']">
+        Password is required.
+    </span>
+</div>
+    </div>
+    <div class="form-group">
+        <div  class="text-center" *ngIf="this.loading">
+            <div class="spinner-border text-primary " role="status">
+            <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div><br><br>
+    <input type="submit" class="button" value="LOGIN" [disabled]="this.loading" (click)="submit=true"><br><br>
+
+</form>
+<div class="attri">
+    If you are a new user? Click <a href="javascript:void(0);" routerLink="/signup">Register</a>
+</div>
+    </div>
+</body>
