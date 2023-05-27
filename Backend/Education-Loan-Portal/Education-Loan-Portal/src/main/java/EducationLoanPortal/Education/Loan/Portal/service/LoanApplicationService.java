@@ -34,6 +34,23 @@ public class LoanApplicationService {
                 .orElseThrow(() -> new RuntimeException("Loan application by id " + id + " was not found"));
     }
 
+    public LoanApplication updateLoanApplicationById(Long id, LoanApplication loanApplication) {
+        Optional<LoanApplication> existingLoanApplication = loanApplicationRepo.findById(id);
+        if (!existingLoanApplication.isPresent()) {
+            throw new RuntimeException("Loan application not found with id: " + id);
+        }
+        // get the loan application by id
+        var loanApplication_var = existingLoanApplication.get();
+        // set the loan application purpose, loan amount, status and application date
+        loanApplication_var.setPurpose(loanApplication.getPurpose());
+        loanApplication_var.setLoanAmount(loanApplication.getLoanAmount());
+        loanApplication_var.setStatus(loanApplication.getStatus());
+        loanApplication_var.setApplicationDate(loanApplication.getApplicationDate());
+        // save the loan application
+        return loanApplicationRepo.save(loanApplication_var);
+
+    }
+
     public Optional<LoanApplication> findAllLoanApplications() {
         try {
             return loanApplicationRepo.findAllByStatus("pending");
@@ -57,15 +74,6 @@ public class LoanApplicationService {
         }
     }
 
-    public List<Loan> findAllLoansByUserId(Long userId) {
-        Optional<LoanApplication> loanApplication = loanApplicationRepo.findAllByUserId(userId);
-        if (loanApplication.isPresent()) {
-            return loanApplication.get().getLoans();
-        } else {
-            throw new RuntimeException("Error while getting all loans by user id");
-        }
-    }
-
     public Optional<LoanApplication> findAllByStatus(String status) {
         try {
             return loanApplicationRepo.findAllByStatus(status);
@@ -73,9 +81,9 @@ public class LoanApplicationService {
             throw new RuntimeException("Error while getting all loan applications");
         }
 
-        // public void deleteLoanApplication(Long id) {
-        // loanApplicationRepo.deleteLoanApplicationById(id);
-        // }
-
     }
+
+//    public Optional<LoanApplication> findAllByUserId(Long user) {
+//
+//    }
 }

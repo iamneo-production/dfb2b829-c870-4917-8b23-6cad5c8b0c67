@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -28,4 +29,5 @@ public interface LoanRepo extends JpaRepository<Loan, Long> {
     // get all loans by status
     Optional<Loan> findAllByStatus(String status);
 
+    List<Long> findAllLoanIdsByUserId(Long userId);
 }

@@ -7,8 +7,10 @@ import EducationLoanPortal.Education.Loan.Portal.repository.LoanRepo;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -27,10 +29,9 @@ public class LoanService {
     }
 
     // get loan by id
-    public Loan getLoanById(Long id) {
-        Loan loan = loanRepo.getLoanById(id)
+    public Loan getLoanById(Long id) throws UserNotFoundException {
+        return loanRepo.getLoanById(id)
                 .orElseThrow(() -> new UserNotFoundException("Loan by id " + id + " was not found"));
-        return loan;
     }
 
     // update an existing loan by id
@@ -45,7 +46,7 @@ public class LoanService {
     }
 
     // delete an existing loan by id
-    public void deleteLoan(Long id) {
+    public void deleteLoan(Long id) throws UserNotFoundException {
         try {
             loanRepo.deleteLoanById(id);
         } catch (Exception e) {
@@ -53,27 +54,27 @@ public class LoanService {
         }
     }
 
-    // get all loans by user id
-//    public List<Loan> findAllLoansByUserId(Long userId) {
-//        // get all loans ids by user id
-//        List<Long> loanIds = loanRepo.findAllLoanIdsByUserId(userId);
-//        // iterate over the list of loan ids and get the loan by id
-//        List<Loan> loans = loanIds.stream().map(loanId -> loanRepo.getLoanById(loanId).get())
-//                .collect(Collectors.toList());
-//
-//        if (loans.isEmpty()) {
-//            // return an empty list if no loans were found
-//            return Collections.emptyList();
-//        } else {
-//            // return the list of loans if at least one loan was found
-//            return loans;
-//        }
-//    }
+//     get all loans by user id
+    public List<Loan> findAllLoansByUserId(Long userId) {
+        // get all loans ids by user id
+        List<Long> loanIds = loanRepo.findAllLoanIdsByUserId(userId);
+        // iterate over the list of loan ids and get the loan by id
+        List<Loan> loans = loanIds.stream().map(loanId -> loanRepo.getLoanById(loanId).get())
+                .collect(Collectors.toList());
+
+        if (loans.isEmpty()) {
+            // return an empty list if no loans were found
+            return Collections.emptyList();
+        } else {
+            // return the list of loans if at least one loan was found
+            return loans;
+        }
+    }
 
 
 
     // get all loans by status
-    public Optional<Loan> findAllLoansByStatus(String status) {
+    public Optional<Loan> findAllLoansByStatus(String status) throws UserNotFoundException {
         try {
             return loanRepo.findAllByStatus(status);
         } catch (Exception e) {
