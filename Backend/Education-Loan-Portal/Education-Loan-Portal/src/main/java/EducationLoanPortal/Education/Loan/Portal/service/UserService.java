@@ -26,8 +26,17 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public User updateUser(User user) {
-        return userRepo.save(user);
+    public User updateUser(User user) throws UserNotFoundException {
+
+        var existingUser = userRepo.findUserById(user.getId())
+                .orElseThrow(() -> new UserNotFoundException("User by id " + user.getId() + " was not found"));
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setPassword(user.getPassword());
+        existingUser.setAddress(user.getAddress());
+        existingUser.setPhoneNumber(user.getPhoneNumber());
+        return userRepo.save(existingUser);
     }
 
     public User findUserById(Long id) {

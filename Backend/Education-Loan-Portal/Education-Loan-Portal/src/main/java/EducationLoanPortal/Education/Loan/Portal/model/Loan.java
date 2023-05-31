@@ -106,5 +106,18 @@ public class Loan {
         this.user_id = user_id;
     }
 
+    @Override
+    public String toString() {
+        return "Loan{" +
+                "user_id=" + user_id +
+                ", id=" + id +
+                ", user=" + user +
+                ", loanAmount=" + loanAmount +
+                ", interestRate=" + interestRate +
+                ", status='" + status + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
 
 }

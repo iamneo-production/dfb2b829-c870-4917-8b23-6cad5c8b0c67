@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 import java.time.LocalDate;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class LoanApplication implements Serializable {
@@ -110,4 +111,6 @@ public class LoanApplication implements Serializable {
                 ", user_id=" + user_id +
                 '}';
     }
+
+
 }

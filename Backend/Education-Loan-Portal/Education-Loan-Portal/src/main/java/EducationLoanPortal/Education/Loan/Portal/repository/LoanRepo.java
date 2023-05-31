@@ -28,5 +28,4 @@ public interface LoanRepo extends JpaRepository<Loan, Long> {
 
     // get all loans by status
     Optional<Loan> findAllByStatus(String status);
-  List<Long> findAllLoanIdsByUserId(Long userId);
 }
