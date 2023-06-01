@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+
+import { url } from '../config';
 
 @Component({
   selector: 'app-apply-loan-form',
@@ -8,29 +10,39 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./apply-loan-form.component.css']
 })
 export class ApplyLoanFormComponent {
+  loanType: string = '';
+  loanAmount: number = 0;
+  loanApplyDate: string = '';
+  purpose: string = '';
 
   constructor(private http: HttpClient) {}
 
   submitLoanForm(form: NgForm) {
     if (form.valid) {
-      // Perform post request
       const loanData = {
-        loanAmount: form.value.loanAmount,
-        loanApplyDate: form.value.loanApplyDate,
-        purpose: form.value.purpose,
-        loanType: form.value.loanType,
+        loanAmount: this.loanAmount,
+        applicationDate: this.loanApplyDate,
+        purpose: this.purpose,
+        loanType: this.loanType,
+        status: 'Applied',
+        user_id:'10'
       };
-      //loanData should be request body 
 
-      const  headers = { 'content-type': 'application/json'}
-      const body=JSON.stringify(loanData);
-      console.log(body)
-      this.http.post('http://localhost:8080/loan-applications', body,{'headers':headers})
-      .subscribe
-      (res => console.log(res),
-      err => console.log(err));
-      alert('Loan application submitted successfully');
-      form.reset();
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      const options = { headers: headers };
+
+      this.http.post(`${url}/loan-applications`, loanData, options)
+        .subscribe(
+          (res) => {
+            console.log(res);
+            alert('Loan application submitted successfully');
+            form.reset();
+          },
+          (err) => {
+            console.log(err);
+            alert('An error occurred while submitting the loan application');
+          }
+        );
     } else {
       alert('Please enter valid details');
     }
