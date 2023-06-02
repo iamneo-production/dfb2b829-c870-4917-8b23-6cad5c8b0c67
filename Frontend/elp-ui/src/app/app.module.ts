@@ -24,10 +24,13 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 import { HomeComponent } from './home/home.component';
 import { ApplyLoanFormComponent } from './apply-loan-form/apply-loan-form.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { LoansComponent } from './loans/loans.component';
 
 
 @NgModule({
@@ -35,7 +38,9 @@ import { ApplyLoanFormComponent } from './apply-loan-form/apply-loan-form.compon
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    ApplyLoanFormComponent
+    ApplyLoanFormComponent,
+    DialogComponent,
+    LoansComponent
   ],
 
   imports: [
@@ -54,6 +59,7 @@ import { ApplyLoanFormComponent } from './apply-loan-form/apply-loan-form.compon
     MatOptionModule,
     MatInputModule,
     MatInputModule,
+    MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
