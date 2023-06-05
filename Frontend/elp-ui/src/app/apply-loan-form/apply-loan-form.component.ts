@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 import { url } from '../config';
 
@@ -14,8 +16,9 @@ export class ApplyLoanFormComponent {
   loanAmount: number = 0;
   loanApplyDate: string = '';
   purpose: string = '';
+  messageState: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private dialog: MatDialog) {}
 
   submitLoanForm(form: NgForm) {
     if (form.valid) {
@@ -35,16 +38,24 @@ export class ApplyLoanFormComponent {
         .subscribe(
           (res) => {
             console.log(res);
-            alert('Loan application submitted successfully');
+            this.openDialog('Success', 'Loan application submitted successfully');
             form.reset();
           },
           (err) => {
             console.log(err);
-            alert('An error occurred while submitting the loan application');
+            this.openDialog('Error', 'An error occurred while submitting the loan application');
           }
         );
     } else {
-      alert('Please enter valid details');
+      this.openDialog('Validation Error', 'Please enter valid details');
     }
+  }
+
+  openDialog(title: string, message: string) {
+    this.messageState = title; // Set the messageState based on the title
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: { title, message }
+    });
   }
 }
