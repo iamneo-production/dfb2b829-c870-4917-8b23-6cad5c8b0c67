@@ -32,6 +32,10 @@ import { ApplyLoanFormComponent } from './apply-loan-form/apply-loan-form.compon
 import { DialogComponent } from './dialog/dialog.component';
 import { LoansComponent } from './loans/loans.component';
 
+import { ProfileComponent } from './profile/profile.component';
+import { MatCardModule } from '@angular/material/card';
+
+
 
 @NgModule({
   declarations: [
@@ -40,7 +44,9 @@ import { LoansComponent } from './loans/loans.component';
     HomeComponent,
     ApplyLoanFormComponent,
     DialogComponent,
-    LoansComponent
+    LoansComponent,
+    ProfileComponent
+    
   ],
 
   imports: [
@@ -65,7 +71,8 @@ import { LoansComponent } from './loans/loans.component';
     ReactiveFormsModule,
     MatChipsModule,
 
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
