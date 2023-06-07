@@ -48,12 +48,13 @@ public class LoanService {
     }
 
     // delete an existing loan by id
-    public void deleteLoan(Long id) throws UserNotFoundException {
+    public boolean deleteLoan(Long id) throws UserNotFoundException {
         try {
             loanRepo.deleteLoanById(id);
         } catch (Exception e) {
             throw new UserNotFoundException("Loan by id " + id + " was not found");
         }
+        return true;
     }
 
     public List<Loan> findAllLoansByUserId(Long userId) {
@@ -77,4 +78,4 @@ public class LoanService {
         }
     }
 
-
+}

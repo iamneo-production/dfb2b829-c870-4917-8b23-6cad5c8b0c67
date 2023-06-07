@@ -72,6 +72,16 @@ public class LoanApplicationService {
             throw new RuntimeException("Error while getting loan application by id");
         }
     }
+    
+    public boolean deleteLoanApplicationById(Long id) {
+        try {
+            loanApplicationRepo.deleteLoanApplicationById(id);
+            
+        } catch (Exception e) {
+            throw new RuntimeException("Error while deleting loan application by id");
+        }
+        return true;
+    }
 
     public List<LoanApplication> findAllByStatus(String status) {
         try {
@@ -85,14 +95,13 @@ public class LoanApplicationService {
     public List<LoanApplication> findAllByUserId(Long userId) {
         try {
 
-            return loanApplicationRepo.findByUserId(userId);
+
+            return loanApplicationRepo.findAllByUserId(userId);
+
         } catch (Exception e) {
             throw new RuntimeException("Error while getting all loan applications");
         }
 
 
-//    public Optional<LoanApplication> findAllByUserId(Long user) {
-//
-//    }
     }
 }
