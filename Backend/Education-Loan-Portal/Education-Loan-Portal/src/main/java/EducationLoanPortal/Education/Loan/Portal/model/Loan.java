@@ -1,5 +1,6 @@
 package EducationLoanPortal.Education.Loan.Portal.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Entity;
@@ -9,16 +10,18 @@ import java.time.LocalDate;
 @Entity
 public class Loan {
 
-    private Long user_id;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @JsonIgnoreProperties("loanList")
+    @JsonBackReference
     private User user;
+
+
+    private Long user_id;
 
     private Double loanAmount;
     private Double interestRate;
