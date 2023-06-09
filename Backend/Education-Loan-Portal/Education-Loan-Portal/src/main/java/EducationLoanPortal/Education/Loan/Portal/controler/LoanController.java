@@ -67,20 +67,26 @@ public class LoanController {
     }
 
     @GetMapping
-    public List<Loan> findAllLoans(
-            @RequestParam(value = "user_id", required = false) Long userId,
-            @RequestParam(value = "status", required = false) String status)
-            throws ResourceNotFoundException, UserNotFoundException {
-        // If user id is present, return all loans by user id
-        if (userId != null) {
-            return loanService.findAllLoansByUserId(userId);
+    public ResponseEntity<?> findAllLoans(
+            @RequestParam(required = false) Long user,
+            @RequestParam(required = false) String status) throws UserNotFoundException {
+        {
+            // If user id is present, return all loans by user id
+            if (user != null) {
+                List<Loan> loans = loanService.findAllLoansByUserId(user);
+                return ResponseEntity.ok(loans);
+            }
+            // If status is present, return all loans by status
+            else if (status != null) {
+                List<Loan> loans = loanService.findAllLoansByStatus(status);
+                return ResponseEntity.ok(loans);
+            } else {
+                // Return an error response
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("No loans found");
+            }
         }
-        // If status is present, return all loans by status
-        if (status != null) {
-            return loanService.findAllLoansByStatus(status);
-        }
-        // If no parameters are present, return an empty list
-        return Collections.emptyList();
+
     }
 
 }

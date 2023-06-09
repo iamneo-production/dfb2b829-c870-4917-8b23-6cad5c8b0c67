@@ -58,17 +58,21 @@ public class LoanService {
     }
 
     public List<Loan> findAllLoansByUserId(Long userId) {
-        // Get all loans by user id
-        List<Loan> loans = loanRepo.findAllByUserId(userId);
+        {
+            try {
 
-        if (loans.isEmpty()) {
-            // Return an empty list if no loans were found
-            return Collections.emptyList();
-        } else {
-            // Return the list of loans if at least one loan was found
-            return loans;
+
+                return loanRepo.findAllByUserId(userId);
+
+            } catch (Exception e) {
+                throw new RuntimeException("Error while getting all loan applications");
+            }
+
+
         }
     }
+        // Get all loans by user id
+
 
     public List<Loan> findAllLoansByStatus(String status) throws UserNotFoundException {
         try {

@@ -87,7 +87,7 @@ public class LoanApplicationController {
         } else {
             // Return an error response
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Either 'user' or 'status' parameter is required");
+                    .body("No loans Found");
         }
     }
 
