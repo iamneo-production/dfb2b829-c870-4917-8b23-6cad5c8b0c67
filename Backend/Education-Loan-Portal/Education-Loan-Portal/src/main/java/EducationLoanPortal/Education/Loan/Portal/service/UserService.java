@@ -23,6 +23,7 @@ public class UserService {
     }
 
     public List<User> findAllUsers() {
+
         return userRepo.findAll();
     }
 

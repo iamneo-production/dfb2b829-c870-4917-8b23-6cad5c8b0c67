@@ -1,6 +1,5 @@
 package EducationLoanPortal.Education.Loan.Portal.service;
 
-import EducationLoanPortal.Education.Loan.Portal.model.Loan;
 import EducationLoanPortal.Education.Loan.Portal.model.LoanApplication;
 import EducationLoanPortal.Education.Loan.Portal.repository.LoanApplicationRepo;
 import org.springframework.stereotype.Service;
@@ -51,7 +50,7 @@ public class LoanApplicationService {
 
     }
 
-    public Optional<LoanApplication> findAllLoanApplications() {
+    public List<LoanApplication> findAllLoanApplications() {
         try {
             return loanApplicationRepo.findAllByStatus("pending");
         } catch (Exception e) {
@@ -73,8 +72,18 @@ public class LoanApplicationService {
             throw new RuntimeException("Error while getting loan application by id");
         }
     }
+    
+    public boolean deleteLoanApplicationById(Long id) {
+        try {
+            loanApplicationRepo.deleteLoanApplicationById(id);
+            
+        } catch (Exception e) {
+            throw new RuntimeException("Error while deleting loan application by id");
+        }
+        return true;
+    }
 
-    public Optional<LoanApplication> findAllByStatus(String status) {
+    public List<LoanApplication> findAllByStatus(String status) {
         try {
             return loanApplicationRepo.findAllByStatus(status);
         } catch (Exception e) {
@@ -83,7 +92,16 @@ public class LoanApplicationService {
 
     }
 
-//    public Optional<LoanApplication> findAllByUserId(Long user) {
-//
-//    }
+    public List<LoanApplication> findAllByUserId(Long userId) {
+        try {
+
+
+            return loanApplicationRepo.findAllByUserId(userId);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error while getting all loan applications");
+        }
+
+
+    }
 }

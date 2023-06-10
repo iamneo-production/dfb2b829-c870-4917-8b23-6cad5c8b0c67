@@ -10,22 +10,22 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+
+
 public interface LoanRepo extends JpaRepository<Loan, Long> {
 
-    // Create a new loan
-    Loan save(Loan loan);
-
-    // Get Loan by id
-
+    // Get loan by id
     Optional<Loan> getLoanById(Long id);
 
+    // Delete loan by id
+    void deleteById(Long id);
     // delete loan by id
     Optional<Loan> deleteLoanById(Long id);
+    // Get all loans by user id
+    List<Loan> findAllByUserId(Long userId);
 
-    // get all loans by user id
-    Optional<Loan> findAllByUserId(Long id);
+    // Get all loans by status
+    List<Loan> findAllByStatus(String status);
 
-    // get all loans by status
-    Optional<Loan> findAllByStatus(String status);
+
 }

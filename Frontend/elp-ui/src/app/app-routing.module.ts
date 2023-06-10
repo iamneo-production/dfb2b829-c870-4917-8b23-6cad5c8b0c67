@@ -12,7 +12,8 @@ const routes: Routes = [
   // { path: '', component: AppComponent },
   { path: 'home', component: HomeComponent },
   { path: 'apply-loan-form', component: ApplyLoanFormComponent },
-  { path: 'loans', component: LoansComponent }
+  { path: 'loans', component: LoansComponent },
+  {path:'', component: ProfileComponent}
 
 
 

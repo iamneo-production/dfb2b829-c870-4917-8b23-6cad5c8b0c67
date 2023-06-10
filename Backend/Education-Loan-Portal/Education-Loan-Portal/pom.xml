@@ -12,6 +12,7 @@
 	<groupId>EducationLoanPortal</groupId>
 	<artifactId>Education-Loan-Portal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
 	<name>Education-Loan-Portal</name>
 	<description>Education Loan Portal</description>
 	<properties>

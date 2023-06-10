@@ -6,19 +6,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-//
 public interface LoanApplicationRepo extends JpaRepository<LoanApplication, Long> {
-
-    // void deleteLoanApplicationById(Long id);
 
     Optional<LoanApplication> findLoanApplicationById(Long id);
 
-    // add loan application
     LoanApplication save(LoanApplication loanApplication);
 
-    // get all loan applications by user id
-    Optional<LoanApplication> findAllByUserId(Long id);
+    // delete loan application by id
+    void deleteLoanApplicationById(Long id);
 
-    Optional<LoanApplication> findAllByStatus(String status);
+    List<LoanApplication> findAllByUserId(Long user_id);
 
+    List<LoanApplication> findAllByStatus(String status);
 }

@@ -2,7 +2,10 @@ package EducationLoanPortal.Education.Loan.Portal.model;
 
 import EducationLoanPortal.Education.Loan.Portal.model.User;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -20,7 +23,7 @@ public class LoanApplication implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @JsonIgnoreProperties("loanApplicationList")
+    @JsonBackReference
     private User user;
 
     private Double loanAmount;
