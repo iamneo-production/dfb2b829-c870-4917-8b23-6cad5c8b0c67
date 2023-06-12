@@ -34,6 +34,7 @@ import { LoansComponent } from './loans/loans.component';
 
 import { ProfileComponent } from './profile/profile.component';
 import { MatCardModule } from '@angular/material/card';
+import { LoginComponent} from './login/login.component';
 
 
 
@@ -45,8 +46,9 @@ import { MatCardModule } from '@angular/material/card';
     ApplyLoanFormComponent,
     DialogComponent,
     LoansComponent,
-    ProfileComponent
-    
+    ProfileComponent,
+    LoginComponent
+
   ],
 
   imports: [
