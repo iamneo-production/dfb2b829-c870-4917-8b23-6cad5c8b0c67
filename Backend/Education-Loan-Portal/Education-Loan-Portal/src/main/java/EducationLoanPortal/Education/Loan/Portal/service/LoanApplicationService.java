@@ -5,6 +5,7 @@ import EducationLoanPortal.Education.Loan.Portal.repository.LoanApplicationRepo;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,15 +94,16 @@ public class LoanApplicationService {
     }
 
     public List<LoanApplication> findAllByUserId(Long userId) {
-        try {
+        List<LoanApplication> loanApplications = loanApplicationRepo.findAll();
+        List<LoanApplication> result = new ArrayList<>();
 
-
-            return loanApplicationRepo.findAllByUserId(userId);
-
-        } catch (Exception e) {
-            throw new RuntimeException("Error while getting all loan applications");
+        for (LoanApplication loanApplication : loanApplications) {
+            if (loanApplication.getUser().getId().equals(userId)) {
+                result.add(loanApplication);
+            }
         }
+        System.out.println(result);
 
-
+        return result;
     }
 }
