@@ -1,0 +1,47 @@
+input{
+    border-bottom: 2px solid #3e4bdc;
+    border-style: none none solid none;
+    outline: none;
+    align-items: center;
+   inline-size: 60%;
+}
+
+.label1{
+    text-align: left;
+    margin-left: 10%;
+}
+
+form{
+    
+        width: 450px;
+        padding: 10px;
+        border: 2px solid black;
+        font-size: 25px;
+        padding: 20px;
+        margin-left: 30%;
+        text-align: center;
+      
+    
+}
+
+span{
+    color:red;
+    font-size:20px;
+}
+
+.span1{
+    color:red;
+    font-size:20px;
+}
+
+button{
+    background-color: #3e4bdc;
+    height: 60px;
+    width:180px;
+    font-size: 20px;
+    color:white
+}
+
+button:hover{
+    opacity:0.8;
+}

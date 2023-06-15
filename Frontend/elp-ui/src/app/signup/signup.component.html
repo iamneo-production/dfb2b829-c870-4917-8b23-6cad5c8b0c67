@@ -1,1 +1,100 @@
-<p>signup works!</p>
+
+
+<body style="background-color:#3e4bdc">
+    <br><br><br>
+    <div>
+      <form (ngSubmit)="submitForm(f)" #f="ngForm" style="background-color:white">
+        <h3>Register here!</h3>
+          <div class="label1 form-group">
+          <label for="id1" >ID:</label><br>
+          <input type="number" name="id1" id="id1" class="form-control" #id2="ngModel" [(ngModel)]="id1" required><br>
+          <span *ngIf="id2.invalid && id2.touched">ID is requried</span>
+      </div><br><br><br>
+  
+      <div class="label1 form-group">
+          <label for="fname">First name:</label><br>
+          <input type="text" name="fname" class="form-control" pattern="[ A-Za-z]" #fname1="ngModel" [(ngModel)]="fname" required><br>
+          <div *ngIf="lname1.invalid && (lname1.dirty || lname1.touched)">
+            <div class="span1" *ngIf="fname1.errors?.['required']">
+              First name is required
+            </div>
+            <div  class="span1" *ngIf="fname1.errors?.['pattern']">
+              Enter valid First name
+            </div>
+          </div>
+      </div><br><br><br>
+  
+      <div class="label1 form-group">
+          <label for="lname">Last name:</label><br>
+          <input type="lname" name="lname" id="lname" pattern="[ A-Za-z]" class="form-control" #lname1="ngModel" [(ngModel)]="lname" required><br>
+          <div *ngIf="lname1.invalid && (lname1.dirty || lname1.touched)">
+            <div class="span1" *ngIf="lname1.errors?.['required']">
+              Last name is required
+            </div>
+            <div  class="span1" *ngIf="lname1.errors?.['pattern']">
+              Enter valid Last name
+            </div>
+            </div>
+          
+      </div><br><br><br>
+  
+          <div class="label1 form-group">
+          <label for="mail">Email:</label><br>
+          <input type="text" email name="mail" [(ngModel)]="mail"  #mail1="ngModel"  required><br>
+          <div *ngIf="mail1.invalid && (mail1.dirty || mail1.touched)">
+            <div class="span1" *ngIf="mail1.errors?.['required']">
+              Email is required.
+            </div>
+            <div  class="span1" *ngIf="mail1.errors?.['email']">
+              Enter valid email
+            </div>
+            </div>
+          </div><br><br><br>
+          
+  
+   <div class="label1 form-group">
+          <label for="pwd">Password:</label><br>
+          <input type="password" name="password" [(ngModel)]="password" required minlength="8" maxlength="8" #passwordInput="ngModel">
+          <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
+              <div class="span1" *ngIf="passwordInput.errors?.['required']">
+                Password is required.
+              </div>
+              <div  class="span1" *ngIf="passwordInput.errors?.['minlength']">
+                Password should be at least 8 characters long.
+              </div>
+              <div  class="span1" *ngIf="passwordInput.errors?.['maxlength']">
+                Password should not exceed 8 characters.
+              </div>
+            </div>
+            
+  
+   </div><br><br><br>
+  
+  
+   <div class="label1 form-group">
+          <label for="addr">Address:</label><br>
+          <input type="text" name="addr" id="addr" class="form-control" #addr1="ngModel" [(ngModel)]="addr" required><br>
+          <span *ngIf="addr1.invalid && addr1.touched">Address is requried</span>
+   </div><br><br><br>
+  
+   <div class="label1 form-group" ngModelGroup="usercred">
+          <label for="phoneno">Phone number:</label><br>
+          <input type="number" name="phoneno"  #pno1="ngModel" pattern="[0-9]{10}"  [(ngModel)]="phoneno" required><br>
+          <div *ngIf="pno1.invalid && (pno1.dirty || pno1.touched)">
+            <div class="span1" *ngIf="pno1.errors?.['required']">
+              Phonenumber is required.
+            </div>
+            <div  class="span1" *ngIf="pno1.errors?.['pattern']">
+              Enter valid Phonenumber
+            </div>
+            </div>
+   </div><br><br><br>
+          
+          
+         <button class="btn btn-primary" value="submit">Submit</button><br>
+         <p>If you already have a account? Login</p>
+  
+      </form>
+    </div>
+  </body>
+  
