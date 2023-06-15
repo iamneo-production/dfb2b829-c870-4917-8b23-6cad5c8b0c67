@@ -4,6 +4,8 @@ import { AppComponent } from './app.component';
 import {HomeComponent} from './home/home.component';
 import { ApplyLoanFormComponent } from './apply-loan-form/apply-loan-form.component';
 import {LoansComponent} from './loans/loans.component';
+import {ProfileComponent} from './profile/profile.component';
+
 
 
 // import { HomeComponent } from './home/home.component';
@@ -13,7 +15,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'apply-loan-form', component: ApplyLoanFormComponent },
   { path: 'loans', component: LoansComponent },
-  {path:'', component: ProfileComponent}
+  {path:'profile', component: ProfileComponent}
 
 
 
