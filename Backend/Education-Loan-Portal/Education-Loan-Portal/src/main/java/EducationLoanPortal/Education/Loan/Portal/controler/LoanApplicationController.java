@@ -77,8 +77,9 @@ public class LoanApplicationController {
     public ResponseEntity<?> getAllLoanApplications(
             @RequestParam(required = false) Long user,
             @RequestParam(required = false) String status) {
-
+        System.out.println(user);
         if (user != null) {
+            System.out.println(user);
             List<LoanApplication> loanApplications = loanApplicationService.findAllByUserId(user);
             return ResponseEntity.ok(loanApplications);
         } else if (status != null) {
