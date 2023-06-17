@@ -2,7 +2,6 @@ package EducationLoanPortal.Education.Loan.Portal.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -21,10 +20,12 @@ public class Loan {
     @JsonBackReference
     private User user;
 
+    @OneToMany(mappedBy = "loan", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Payment> PaymentList;
 
-    @JsonProperty("user_id")
+
     private Long user_id;
-
 
     private Double loanAmount;
     private Double interestRate;
