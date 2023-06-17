@@ -35,6 +35,8 @@ import { LoansComponent } from './loans/loans.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatCardModule } from '@angular/material/card';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { LoginComponent } from './login/login.component';
+import { AdminLoanFormComponent } from './admin-loan-form/admin-loan-form.component';
 
 
 
@@ -47,7 +49,9 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
     DialogComponent,
     LoansComponent,
     ProfileComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    LoginComponent,
+    AdminLoanFormComponent
     
   ],
 
