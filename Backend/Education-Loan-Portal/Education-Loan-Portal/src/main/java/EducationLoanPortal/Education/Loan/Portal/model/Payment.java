@@ -49,7 +49,7 @@ public class Payment {
         return loan;
     }
 
-    public void setUser(Loan loan) {
+    public void setLoant(Loan loan) {
         this.loan = loan;
 //        this.loanId = loan.getId(); // set loanId to the id of the loan object
     }
