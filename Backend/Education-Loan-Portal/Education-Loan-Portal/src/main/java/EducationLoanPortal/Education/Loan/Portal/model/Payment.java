@@ -49,7 +49,7 @@ public class Payment {
         return loan;
     }
 
-    public void setLoant(Loan loan) {
+    public void setLoan(Loan loan) {
         this.loan = loan;
 //        this.loanId = loan.getId(); // set loanId to the id of the loan object
     }
@@ -58,9 +58,7 @@ public class Payment {
 //        return loanId;
 //    }
 
-    public void setLoan(Loan loan) {
-        this.loan = loan;
-    }
+
 
 //    public void setLoanId(Long loanId) {
 //        this.loanId = loanId;
@@ -92,4 +90,5 @@ public class Payment {
                 ", paymentDate=" + paymentDate +
                 '}';
     }
+
 }
