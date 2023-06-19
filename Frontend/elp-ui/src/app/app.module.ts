@@ -35,6 +35,9 @@ import { LoansComponent } from './loans/loans.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatCardModule } from '@angular/material/card';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { UserComponent } from './user/user.component';
+import { AdminComponent } from './admin/admin.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 
@@ -47,7 +50,10 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
     DialogComponent,
     LoansComponent,
     ProfileComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    UserComponent,
+    AdminComponent,
+    ForbiddenComponent
     
   ],
 
