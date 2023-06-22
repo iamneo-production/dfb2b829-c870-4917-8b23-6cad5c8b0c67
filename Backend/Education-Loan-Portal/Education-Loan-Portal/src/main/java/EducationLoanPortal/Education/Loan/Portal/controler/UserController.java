@@ -31,7 +31,7 @@ public class UserController {
 
    //- `GET /users/{id}`: Retrieve a specific user by ID
    @GetMapping("/{id}")
-   public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+   public ResponseEntity<User> getUserById(@PathVariable("id") Long id) throws UserNotFoundException {
        User user = userService.findUserById(id);
        return new ResponseEntity<>(user, HttpStatus.OK);
    }
