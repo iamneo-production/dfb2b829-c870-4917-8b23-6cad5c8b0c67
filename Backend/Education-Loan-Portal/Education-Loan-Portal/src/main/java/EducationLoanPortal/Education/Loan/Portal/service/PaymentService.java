@@ -20,7 +20,22 @@ public class PaymentService {
    private LoanRepo loanRepo;
     public List<Payment> getPaymentsByLoanId(Long loan_id){
         return paymentRepo.findByLoanId(loan_id);
-
-
     }
+    public Payment createPayment(Payment payment){
+        return paymentRepo.save(payment);
+    }
+
+    public Payment getPaymentById(Long id) throws ResourceNotFoundException{
+        Optional<Payment> payment = paymentRepo.getPaymentById(id);
+        if (payment.isEmpty()){
+            throw new ResourceNotFoundException("Payment not fount with payment id: "+id);
+        }
+        else {
+            return payment.get();
+        }
+    }
+
+//    public Payment updatePayment(Payment payment) {
+//        return paymentRepo.save(payment);
+//    }
 }

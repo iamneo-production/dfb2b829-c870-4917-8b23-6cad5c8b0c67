@@ -1,7 +1,6 @@
 package EducationLoanPortal.Education.Loan.Portal.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
@@ -20,6 +19,8 @@ public class Payment {
     @JoinColumn(name = "loan_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonBackReference
     private Loan loan;
+    @JsonProperty("loan_id")
+    private Long loan_id;
 
 
 
@@ -30,8 +31,9 @@ public class Payment {
         // constructor
     }
 
-    public Payment(Loan loan, Double amount, LocalDate paymentDate) {
+    public Payment(Loan loan, Long loanId, Double amount, LocalDate paymentDate) {
         this.loan = loan;
+        loan_id = loanId;
         this.amount = amount;
         this.paymentDate = paymentDate;
 //        this.loanId = loan.getId(); // set loanId to the id of the loan object
