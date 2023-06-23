@@ -36,7 +36,7 @@
           <a class="nav-link active" aria-current="page" routerLink="/user">User Dashboard</a>
         </li>
       </ul>
-      <button *ngIf="!isLoggedIn()" mat-raised-button color="primary" routerLink="/login">Login</button>
+      <button *ngIf="!isLoggedIn()" mat-raised-button color="primary" routerLink="">Login</button>
       <button *ngIf="isLoggedIn()" mat-raised-button color="warn" (click)="logout()">Logout</button>
       <button mat-icon-button class="example-icon" aria-label="Profile" routerLink="/profile">
         <mat-icon>account_circle</mat-icon>
