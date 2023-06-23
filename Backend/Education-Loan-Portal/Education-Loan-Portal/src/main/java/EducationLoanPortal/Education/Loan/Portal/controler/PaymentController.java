@@ -48,14 +48,18 @@ public class PaymentController {
         }
         return payment;
     }
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Payment> updatePayment(@PathVariable Long id, @RequestBody Payment updatedPayment) throws ResourceNotFoundException {
-        List<Payment> existingPayment = paymentService.getPaymentById(id);
-        if(existingPayment==null){
-            return ResponseEntity<Payment>.notFound().build();
+    @PutMapping("/updateById/{id}")
+    public ResponseEntity<Payment> updatePayment(@PathVariable("id") Long id, @RequestBody Payment updatedPayment) throws ResourceNotFoundException {
+        Payment payment = paymentService.getPaymentById(id);
+        if(payment!=null){
+            Payment newPayment = paymentService.updatePaymentById(id,updatedPayment);
+            return new ResponseEntity<>(newPayment, HttpStatus.OK);
         }
-        return ResponseEntity<>.ok(paymentService.updatePayment(updatedPayment));
+        else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
+
 
 
 

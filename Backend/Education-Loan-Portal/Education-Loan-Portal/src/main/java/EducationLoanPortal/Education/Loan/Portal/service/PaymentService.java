@@ -35,6 +35,18 @@ public class PaymentService {
         }
     }
 
+    public Payment updatePaymentById(Long id, Payment updatedPayment) {
+        Optional<Payment> existingPayment = paymentRepo.findById(id);
+        if(!existingPayment.isPresent()){
+            throw new RuntimeException("Payment not found with this id: "+id);
+        }else{
+            var payment_var = existingPayment.get();
+            payment_var.setAmount(updatedPayment.getAmount());
+            return paymentRepo.save(payment_var)
+;
+        }
+    }
+
 //    public Payment updatePayment(Payment payment) {
 //        return paymentRepo.save(payment);
 //    }
