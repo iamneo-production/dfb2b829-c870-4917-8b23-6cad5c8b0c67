@@ -1,5 +1,8 @@
-<h1>User Dashboard</h1>
 <div class="container">
+  <div class="greeting">
+    <p class="greeting-text"> Hello {{ userAuthService.getUserdetails()?.firstName }} {{ userAuthService.getUserdetails()?.lastName }}</p>
+  </div>
+
 
   <div class="row">
     <button mat-raised-button color="primary" routerLink="/apply-loan-form" class="flex-button">

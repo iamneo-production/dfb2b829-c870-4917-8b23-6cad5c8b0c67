@@ -6,46 +6,62 @@ import { UserAuthService } from './user-auth.service';
   providedIn: 'root',
 })
 export class UserService {
-  private PATH_OF_API = 'http://localhost:8080';
-  private requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
-  message!: string; // Use definite assignment assertion modifier
+  PATH_OF_API = 'http://localhost:8080';
 
+  requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
   constructor(
-    private httpClient: HttpClient,
+    private httpclient: HttpClient,
     private userAuthService: UserAuthService
   ) {}
 
   public login(loginData: any) {
-    return this.httpClient.post(`${this.PATH_OF_API}/authenticate`, loginData, {
+    return this.httpclient.post(this.PATH_OF_API + '/authenticate', loginData, {
       headers: this.requestHeader,
     });
   }
 
   public forUser() {
-    return this.httpClient.get(`${this.PATH_OF_API}/forUser`, {
+    return this.httpclient.get(this.PATH_OF_API + '/forUser', {
       responseType: 'text',
     });
   }
 
   public forAdmin() {
-    return this.httpClient.get(`${this.PATH_OF_API}/forAdmin`, {
+    return this.httpclient.get(this.PATH_OF_API + '/forAdmin', {
       responseType: 'text',
     });
   }
 
-  public roleMatch(allowedRoles: string[]): boolean {
+  public checktherole(s: string) {
     const userRoles: string[] = this.userAuthService.getRoles();
+    console.log('userRoles');
+    console.log(userRoles);
+    console.log('s');
+    console.log(s);
 
-    if (userRoles) {
+    return false;
+  }
+
+  public roleMatch(allowedRoles: string[]): boolean {
+    let isMatch = false;
+    const userRoles: any = this.userAuthService.getRoles();
+    console.log('userRoles');
+    console.log(userRoles);
+    console.log('allowedRoles');
+    console.log(allowedRoles);
+
+    if (userRoles != null && userRoles) {
       for (let i = 0; i < userRoles.length; i++) {
         for (let j = 0; j < allowedRoles.length; j++) {
-          if (userRoles[i] === allowedRoles[j]) {
-            return true;
+          if (userRoles[i].roleName === allowedRoles[j]) {
+            isMatch = true;
+            return isMatch;
+          } else {
+            return isMatch;
           }
         }
       }
     }
-
-    return false;
+    return isMatch;
   }
 }

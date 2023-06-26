@@ -11,6 +11,7 @@ import { UserService } from '../_services/user.service';
 })
 export class LoginComponent implements OnInit {
   errorMessage: string = '';
+  userDetails: any = {}; // Corrected the variable declaration
 
   constructor(
     private userService: UserService,
@@ -31,6 +32,13 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         this.userAuthService.setRoles(response.user.role);
         this.userAuthService.setToken(response.jwtToken);
+        const userDetails = {
+          id: response.user.id,
+          firstName: response.user.firstName,
+          lastName: response.user.lastName,
+          email: response.user.email, // Corrected the variable name
+        };
+        this.userAuthService.setUserdetails(userDetails);
 
         const role = response.user.role[0].roleName;
         if (role === 'Admin') {

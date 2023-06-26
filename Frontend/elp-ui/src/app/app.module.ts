@@ -46,6 +46,8 @@ import { AuthGuard } from './_auth/auth.guard';
 import { AuthInterceptor } from './_auth/auth.interceptor';
 import { UserService } from './_services/user.service';
 import { LoginComponent } from './login/login.component';
+import { MatListModule } from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -89,6 +91,7 @@ import { LoginComponent } from './login/login.component';
     MatSnackBarModule,
     MatCardModule,
     HttpClientModule,  
+    MatListModule,
 
 
  

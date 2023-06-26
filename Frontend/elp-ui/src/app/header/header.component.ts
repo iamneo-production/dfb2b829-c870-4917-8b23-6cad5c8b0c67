@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../_services/user-auth.service';
 import { UserService } from '../_services/user.service';
-import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +9,7 @@ import { MatSidenav } from '@angular/material/sidenav';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  @ViewChild('sidenav', { static: false }) sidenav?: MatSidenav;
-
+  isNavbarOpen: boolean = false;
 
   constructor(
     private userAuthService: UserAuthService,
@@ -21,12 +19,16 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public isLoggedIn() {
+  public isLoggedIn(): boolean {
     return this.userAuthService.isLoggedIn();
   }
 
-  public logout() {
+  public logout(): void {
     this.userAuthService.clear();
     this.router.navigate(['']);
+  }
+
+  public toggleNavbar(): void {
+    this.isNavbarOpen = !this.isNavbarOpen;
   }
 }

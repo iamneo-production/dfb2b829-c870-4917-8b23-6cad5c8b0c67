@@ -13,6 +13,17 @@ export class UserAuthService {
   public getRoles(): string[] {
     return JSON.parse(localStorage.getItem('roles') || '[]');
   }
+  public setUserdetails(userdetails: any) {
+    console.log('userdetails');
+    console.log(userdetails);
+    //print the userdetails type
+    console.log(typeof userdetails);
+    
+    localStorage.setItem('userdetails', JSON.stringify(userdetails));
+  }
+  public getUserdetails(): any{
+    return JSON.parse(localStorage.getItem('userdetails') || '{}');
+  }
 
   public setToken(jwtToken: string) {
     localStorage.setItem('jwtToken', jwtToken);
