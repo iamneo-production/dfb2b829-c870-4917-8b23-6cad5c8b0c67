@@ -5,8 +5,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import { FormsModule } from '@angular/forms';
+
+import { ReactiveFormsModule} from "@angular/forms";
+
 import {NgxFileDropModule} from "ngx-file-drop";
 import {MatButtonModule} from "@angular/material/button";
 import {HeaderComponent} from './header/header.component';
@@ -31,7 +33,6 @@ import { HomeComponent } from './home/home.component';
 import { ApplyLoanFormComponent } from './apply-loan-form/apply-loan-form.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { LoansComponent } from './loans/loans.component';
-
 import { ProfileComponent } from './profile/profile.component';
 import { MatCardModule } from '@angular/material/card';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
@@ -39,7 +40,12 @@ import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { AuthGuard } from './_auth/auth.guard';
+import { AuthInterceptor } from './_auth/auth.interceptor';
+import { UserService } from './_services/user.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +59,8 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     AdminHomeComponent,
     UserComponent,
     AdminComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    LoginComponent
     
   ],
 
@@ -72,7 +79,7 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     MatSelectModule,
     MatOptionModule,
     MatInputModule,
-    MatInputModule,
+
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -80,9 +87,20 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     MatChipsModule,
 
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule,  
+
+
+ 
+    RouterModule
   ],
-  providers: [],
+  providers: [   AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass:AuthInterceptor,
+      multi:true
+    },
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

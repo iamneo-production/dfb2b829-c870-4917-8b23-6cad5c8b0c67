@@ -1,30 +1,48 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserAuthService } from '../_services/user-auth.service';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  errorMessage: string = '';
 
-   credentials={
-    username:'',
-    password:''
-   }
+  constructor(
+    private userService: UserService,
+    private userAuthService: UserAuthService,
+    private router: Router
+  ) {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-  onSubmit()
-  {
-    console.log("form is submitted");
-    if((this.credentials.username!='' && this.credentials.password!='')&& (this.credentials.username!=null && this.credentials.password!=null))
-    {
-      console.log("We have to submit the form to server")
-    }else{
-      console.log("Fields are empty");
+  login(loginForm: NgForm) {
+    this.errorMessage = '';
+
+    if (loginForm.invalid) {
+      return;
     }
-  }
 
+    this.userService.login(loginForm.value).subscribe(
+      (response: any) => {
+        this.userAuthService.setRoles(response.user.role);
+        this.userAuthService.setToken(response.jwtToken);
+
+        const role = response.user.role[0].roleName;
+        if (role === 'Admin') {
+          this.router.navigate(['/adminHome']);
+        } else {
+          this.router.navigate(['/userHome']);
+        }
+      },
+      (error) => {
+        this.errorMessage = 'User email or password is wrong.';
+        console.log(error);
+      }
+    );
+  }
 }

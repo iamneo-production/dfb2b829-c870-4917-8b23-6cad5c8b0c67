@@ -1,43 +1,25 @@
-<div class="bootstrap-wrapper">
-  <div  class="container margin-top">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
+<div class="container mt-5">
+  <div class="card" style="padding: 20px;">
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+      <input type="text"
+             ngModel
+             name="userEmail"
+             id="userEmail"
+             placeholder="Enter your Email"
+             class="form-control mb-3">
 
-        <div class="container text-center">
+      <input type="password"
+             ngModel
+             name="userPassword"
+             id="userPassword"
+             placeholder="Enter your password"
+             class="form-control mb-3">
 
-          <img class="img-fluid" style="width: 100px;" src="/assets/login-logo.png" alt="" />
+      <input type="submit"
+             value="Login"
+             class="btn btn-outline-primary form-control rounded-0">
 
-        </div>
-
-        <h1 class="text-center">Login here !</h1>
-
-        <form (ngSubmit)="onSubmit()">
-
-          <mat-form-field class="full-width">
-            <mat-label>User name</mat-label>
-            <input
-            [(ngModel)]="credentials.username"
-            name="username"
-            required type="text" matInput />
-          </mat-form-field>
-
-          <mat-form-field class="full-width">
-            <mat-label>Password</mat-label>
-            <input
-            [(ngModel)]="credentials.password"
-            name="password"
-            required type="password" matInput />
-          </mat-form-field>
-
-          <div class="container text-center">
-            <button type="submit" mat-raised-button color="primary">Login</button>
-
-            <button style="margin-left: 10px;" type="reset" mat-raised-button color="accent">Reset</button>
-          </div>
-        </form>
-        <br>
-        <p class="mt">{{ credentials | json }}}</p>
-      </div>
-    </div>
+      <p class="error-message" *ngIf="loginForm.submitted && loginForm.invalid">User email or password is incorrect.</p>
+    </form>
   </div>
 </div>

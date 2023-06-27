@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4600cb67-018f-4086-80c1-788dbbe13930" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Frontend/elp-ui/src/app/header/header.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/elp-ui/src/app/header/header.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Education-Loan-Portal/Education-Loan-Portal/src/main/java/EducationLoanPortal/Education/Loan/Portal/repository/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Education-Loan-Portal/Education-Loan-Portal/src/main/java/EducationLoanPortal/Education/Loan/Portal/repository/Payment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +34,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Raghul S/Documents/GitHub/dfb2b829-c870-4917-8b23-6cad5c8b0c67/Backend/Education-Loan-Portal"
+    "last_opened_file_path": "C:/Users/Raghul S/Documents/GitHub/dfb2b829-c870-4917-8b23-6cad5c8b0c67"
   }
 }]]></component>
   <component name="RunManager">
