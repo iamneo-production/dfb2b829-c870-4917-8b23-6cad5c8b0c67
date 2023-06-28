@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { UserAuthService } from '../_services/user-auth.service';
 import { UserService } from '../_services/user.service';
+import { LogoutConfirmationDialogComponent } from '../logout-confirmation-dialog/logout-confirmation-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +16,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userAuthService: UserAuthService,
     private router: Router,
-    public userService: UserService
+    public userService: UserService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -24,8 +27,15 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout(): void {
-    this.userAuthService.clear();
-    this.router.navigate(['']);
+    const dialogRef = this.dialog.open(LogoutConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.userAuthService.clear();
+        this.router.navigate(['']);
+        console.log('The dialog was closed');
+      }
+    });
   }
 
   public toggleNavbar(): void {

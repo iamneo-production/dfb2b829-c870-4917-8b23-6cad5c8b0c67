@@ -10,8 +10,10 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  
   errorMessage: string = '';
-  userDetails: any = {}; // Corrected the variable declaration
+  userEmail: string = ''; // Added property
+  userPassword: string = ''; // Added property
 
   constructor(
     private userService: UserService,
@@ -36,7 +38,7 @@ export class LoginComponent implements OnInit {
           id: response.user.id,
           firstName: response.user.firstName,
           lastName: response.user.lastName,
-          email: response.user.email, // Corrected the variable name
+          email: response.user.email,
         };
         this.userAuthService.setUserdetails(userDetails);
 

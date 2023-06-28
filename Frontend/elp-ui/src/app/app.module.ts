@@ -48,6 +48,8 @@ import { UserService } from './_services/user.service';
 import { LoginComponent } from './login/login.component';
 import { MatListModule } from '@angular/material/list';
 
+import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/logout-confirmation-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { MatListModule } from '@angular/material/list';
     UserComponent,
     AdminComponent,
     ForbiddenComponent,
-    LoginComponent
+    LoginComponent,
+
+    LogoutConfirmationDialogComponent
     
   ],
 

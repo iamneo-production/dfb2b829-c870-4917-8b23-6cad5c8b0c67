@@ -7,27 +7,20 @@ import {LoansComponent} from './loans/loans.component';
 import {ProfileComponent} from './profile/profile.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component'
 import {LoginComponent} from './login/login.component'
+import { AuthGuard } from './_auth/auth.guard';
 
 
 // import {ContactComponent} from './contact/contact.component';
 
-// import { HomeComponent } from './home/home.component';
-
 const routes: Routes = [
-  // { path: '', component: AppComponent },
+
   {path:'',component:LoginComponent},
   { path: 'userHome', component: HomeComponent },
-  { path: 'apply-loan-form', component: ApplyLoanFormComponent },
+  { path: 'apply-loan-form', component: ApplyLoanFormComponent,canActivate:[AuthGuard], data:{roles:['User']} },
   { path: 'loans', component: LoansComponent },
   {path:'profile', component: ProfileComponent},
-  {path:'adminHome',component:AdminHomeComponent}
-  // {path:'contact',component: ContactComponent}
+  {path:'adminHome',component:AdminHomeComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
 
-
-
-  // { path: 'home', component: HomeComponent },
-  // { path: 'about', component: AboutComponent },
-  // { path: 'contact', component: ContactComponent 
 ]
 
 
