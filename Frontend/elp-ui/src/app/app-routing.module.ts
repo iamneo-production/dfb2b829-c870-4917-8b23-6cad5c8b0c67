@@ -7,6 +7,7 @@ import {LoansComponent} from './loans/loans.component';
 import {ProfileComponent} from './profile/profile.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component'
 import {LoginComponent} from './login/login.component'
+import { PaymentComponent } from './payment/payment.component';
 
 
 // import {ContactComponent} from './contact/contact.component';
@@ -20,9 +21,10 @@ const routes: Routes = [
   { path: 'apply-loan-form', component: ApplyLoanFormComponent },
   { path: 'loans', component: LoansComponent },
   {path:'profile', component: ProfileComponent},
-  {path:'adminHome',component:AdminHomeComponent}
+  {path:'adminHome',component:AdminHomeComponent},
   // {path:'contact',component: ContactComponent}
 
+  {path:'payment',component: PaymentComponent}
 
 
   // { path: 'home', component: HomeComponent },
