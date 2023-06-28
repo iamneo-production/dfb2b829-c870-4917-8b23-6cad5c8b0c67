@@ -19,19 +19,4 @@ public interface PaymentRepo extends JpaRepository<Payment, Long> {
 
     Optional<Payment> getPaymentById(Long id);
 
-
-//    // Get loan by id
-//    Optional<Payment> getPaymentById(Long id);
-//
-//    // Delete loan by id
-////    void deleteById(Long id);
-////    // delete loan by id
-////    Optional<Loan> deletePaymentById(Long id);
-//    // Get all loans by user id
-//    List<Payment> findAllByUserId(Long userId);
-//
-//    // Get all loans by status
-//    List<Payment> findAllByStatus(String status);
-//
-
 }
