@@ -4,7 +4,6 @@
   <form id="loanForm" #loanForm="ngForm" (ngSubmit)="submitLoanForm(loanForm)">
     <div class="form-container">
       <div class="form-group">
-<<<<<<< HEAD
         <label class="label">Loan Amount</label>
         <input class="input" type="text" matInput required>
       </div>
@@ -19,38 +18,10 @@
       <div class="form-group">
         <label class="label">Purpose</label>
         <input class="input" type="text" matInput required>
-=======
-        <mat-form-field class="form-field">
-          <mat-label>Loan Amount</mat-label>
-          <input matInput type="number" required name="loanAmount" [(ngModel)]="loanAmount">
-        </mat-form-field>
       </div>
 
-      <div class="form-group">
-        <mat-form-field class="form-field">
-          <mat-label>Loan Apply Date</mat-label>
-          <input matInput [matDatepicker]="loanDatePicker" required name="loanApplyDate" [(ngModel)]="loanApplyDate">
-          <mat-datepicker-toggle matSuffix [for]="loanDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #loanDatePicker></mat-datepicker>
-        </mat-form-field>
-      </div>
-
-      <div class="form-group">
-        <mat-form-field class="form-field">
-          <mat-label>Purpose</mat-label>
-          <input matInput required name="purpose" [(ngModel)]="purpose">
-        </mat-form-field>
->>>>>>> b9af85be469af4ce08444962c6b45fe363db2bdd
-      </div>
-
-      <div class="form-group">
-<<<<<<< HEAD
-        <label class="label">Loan Type</label>
-        <input class="input" type="text" matInput required>
-      </div>
 
       <button type="submit">Submit</button>
-=======
         <mat-form-field class="form-field">
           <mat-label>Loan Type</mat-label>
           <select matNativeControl required name="loanType" [(ngModel)]="loanType">
@@ -62,8 +33,6 @@
         </mat-form-field>
       </div>
       
-      <button type="submit" mat-raised-button color="primary">Submit</button>
->>>>>>> b9af85be469af4ce08444962c6b45fe363db2bdd
-    </div>
+
   </form>
 </div>

@@ -58,8 +58,4 @@ export class ApplyLoanFormComponent {
       data: { title, message }
     });
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> b9af85be469af4ce08444962c6b45fe363db2bdd

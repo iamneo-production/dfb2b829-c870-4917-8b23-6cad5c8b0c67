@@ -46,6 +46,7 @@ import { AuthGuard } from './_auth/auth.guard';
 import { AuthInterceptor } from './_auth/auth.interceptor';
 import { UserService } from './_services/user.service';
 import { LoginComponent } from './login/login.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { LoginComponent } from './login/login.component';
     UserComponent,
     AdminComponent,
     ForbiddenComponent,
-    LoginComponent
+    LoginComponent,
+    PaymentComponent
     
   ],
 
