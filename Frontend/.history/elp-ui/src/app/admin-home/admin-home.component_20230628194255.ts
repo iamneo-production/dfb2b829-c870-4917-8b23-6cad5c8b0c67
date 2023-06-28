@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-home.component.css']
 })
 export class AdminHomeComponent {
+<<<<<<< HEAD
+=======
   
+>>>>>>> 4b2657ac (added admin panel)
 
 }

@@ -3,7 +3,6 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { UserAuthService } from '../_services/user-auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,24 +14,15 @@ export class ProfileComponent implements OnInit {
   dialogRef!: MatDialogRef<any>;
   user: User = new User();
   userdetails: User[] = [];
-  userDetails: any;
-  userId: any;
 
-  constructor(
-    private userService: UserService,
-    private dialog: MatDialog,
-    public userAuthService: UserAuthService
-  ) {
-    this.userDetails = this.userAuthService.getUserdetails();
-    this.userId = this.userDetails.id;
-  }
+  constructor(private userService: UserService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.getUserdetails();
   }
 
   getUserdetails() {
-    const id = this.userId; // Specify the ID of the user you want to fetch
+    const id = 13; // Specify the ID of the user you want to fetch
     this.userService.getUserById(id).subscribe(
       (resp) => {
         console.log(resp);

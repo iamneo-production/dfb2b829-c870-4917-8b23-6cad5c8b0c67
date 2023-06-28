@@ -1,0 +1,91 @@
+<h1>Loan Applications</h1>
+
+<mat-form-field>
+  <input matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup)="onSearch()">
+</mat-form-field>
+
+<table class="loans-table">
+  <thead>
+    <th (click)="sortTable('id')" [ngClass]="{'highlight': activeField === 'id'}">LoanApplication Id
+      <mat-icon *ngIf="activeField === 'id' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'id' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('user_id')" [ngClass]="{'highlight': activeField === 'user_id'}">User ID
+      <mat-icon *ngIf="activeField === 'user_id' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'user_id' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('purpose')" [ngClass]="{'highlight': activeField === 'purpose'}">Purpose
+      <mat-icon *ngIf="activeField === 'purpose' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'purpose' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('loanAmount')" [ngClass]="{'highlight': activeField === 'loanAmount'}">Loan Amount
+      <mat-icon *ngIf="activeField === 'loanAmount' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'loanAmount' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('status')" [ngClass]="{'highlight': activeField === 'status'}">Status
+      <mat-icon *ngIf="activeField === 'status' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'status' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('applicationDate')" [ngClass]="{'highlight': activeField === 'applicationDate'}">Application Date
+      <mat-icon *ngIf="activeField === 'applicationDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'applicationDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th>
+      Actions
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let loanApplication of filteredLoans" class="table-row">
+      <td>{{ loanApplication.id }}</td>
+      <td>{{ loanApplication.user_id }}</td>
+      <td>{{ loanApplication.purpose }}</td>
+      <td>{{ loanApplication.loanAmount }}</td>
+      <td>{{ loanApplication.status }}</td>
+      <td>{{ loanApplication.applicationDate }}</td>
+      <td>
+        <button mat-button color="primary" (click)="approveLoan(loanApplication)" [disabled]="loanApplication.isApproved || loanApplication.isRejected">
+          Approve
+        </button>
+        <button mat-button color="warn" (click)="rejectLoan(loanApplication)" [disabled]="loanApplication.isRejected || loanApplication.isApproved">
+          Reject
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #loanApprovalDialog>
+  <h1>Add Loan</h1>
+  <div class="dialog-close-button">
+    <button mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <form (ngSubmit)="submitLoanApprovalForm()">
+    <div class="form-container">
+      <mat-label>Loan Amount</mat-label>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Loan Amount" name="loanAmount" [(ngModel)]="selectedLoanAmount" required>
+      </mat-form-field>
+      
+      <mat-label>Start Date</mat-label>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Start Date" name="startDate" [(ngModel)]="selectedStartDate" required [matDatepicker]="startDatePicker">
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+      </mat-form-field>
+      <mat-label>End Date</mat-label>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="End Date" name="endDate" [(ngModel)]="selectedEndDate" required [matDatepicker]="endDatePicker">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+      <mat-label>Interest Rate</mat-label>
+      <mat-form-field class="form-field">
+        <input matInput type="number" placeholder="Interest Rate" name="interestRate" [(ngModel)]="selectedInterestRate" required>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+  </form>
+</ng-template>

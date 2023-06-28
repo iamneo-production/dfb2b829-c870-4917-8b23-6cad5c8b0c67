@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getUserdetails() {
-    const id = this.userId; // Specify the ID of the user you want to fetch
+    const id = 13; // Specify the ID of the user you want to fetch
     this.userService.getUserById(id).subscribe(
       (resp) => {
         console.log(resp);

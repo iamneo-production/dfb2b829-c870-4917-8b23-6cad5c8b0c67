@@ -8,11 +8,9 @@ import {ProfileComponent} from './profile/profile.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component'
 import {LoginComponent} from './login/login.component'
 import { AuthGuard } from './_auth/auth.guard';
-import { AdminLoansComponent } from './admin-loans/admin-loans.component';
-import { AdminLoanApplicationComponent } from './admin-loan-application/admin-loan-application.component';
-import { LoanDetailsComponent } from './loan-details/loan-details.component';
-import { AddLoanComponent } from './add-loan/add-loan.component';
 
+
+// import {ContactComponent} from './contact/contact.component';
 
 const routes: Routes = [
 
@@ -21,13 +19,7 @@ const routes: Routes = [
   { path: 'apply-loan-form', component: ApplyLoanFormComponent,canActivate:[AuthGuard], data:{roles:['User']} },
   { path: 'loans', component: LoansComponent },
   {path:'profile', component: ProfileComponent},
-  {path :'admin-home',component:AdminHomeComponent},
-  {path:'admin-loans',component:AdminLoansComponent},
-  {path:'admin-loan-application',component:AdminLoanApplicationComponent},
-  {path:'loan-details',component:LoanDetailsComponent},
-  {path:'Add-loan',component:AddLoanComponent},
   {path:'adminHome',component:AdminHomeComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
-  
 
 ]
 

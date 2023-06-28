@@ -27,7 +27,6 @@ const routes: Routes = [
   {path:'loan-details',component:LoanDetailsComponent},
   {path:'Add-loan',component:AddLoanComponent},
   {path:'adminHome',component:AdminHomeComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
-  
 
 ]
 

@@ -49,10 +49,6 @@ import { LoginComponent } from './login/login.component';
 import { MatListModule } from '@angular/material/list';
 
 import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/logout-confirmation-dialog.component';
-import { LoanDetailsComponent } from './loan-details/loan-details.component';
-import { AddLoanComponent } from './add-loan/add-loan.component';
-import { AdminLoanApplicationComponent } from './admin-loan-application/admin-loan-application.component';
-import { AdminLoansComponent } from './admin-loans/admin-loans.component';
 
 
 @NgModule({
@@ -69,10 +65,6 @@ import { AdminLoansComponent } from './admin-loans/admin-loans.component';
     AdminComponent,
     ForbiddenComponent,
     LoginComponent,
-    LoanDetailsComponent,
-    AddLoanComponent,
-    AdminLoanApplicationComponent,
-    AdminLoansComponent,
 
     LogoutConfirmationDialogComponent
     
@@ -87,13 +79,12 @@ import { AdminLoansComponent } from './admin-loans/admin-loans.component';
     NgxFileDropModule,
     MatButtonModule,
     MatToolbarModule,
-
+    MatIconModule,
     // FlexLayoutModule,
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
     MatInputModule,
-    MatIconModule,
 
     MatDialogModule,
     MatDatepickerModule,
