@@ -17,7 +17,7 @@ import { AddLoanComponent } from './add-loan/add-loan.component';
 const routes: Routes = [
 
   {path:'',component:LoginComponent},
-  { path: 'userHome', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'apply-loan-form', component: ApplyLoanFormComponent,canActivate:[AuthGuard], data:{roles:['User']} },
   { path: 'loans', component: LoansComponent },
   {path:'profile', component: ProfileComponent},
@@ -25,9 +25,9 @@ const routes: Routes = [
   {path:'admin-loans',component:AdminLoansComponent},
   {path:'admin-loan-application',component:AdminLoanApplicationComponent},
   {path:'loan-details',component:LoanDetailsComponent},
-  {path:'add-loan',component:AddLoanComponent},
+  {path:'Add-loan',component:AddLoanComponent},
   {path:'adminHome',component:AdminHomeComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
-  
+
 
 ]
 

@@ -112,7 +112,7 @@ import { DatePipe } from '@angular/common';
 
  
     RouterModule,
-
+    DatePipe
   ],
   providers: [   AuthGuard,
     {

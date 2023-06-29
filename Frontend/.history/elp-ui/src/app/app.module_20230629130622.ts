@@ -55,9 +55,6 @@ import { AdminLoanApplicationComponent } from './admin-loan-application/admin-lo
 import { AdminLoansComponent } from './admin-loans/admin-loans.component';
 
 
-import { DatePipe } from '@angular/common';
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -111,8 +108,7 @@ import { DatePipe } from '@angular/common';
 
 
  
-    RouterModule,
-
+    RouterModule
   ],
   providers: [   AuthGuard,
     {
@@ -120,8 +116,7 @@ import { DatePipe } from '@angular/common';
       useClass:AuthInterceptor,
       multi:true
     },
-    UserService,
-    DatePipe],
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

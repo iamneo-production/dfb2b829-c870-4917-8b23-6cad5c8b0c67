@@ -112,7 +112,7 @@ import { DatePipe } from '@angular/common';
 
  
     RouterModule,
-
+    DatePipe
   ],
   providers: [   AuthGuard,
     {
@@ -120,8 +120,7 @@ import { DatePipe } from '@angular/common';
       useClass:AuthInterceptor,
       multi:true
     },
-    UserService,
-    DatePipe],
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
