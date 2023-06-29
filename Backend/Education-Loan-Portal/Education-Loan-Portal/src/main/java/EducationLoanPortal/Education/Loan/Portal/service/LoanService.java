@@ -71,7 +71,7 @@ public class LoanService {
 
         }
     }
-        // Get all loans by user id
+    // Get all loans by user id
 
 
     public List<Loan> findAllLoansByStatus(String status) throws UserNotFoundException {
