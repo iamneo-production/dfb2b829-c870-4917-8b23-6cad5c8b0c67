@@ -2,6 +2,7 @@ import { Component, ViewChild, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { UserAuthService } from '../_services/user-auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,16 +14,24 @@ export class ProfileComponent {
 
   user: User = new User();
   userdetails: User[] = [];
-  
+  userDetails: any;
+  userId: any;
 
-  constructor(private userService: UserService, private dialog: MatDialog) {}
+  constructor(
+    private userService: UserService,
+    private dialog: MatDialog,
+    public userAuthService: UserAuthService
+  ) {
+    this.userDetails = this.userAuthService.getUserdetails();
+    this.userId = this.userDetails.id;
+  }
 
   ngOnInit() {
     this.getUserdetails();
   }
 
   getUserdetails() {
-    const id = 13; // Specify the ID of the user you want to fetch
+    const id = this.userId; // Specify the ID of the user you want to fetch
     this.userService.getUserById(id).subscribe(
       (resp) => {
         console.log(resp);
@@ -35,7 +44,7 @@ export class ProfileComponent {
   }
 
   updateUser() {
-    const id = this.user.id;
+    const id = this.userId;
     this.userService.updateUser(id, this.user).subscribe(
       (resp) => {
         console.log(resp);
@@ -48,7 +57,7 @@ export class ProfileComponent {
   }
 
   openEditDialog(user: User) {
-    this.user = Object.assign({}, user); // Copy the selected user details to the 'user' object for editing
+    this.user = { ...user }; // Copy the selected user details to the 'user' object for editing
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '300px'; // Adjust the width as per your requirements
@@ -67,6 +76,3 @@ export class ProfileComponent {
     this.user = new User();
   }
 }
-
-
-

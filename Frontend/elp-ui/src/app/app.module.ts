@@ -47,6 +47,10 @@ import { AuthInterceptor } from './_auth/auth.interceptor';
 import { UserService } from './_services/user.service';
 import { LoginComponent } from './login/login.component';
 import { PaymentComponent } from './payment/payment.component';
+import { MatListModule } from '@angular/material/list';
+
+import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/logout-confirmation-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +66,9 @@ import { PaymentComponent } from './payment/payment.component';
     AdminComponent,
     ForbiddenComponent,
     LoginComponent,
-    PaymentComponent
+    PaymentComponent,
+
+    LogoutConfirmationDialogComponent
     
   ],
 
@@ -91,6 +97,7 @@ import { PaymentComponent } from './payment/payment.component';
     MatSnackBarModule,
     MatCardModule,
     HttpClientModule,  
+    MatListModule,
 
 
  
