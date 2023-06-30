@@ -1,100 +1,100 @@
 
-
 <body style="background-color:#3e4bdc">
-    <br><br><br>
-    <div>
-      <form (ngSubmit)="submitForm(f)" #f="ngForm" style="background-color:white">
-        <h3>Register here!</h3>
-          <div class="label1 form-group">
-          <label for="id1" >ID:</label><br>
-          <input type="number" name="id1" id="id1" class="form-control" #id2="ngModel" [(ngModel)]="id1" required><br>
-          <span *ngIf="id2.invalid && id2.touched">ID is requried</span>
-      </div><br><br><br>
-  
-      <div class="label1 form-group">
-          <label for="fname">First name:</label><br>
-          <input type="text" name="fname" class="form-control" pattern="[ A-Za-z]" #fname1="ngModel" [(ngModel)]="fname" required><br>
-          <div *ngIf="lname1.invalid && (lname1.dirty || lname1.touched)">
-            <div class="span1" *ngIf="fname1.errors?.['required']">
-              First name is required
+  <br><br><br>
+  <div>
+    <form (ngSubmit)="register(f)" #f="ngForm" style="background-color:white">
+      <h3>Register here!</h3>
+        <div class="label1 form-group">
+        <label >ID:</label><br>
+        <input type="number" ngModel name="id1" id="id1" class="form-control"  required><br>
+        <span *ngIf="f.controls['id2']?.['invalid'] && f.controls['id2']?.['touched']">ID is requried</span>
+    </div><br><br><br>
+
+    <div class="label1 form-group">
+        <label >First name:</label><br>
+        <input type="text" class="form-control"  pattern="[ A-Za-z]*"  ngModel name="fname" required><br>
+        <div *ngIf="f.controls['fname']?.['invalid'] && (f.controls['fname']?.['dirty'] || f.controls['fname']?.['touched'])">
+          <div class="span1" *ngIf="f.controls['fname']?.['errors']?.['required']">
+            First name is required
+          </div>
+          <div  class="span1" *ngIf="f.controls['fname']?.['errors']?.['pattern']">
+            Enter valid First name
+          </div>
+        </div>
+    </div><br><br><br>
+
+    <div class="label1 form-group">
+        <label>Last name:</label><br>
+        <input type="lname" ngModel name="lname"  pattern="[ A-Za-z]" class="form-control"  required><br>
+        <div *ngIf="f.controls['lname']?.['invalid'] && (f.controls['lname']?.['dirty'] || f.controls['lname']?.['touched'])">
+          <div class="span1" *ngIf="f.controls['lname']?.['errors']?.['required']">
+            Last name is required
+          </div>
+          <div  class="span1" *ngIf="f.controls['lname']?.['errors']?.['pattern']">
+            Enter valid Last name
+          </div>
+          </div>
+        
+    </div><br><br><br>
+
+        <div class="label1 form-group">
+        <label >Email:</label><br>
+        <input type="text" email class="form-control" ngModel name="mail"  required><br>
+        <div *ngIf="f.controls['mail']?.['invalid'] && (f.controls['mail']?.['dirty'] || f.controls['mail']?.['touched'])">
+          <div class="span1" *ngIf="f.controls['mail']?.['errors']?.['required']">
+            Email is required.
+          </div>
+          <div  class="span1" *ngIf="f.controls['mail']?.['errors']?.['email']">
+            Enter valid email
+          </div>
+          </div>
+        </div><br><br><br>
+        
+
+ <div class="label1 form-group">
+        <label >Password:</label><br>
+        <input type="password" ngModel name="password" class="form-control"  required minlength="8" maxlength="8" >
+        <div *ngIf="f.controls['password']?.['invalid'] && (f.controls['password']?.['dirty'] ||f.controls['password']?.['touched'])">
+            <div class="span1" *ngIf="f.controls['password']?.['errors']?.['required']">
+              Password is required.
             </div>
-            <div  class="span1" *ngIf="fname1.errors?.['pattern']">
-              Enter valid First name
+            <div  class="span1" *ngIf="f.controls['password']?.['errors']?.['minlength']">
+              Password should be at least 8 characters long.
+            </div>
+            <div  class="span1" *ngIf="f.controls['password']?.['errors']?.['maxlength']">
+              Password should not exceed 8 characters.
             </div>
           </div>
-      </div><br><br><br>
-  
-      <div class="label1 form-group">
-          <label for="lname">Last name:</label><br>
-          <input type="lname" name="lname" id="lname" pattern="[ A-Za-z]" class="form-control" #lname1="ngModel" [(ngModel)]="lname" required><br>
-          <div *ngIf="lname1.invalid && (lname1.dirty || lname1.touched)">
-            <div class="span1" *ngIf="lname1.errors?.['required']">
-              Last name is required
-            </div>
-            <div  class="span1" *ngIf="lname1.errors?.['pattern']">
-              Enter valid Last name
-            </div>
-            </div>
           
-      </div><br><br><br>
-  
-          <div class="label1 form-group">
-          <label for="mail">Email:</label><br>
-          <input type="text" email name="mail" [(ngModel)]="mail"  #mail1="ngModel"  required><br>
-          <div *ngIf="mail1.invalid && (mail1.dirty || mail1.touched)">
-            <div class="span1" *ngIf="mail1.errors?.['required']">
-              Email is required.
-            </div>
-            <div  class="span1" *ngIf="mail1.errors?.['email']">
-              Enter valid email
-            </div>
-            </div>
-          </div><br><br><br>
-          
-  
-   <div class="label1 form-group">
-          <label for="pwd">Password:</label><br>
-          <input type="password" name="password" [(ngModel)]="password" required minlength="8" maxlength="8" #passwordInput="ngModel">
-          <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
-              <div class="span1" *ngIf="passwordInput.errors?.['required']">
-                Password is required.
-              </div>
-              <div  class="span1" *ngIf="passwordInput.errors?.['minlength']">
-                Password should be at least 8 characters long.
-              </div>
-              <div  class="span1" *ngIf="passwordInput.errors?.['maxlength']">
-                Password should not exceed 8 characters.
-              </div>
-            </div>
-            
-  
-   </div><br><br><br>
-  
-  
-   <div class="label1 form-group">
-          <label for="addr">Address:</label><br>
-          <input type="text" name="addr" id="addr" class="form-control" #addr1="ngModel" [(ngModel)]="addr" required><br>
-          <span *ngIf="addr1.invalid && addr1.touched">Address is requried</span>
-   </div><br><br><br>
-  
-   <div class="label1 form-group" ngModelGroup="usercred">
-          <label for="phoneno">Phone number:</label><br>
-          <input type="number" name="phoneno"  #pno1="ngModel" pattern="[0-9]{10}"  [(ngModel)]="phoneno" required><br>
-          <div *ngIf="pno1.invalid && (pno1.dirty || pno1.touched)">
-            <div class="span1" *ngIf="pno1.errors?.['required']">
-              Phonenumber is required.
-            </div>
-            <div  class="span1" *ngIf="pno1.errors?.['pattern']">
-              Enter valid Phonenumber
-            </div>
-            </div>
-   </div><br><br><br>
-          
-          
-         <button class="btn btn-primary" value="submit">Submit</button><br>
-         <p>If you already have a account? Login</p>
-  
-      </form>
-    </div>
-  </body>
-  
+
+ </div><br><br><br>
+
+
+ <div class="label1 form-group">
+        <label >Address:</label><br>
+        <input type="text" ngModel name="addr"  class="form-control" required><br>
+        <span *ngIf="f.controls['addr']?.['invalid'] && f.controls['addr']?.['touched']">Address is requried</span>
+ </div><br><br><br>
+
+ <div class="label1 form-group" >
+        <label>Phone number:</label><br>
+        <input type="number" class="form-control" ngModel name="phoneno"  pattern="[0-9]{10}"   required><br>
+        <div *ngIf="f.controls['phoneno']?.['invalid'] && (f.controls['phoneno']?.['dirty'] || f.controls['phoneno']?.['touched'])">
+          <div class="span1" *ngIf="f.controls['phoneno']?.['errors']?.['required']">
+            Phonenumber is required.
+          </div>
+          <div  class="span1" *ngIf="f.controls['phoneno']?.['errors']?.['pattern']">
+            Enter valid Phonenumber
+          </div>
+          </div>
+ </div><br><br><br>
+        
+        
+       <button class="btn btn-primary" value="submit" >Submit</button><br>
+       <p>If you already have a account? Login</p>
+
+    </form>
+  </div>
+</body>
+
+

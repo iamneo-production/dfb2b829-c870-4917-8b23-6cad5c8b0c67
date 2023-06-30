@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {NgForm} from '@angular/forms';
-import { ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import {HttpClient} from  '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -8,66 +10,55 @@ import { ViewChild } from '@angular/core';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  @ViewChild('passwordInput') passwordInput: any;
-  @ViewChild('f', { static: false }) signInForm!: NgForm;
-
-  id1: bigint=BigInt('');
-  fname: string='';
-  lname:string='';
-  mail: string='';
-  password: string='';
-  addr:string='';
-  phoneno:any=''
   
+  constructor(private http: HttpClient){}
 
-
-  formdata={
-    id1: BigInt(''),
-    fname: '',
-    lname:'',
-    mail: '',
-    password:'',
-    addr:'',
-    phoneno:''
+  id1: string='';
+    fname: string='';
+    lname:string='';
+    mail: string='';
+    password: string='';
+    addr:string='';
+    phoneno:string=''
     
-  }
 
-  get id1Field() {
-    return this.signInForm.form.get('id1');
-  }
-
-  get fnameField() {
-    return this.signInForm.form.get('fname');
-  }
-
-  get lnameField() {
-    return this.signInForm.form.get('lname');
-  }
-
-  get mailField() {
-    return this.signInForm.form.get('mail');
-  }
-
-  get passwordField() {
-    return this.signInForm.form.get('password');
-  }
-
-  get addrField() {
-    return this.signInForm.form.get('addr');
-  }
-
-  get pnoField() {
-    return this.signInForm.form.get('phoneno');
-  }
-
-  submitForm(f: NgForm) {
+  register(f:NgForm):void
+  {
+  
     if (f.invalid) {
       f.control.markAllAsTouched();
       return;
     }
 
-    
+    let bodyData = {
+      "id" : this.id1,
+      "firstName" : this.fname,
+      "lastName" : this.lname,
+      "email" : this.mail,
+      "password" : this.password,
+      "address" : this.addr,
+      "phoneNumber" : this.phoneno
+    };
+ 
+    this.http.post("http://localhost:8080/users/",bodyData).subscribe((resultData: any)=>
+    {
+        console.log(resultData);
+        alert("User Registered Successfully")
+        
+        this.id1 = '';
+        this.fname = '';
+       this.lname = '';
+       this.mail = '';
+       this.password = '';
+       this.addr= '';
+       this.phoneno = '';
+    });
   }
 
 
+
+
+  
+
+  
 }
