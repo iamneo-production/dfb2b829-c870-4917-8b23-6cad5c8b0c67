@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { UserAuthService } from '../_services/user-auth.service';
+
 
 interface LoanApplication {
   id: number;
@@ -18,19 +20,22 @@ interface LoanApplication {
 })
 export class LoanDetailsComponent implements OnInit {
   loanApplications: LoanApplication[] = [];
-  userId: number = 3;
+  userId: number = 0;
   filteredLoans: LoanApplication[] = [];
   searchTerm: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   activeField: string = '';
 
-  constructor(private http: HttpClient, private datePipe: DatePipe) { }
+  constructor(private http: HttpClient, private datePipe: DatePipe, public userAuthService: UserAuthService) {}
 
   ngOnInit() {
     this.getLoansByUserId();
   }
 
+
   getLoansByUserId() {
+    const userDetails=this.userAuthService.getUserdetails()
+    this.userId=userDetails.id;
     const url = `http://localhost:8080/loan-applications?user=${this.userId}`;
     this.http.get<LoanApplication[]>(url).subscribe(
       (response) => {

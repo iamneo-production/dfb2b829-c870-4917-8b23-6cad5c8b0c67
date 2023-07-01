@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoanService } from '../loan.service';
+import { UserAuthService } from '../_services/user-auth.service';
+
 
 @Component({
   selector: 'app-loans',
@@ -7,21 +9,23 @@ import { LoanService } from '../loan.service';
   styleUrls: ['./loans.component.css']
 })
 export class LoansComponent implements OnInit {
-  userId: number = 13; // User ID to fetch loans for
+  userId: number = 0; // User ID to fetch loans for
   loans: any[] = [];
   filteredLoans: any[] = [];
   searchTerm: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   activeField: string = '';
 
-  constructor(private loanService: LoanService) { }
+  constructor(private loanService: LoanService,public userAuthService: UserAuthService) {}
 
   ngOnInit() {
     this.getLoansByUserId(this.userId);
   }
 
   getLoansByUserId(userId: number) {
-    this.loanService.getLoansByUserId(userId).subscribe(
+    const userDetails=this.userAuthService.getUserdetails()
+    this.userId=userDetails.id;
+    this.loanService.getLoansByUserId(this.userId).subscribe(
       (loans: any[]) => {
         this.loans = loans;
         this.filteredLoans = loans;

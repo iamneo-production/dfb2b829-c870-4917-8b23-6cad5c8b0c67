@@ -190,7 +190,7 @@ export class AdminLoanApplicationComponent implements OnInit {
         interestRate,
       };
 
-      const addLoanUrl = `${url}/loans/add`;
+      const addLoanUrl = `${url}/loans`;
       this.http.post<Loan>(addLoanUrl, loan).subscribe(
         (res: Loan) => {
           console.log(res);

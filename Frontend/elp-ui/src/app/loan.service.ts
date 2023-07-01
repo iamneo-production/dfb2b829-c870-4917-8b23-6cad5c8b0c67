@@ -16,7 +16,7 @@ export class LoanService {
   }
 
   getLoansByUserId(userId: number): Observable<any[]> {
-    const url = `http://localhost:8080/loans?user_id=${userId}`;
+    const url = `http://localhost:8080/loans?user=${userId}`;
     return this.http.get<any[]>(url);
   }
 
