@@ -1,12 +1,13 @@
 <p>
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
             <mat-icon>menu</mat-icon>
           </button>
         <span>Education Loan Portal</span>
         <span class="example-spacer"></span>
-
+        <button mat-button>Login</button>
+        <button mat-button>Signup</button>
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
             <mat-icon>account_circle</mat-icon>
             
@@ -14,7 +15,42 @@
      
       </mat-toolbar-row>
      
-  
+      
 
     </mat-toolbar>
-</p>
+   
+    <mat-drawer-container autosize>
+      <mat-drawer #drawer opened="true" mode="side" position="start">
+        <mat-nav-list>
+          <mat-list-item>
+            <button mat-button>Home</button>
+
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-button>Profile</button>
+
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-button>Contact</button>
+
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-button> About us</button>
+
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-button>Help us</button>
+
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-button>Log out</button>
+
+          </mat-list-item>
+        </mat-nav-list>
+
+      </mat-drawer>
+      <mat-drawer-content>
+        <router-outlet></router-outlet>
+      </mat-drawer-content>
+    </mat-drawer-container>
+    </p>

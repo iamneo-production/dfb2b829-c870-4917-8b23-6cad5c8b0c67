@@ -12,7 +12,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {HeaderComponent} from './header/header.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
-
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
 // import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
@@ -35,6 +36,7 @@ import { LoansComponent } from './loans/loans.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatCardModule } from '@angular/material/card';
 import { ContactComponent } from './contact/contact.component';
+import { ContactService } from './contact.service';
 
 
 
@@ -48,7 +50,7 @@ import { ContactComponent } from './contact/contact.component';
     LoansComponent,
     ProfileComponent,
     ContactComponent
-    
+   
   ],
 
   imports: [
@@ -61,6 +63,8 @@ import { ContactComponent } from './contact/contact.component';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    MatSidenavModule,
+    MatListModule,
     // FlexLayoutModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -76,7 +80,7 @@ import { ContactComponent } from './contact/contact.component';
     MatSnackBarModule,
     MatCardModule
   ],
-  providers: [],
+  providers: [ContactService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

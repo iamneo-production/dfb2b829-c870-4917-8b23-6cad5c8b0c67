@@ -15,22 +15,22 @@
                 <form (ngSubmit)="onSubmit()">
                      <mat-form-field class="full-width">
                            <mat-label>Fullname</mat-label>
-                           <input type="text" matInput />
+                           <input type="text" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" class="form-control" id="name"  placeholder="Enter Name" matInput/>
                      </mat-form-field>
 
                      <mat-form-field class="full-width">
-                        <mat-label>Email-id</mat-label>
-                        <input type="text" matInput />
+                        <mat-label>Email</mat-label>
+                        <input type="text" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="form-control" id="email"  placeholder="Enter Email" matInput/>
                   </mat-form-field>
 
                   <mat-form-field class="full-width">
                     <mat-label>Message</mat-label>
-                    <input type="text" matInput />
+                    <input type="text" [(ngModel)]="message" [ngModelOptions]="{standalone: true}" class="form-control" id="message"  placeholder="Enter message"matInput/>
               </mat-form-field>
 
               <div class="container">
 
-                <button type="submit" mat-raised-button color="primary">Submit</button>
+                <button type="submit" mat-raised-button color="primary"(click)="save()">Submit</button>
               </div>
 
                 </form>
