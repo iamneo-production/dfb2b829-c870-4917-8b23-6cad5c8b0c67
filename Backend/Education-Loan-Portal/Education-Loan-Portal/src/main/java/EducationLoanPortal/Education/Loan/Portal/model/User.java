@@ -43,7 +43,7 @@ public class User implements Serializable {
     private List<Loan> loanList;
 
     public User(Long id, String firstName, String lastName, String email, String password, String address,
-            String phoneNumber) {
+                String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
