@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1bc9fa4e-7ad9-41e4-bace-b08f758d272f" name="Changes" comment="">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Frontend/elp-ui/src/app/header/header.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/elp-ui/src/app/header/header.component.css" afterDir="false" />
 =======
@@ -65,6 +66,10 @@
       <change beforePath="$PROJECT_DIR$/../../Frontend/elp-ui/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/elp-ui/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Frontend/elp-ui/src/app/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/elp-ui/src/app/profile/profile.component.ts" afterDir="false" />
 >>>>>>> b9af85be469af4ce08444962c6b45fe363db2bdd
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/elp-ui/sample.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/elp-ui/sample.java" afterDir="false" />
+>>>>>>> 27ca0545a4ab85415f4d7b878b279287c6e316de
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +107,11 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+<<<<<<< HEAD
     "last_opened_file_path": "C:/Users/Raghul S/Documents/GitHub/dfb2b829-c870-4917-8b23-6cad5c8b0c67/Backend/Education-Loan-Portal/Education-Loan-Portal",
+=======
+    "last_opened_file_path": "I:/spring boot/dfb2b829-c870-4917-8b23-6cad5c8b0c67/Backend/Education-Loan-Portal/Education-Loan-Portal",
+>>>>>>> 27ca0545a4ab85415f4d7b878b279287c6e316de
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",

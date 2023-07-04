@@ -1,13 +1,11 @@
 package EducationLoanPortal.Education.Loan.Portal.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User implements Serializable {
@@ -18,10 +16,23 @@ public class User implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
+
+
+    @Column(unique = true)
     private String email;
     private String password;
     private String address;
     private String phoneNumber;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_ROLE",
+            joinColumns = {
+                    @JoinColumn(name = "USER_ID")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "ROLE_ID")
+            }
+    )
+    private Set<Role> role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -70,7 +81,7 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
+    public String getEmail(String admin) {
         return email;
     }
 
@@ -110,9 +121,30 @@ public class User implements Serializable {
         this.loanApplicationList = loanApplicationList;
     }
 
+    public Set<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(Set<Role> role) {
+        this.role = role;
+    }
+
+    public List<Loan> getLoanList() {
+        return loanList;
+    }
+
+    public void setLoanList(List<Loan> loanList) {
+        this.loanList = loanList;
+    }
+
     @Override
     public String toString() {
         return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
                 + ", password=" + password + ", address=" + address + ", phoneNumber=" + phoneNumber + "]";
+    }
+
+
+    public String getEmail() {
+        return User.this.email;
     }
 }
