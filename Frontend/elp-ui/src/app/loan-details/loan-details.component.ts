@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { UserAuthService } from '../_services/user-auth.service';
+import { StringEncryptionService } from '../_services/string-encryption.service';
 
 
 interface LoanApplication {
@@ -26,7 +27,7 @@ export class LoanDetailsComponent implements OnInit {
   sortDirection: 'asc' | 'desc' = 'asc';
   activeField: string = '';
 
-  constructor(private http: HttpClient, private datePipe: DatePipe, public userAuthService: UserAuthService) {}
+  constructor(private http: HttpClient, private datePipe: DatePipe, public userAuthService: UserAuthService, private encryptionService: StringEncryptionService) {}
 
   ngOnInit() {
     this.getLoansByUserId();
@@ -72,7 +73,17 @@ export class LoanDetailsComponent implements OnInit {
       this.filteredLoans = [...this.loanApplications];
     }
   }
-  
+  downloadPdf(loanApplication: LoanApplication) {
+    const loanApplicationId = loanApplication.id;
+    const encodedId = this.encryptionService.encodeString(loanApplicationId.toString());
+    const url = `http://localhost:8080/loan-applications/download?encodedId=${encodedId}`;
+    
+    // Trigger the file download by creating a link and clicking it programmatically
+    const link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.click();
+  }
   
   sortTable(field: string) {
     if (field === this.activeField) {

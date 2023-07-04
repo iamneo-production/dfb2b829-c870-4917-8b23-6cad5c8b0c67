@@ -77,6 +77,7 @@ import { DatePipe } from '@angular/common';
     AdminLoanApplicationComponent,
     AdminLoansComponent,
 
+
     LogoutConfirmationDialogComponent
     
   ],

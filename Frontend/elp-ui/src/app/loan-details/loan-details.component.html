@@ -24,6 +24,9 @@
       <mat-icon *ngIf="activeField === 'applicationDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
       <mat-icon *ngIf="activeField === 'applicationDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
     </th>
+    <th  [ngClass]="{'highlight': activeField === 'applicationDate'}">
+       Reports
+    </th>
   </thead>
   <tbody>
     <tr *ngFor="let loanApplication of filteredLoans">
@@ -32,6 +35,12 @@
       <td>{{ loanApplication.loanAmount }}</td>
       <td>{{ loanApplication.status }}</td>
       <td>{{ loanApplication.applicationDate }}</td>
+      <td>
+        <button mat-icon-button color="primary" (click)="downloadPdf(loanApplication)">
+          <mat-icon>file_download</mat-icon>
+        </button>
+      </td>
+    
     </tr>
   </tbody>
 </table>
