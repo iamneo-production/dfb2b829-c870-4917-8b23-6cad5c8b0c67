@@ -1,12 +1,16 @@
 package EducationLoanPortal.Education.Loan.Portal.controler;
 
-import EducationLoanPortal.Education.Loan.Portal.model.Loan;
 import EducationLoanPortal.Education.Loan.Portal.model.LoanApplication;
 import EducationLoanPortal.Education.Loan.Portal.service.LoanApplicationService;
+import EducationLoanPortal.Education.Loan.Portal.service.StringEncryptionEncoderDecoder;
+import com.itextpdf.text.DocumentException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,6 +77,7 @@ public class LoanApplicationController {
     }
 
 
+
     @GetMapping
     public ResponseEntity<?> getAllLoanApplications(
             @RequestParam(required = false) Long user,
@@ -92,5 +97,26 @@ public class LoanApplicationController {
         }
     }
 
+    @GetMapping("/download")
+    public ResponseEntity<byte[]> downloadPdf  (@RequestParam(required = false) String encodedId){
+        long id = StringEncryptionEncoderDecoder.decodeToLong(encodedId);
+        Optional<LoanApplication> loanApplication = loanApplicationService.findLoanApplicationById(id);
+        if (loanApplication.isPresent()) {
+            try {
+                byte[] pdfBytes = loanApplicationService.generateLoanApplicationPdf(loanApplication.get());
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_PDF);
+                headers.setContentDispositionFormData("attachment", "loan_application.pdf");
+
+                return ResponseEntity.ok().headers(headers).body(pdfBytes);
+            } catch (IOException e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            } catch (DocumentException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
