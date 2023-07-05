@@ -1,0 +1,81 @@
+/* Styles for the loan applications table */
+table {
+  width: 55%;
+  border-collapse: collapse;
+  margin: 0 auto; 
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+thead {
+  background-color: #3f51b5; 
+  color: white;
+}
+
+th {
+ 
+  text-align: center; /* Center the heading */
+}
+
+.table-row {
+  border-bottom: 1px solid lightgray;
+}
+
+/* Angular Material elevation */
+.mat-elevation-z8 {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.field-name {
+  font-weight: bold;
+  margin-top: 16px; 
+  margin-bottom: 8px;/* Adjust the value to control the spacing between field names */
+}
+
+.dialog-close-button {
+  display: flex;
+  justify-content: center;
+}
+
+/* Animation and keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.form-field {
+  width: 100%;
+}
+
+button[type="submit"] {
+  display: block;
+  margin: 20px auto 0;
+  width: 100%;
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

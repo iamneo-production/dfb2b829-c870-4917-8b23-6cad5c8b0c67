@@ -1,10 +1,3 @@
-.container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-
-
 .mat-elevation-z8 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
@@ -34,17 +27,15 @@
   }
   
   .form-container {
-    background-color: #f2f2f2;
+    max-width: 400px;
+    margin: 0 auto;
     padding: 20px;
+    background-color: #f2f2f2;
     border-radius: 5px;
   }
   
   .form-field {
     width: 100%;
-  }
-  button:hover{
-    color: blueviolet;
-    background-color: rgb(183, 243, 243);
   }
   
   button[type="submit"] {
@@ -73,9 +64,4 @@
     font-weight: bold;
     margin-bottom: 8px;
   }
-  h1{
-    text-align: center;
-  }
-  mat-form-field{
-    width: 85%;
-  }
+  

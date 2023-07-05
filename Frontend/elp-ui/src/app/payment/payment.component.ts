@@ -1,11 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { UserAuthService } from '../_services/user-auth.service';
-import { MatDatepickerControl, MatDatepickerPanel } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
-import { url } from '../config';
 import { DialogComponent } from '../dialog/dialog.component';
+import { UserAuthService } from '../_services/user-auth.service';
+import { url } from '../config';
 
 @Component({
   selector: 'app-payment',
@@ -13,37 +12,43 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent {
-  // loan_id:  number=0;
-  amount : number=0;
-  paymentDate : string='';
-  
-  messageState: string='';
-  
+  loan_id: number = 0;
+  paymentAmount: number = 0;
+  paymentDate: string = '';
+  messageState: string = '';
 
-  constructor(private http: HttpClient, private dialog: MatDialog){}
-  
-  submitPaymentForm(form:NgForm){
+  constructor(private http: HttpClient, private dialog: MatDialog, public userAuthService: UserAuthService) {}
+
+  submitPaymentForm(form: NgForm) {
+    const userDetails = this.userAuthService.getUserdetails();
+    const userId = userDetails.id;
+
     if (form.valid) {
       const paymentData = {
-        // loan_id:this.loan_id,
-        amount:this.amount,
-        paymentDate:this.paymentDate
+        loan_id: this.loan_id,
+        amount: this.paymentAmount,
+        paymentDate: this.paymentDate
       };
+
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       const options = { headers: headers };
-      this.http.post(`${url}/payment`, paymentData, options)
-        .subscribe((res) => {
+
+      this.http.post(`${url}/payment`, paymentData, options).subscribe(
+        (res) => {
           console.log(res);
-          this.openDialog('Success', 'Payment done successfully');
+          this.openDialog('Success', 'Payment added successfully');
           form.reset();
         },
         (err) => {
           console.log(err);
-          this.openDialog('Error', 'An error occurred while doing payment');
-        });
+          this.openDialog('Error', 'An error occurred while adding the payment');
+        }
+      );
+    } else {
+      this.openDialog('Validation Error', 'Please enter valid details');
     }
-    
   }
+
   openDialog(title: string, message: string) {
     this.messageState = title; // Set the messageState based on the title
     this.dialog.open(DialogComponent, {

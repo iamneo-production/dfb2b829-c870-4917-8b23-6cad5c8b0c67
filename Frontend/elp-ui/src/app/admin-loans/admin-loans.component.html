@@ -1,0 +1,111 @@
+
+    <h1>Loans</h1>
+    <mat-card-content>
+      <div class="search-bar">
+        <mat-form-field>
+          <mat-label>Status</mat-label>
+          <mat-select [(value)]="selectedStatus" (selectionChange)="onStatusChange()">
+            <mat-option *ngFor="let status of statuses" [value]="status">{{ status }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup)="onSearch()">
+          </mat-form-field>
+      </div>
+  
+      <table class="loans-table" *ngIf="filteredLoans.length > 0">
+        <thead>
+          <tr>
+            <th (click)="sortTable('id')" [ngClass]="{'highlight': activeField === 'id'}">Id
+              <mat-icon *ngIf="activeField === 'id' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+              <mat-icon *ngIf="activeField === 'id' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+            </th>
+            <th (click)="sortTable('user_id')" [ngClass]="{'highlight': activeField === 'user_id'}">User_Id
+              <mat-icon *ngIf="activeField === 'user_id' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+              <mat-icon *ngIf="activeField === 'user_id' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+            </th>
+            <th (click)="sortTable('loanAmount')" [ngClass]="{'highlight': activeField === 'loanAmount'}">Loan Amount
+              <mat-icon *ngIf="activeField === 'loanAmount' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+              <mat-icon *ngIf="activeField === 'loanAmount' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+            </th>
+            <th (click)="sortTable('interestRate')" [ngClass]="{'highlight': activeField === 'interestRate'}">Interest Rate
+              <mat-icon *ngIf="activeField === 'interestRate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+              <mat-icon *ngIf="activeField === 'interestRate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+            </th>
+            <th (click)="sortTable('startDate')" [ngClass]="{'highlight': activeField === 'startDate'}">Start Date
+              <mat-icon *ngIf="activeField === 'startDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+              <mat-icon *ngIf="activeField === 'startDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+            </th>
+            <th (click)="sortTable('endDate')" [ngClass]="{'highlight': activeField === 'endDate'}">End Date
+              <mat-icon *ngIf="activeField === 'endDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+              <mat-icon *ngIf="activeField === 'endDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+            </th>
+            
+            <th>Actions</th> <!-- Added column for Actions -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let loan of filteredLoans">
+            <td>{{loan.id}}</td>
+            <td>{{loan.user_id}}</td>
+            <td>{{ loan.loanAmount }}</td>
+            <td>{{ loan.interestRate }}</td>
+            <td>{{ loan.startDate  | date:'yyyy-MM-dd'}}</td>
+            <td>{{ loan.endDate | date:'yyyy-MM-dd'}}</td>
+            <td>
+              <button mat-raised-button color="primary" (click)="editLoan(loan)">
+                <mat-icon class="icon large-icon">edit</mat-icon>
+                <span class="button-text">Edit</span>
+              </button>
+              <span class="spacing"></span> 
+              <button mat-raised-button color="warn" (click)="deleteLoan(loan)">
+                <mat-icon class="icon large-icon">delete</mat-icon>
+                <span class="button-text">Delete</span>
+              </button>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <div *ngIf="filteredLoans.length === 0">No loans found with the selected status.</div>
+    </mat-card-content>
+  <ng-template #dialogTemplate let-data>
+    <div class="dialog-close-button">
+        <button mat-icon-button mat-dialog-close>
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    
+    <mat-dialog-content>
+      <!-- Display the loan details inside the dialog form -->
+      <div class="field-name">Id</div>
+      <mat-form-field>
+        <input matInput placeholder="Id" [(ngModel)]="data.loan.id">
+      </mat-form-field>
+      <div class="field-name">User_Id</div>
+      <mat-form-field>
+        <input matInput placeholder="User_Id" [(ngModel)]="data.loan.user_id">
+      </mat-form-field>
+      <div class="field-name">Loan Amount</div>
+      <mat-form-field>
+        <input matInput placeholder="Loan Amount" [(ngModel)]="data.loan.loanAmount">
+      </mat-form-field>
+      <div class="field-name">Interest Rate</div>
+      <mat-form-field>
+        <input matInput placeholder="Interest Rate" [(ngModel)]="data.loan.interestRate">
+      </mat-form-field>
+      <div class="field-name">Start Date</div>
+      <mat-form-field>
+        <input matInput placeholder="Start Date" [(ngModel)]="data.loan.startDate">
+      </mat-form-field>
+      <div class="field-name">End Date</div>
+      <mat-form-field>
+        <input matInput placeholder="End Date" [(ngModel)]="data.loan.endDate">
+      </mat-form-field>      
+    </mat-dialog-content>
+  
+    <mat-dialog-actions>
+        <button mat-raised-button color="primary" [mat-dialog-close]="data" >Save Changes</button>
+    </mat-dialog-actions>
+  </ng-template>

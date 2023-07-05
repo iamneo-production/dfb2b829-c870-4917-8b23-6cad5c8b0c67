@@ -50,6 +50,13 @@ import { PaymentComponent } from './payment/payment.component';
 import { MatListModule } from '@angular/material/list';
 
 import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/logout-confirmation-dialog.component';
+import { LoanDetailsComponent } from './loan-details/loan-details.component';
+import { AddLoanComponent } from './add-loan/add-loan.component';
+import { AdminLoanApplicationComponent } from './admin-loan-application/admin-loan-application.component';
+import { AdminLoansComponent } from './admin-loans/admin-loans.component';
+
+
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -67,6 +74,11 @@ import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/
     ForbiddenComponent,
     LoginComponent,
     PaymentComponent,
+    LoanDetailsComponent,
+    AddLoanComponent,
+    AdminLoanApplicationComponent,
+    AdminLoansComponent,
+
 
     LogoutConfirmationDialogComponent
     
@@ -81,12 +93,13 @@ import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/
     NgxFileDropModule,
     MatButtonModule,
     MatToolbarModule,
-    MatIconModule,
+
     // FlexLayoutModule,
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
     MatInputModule,
+    MatIconModule,
 
     MatDialogModule,
     MatDatepickerModule,
@@ -101,7 +114,8 @@ import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/
 
 
  
-    RouterModule
+    RouterModule,
+
   ],
   providers: [   AuthGuard,
     {
@@ -109,8 +123,10 @@ import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/
       useClass:AuthInterceptor,
       multi:true
     },
-    UserService],
+    UserService,
+    DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 }
+
