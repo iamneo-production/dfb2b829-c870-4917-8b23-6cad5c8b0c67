@@ -15,7 +15,7 @@ public class EducationLoanPortalApplication {
 	}
 
 	@Configuration
-	@EnableWebMvc
+			.	@EnableWebMvc
 	public class CorsConfig implements WebMvcConfigurer {
 
 		@Override
