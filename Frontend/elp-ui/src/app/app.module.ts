@@ -57,6 +57,7 @@ import { AdminLoansComponent } from './admin-loans/admin-loans.component';
 
 
 import { DatePipe } from '@angular/common';
+import { UserPaymentComponent } from './user-payment/user-payment.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { DatePipe } from '@angular/common';
     AdminLoansComponent,
 
 
-    LogoutConfirmationDialogComponent
+    LogoutConfirmationDialogComponent,
+        UserPaymentComponent
     
   ],
 
