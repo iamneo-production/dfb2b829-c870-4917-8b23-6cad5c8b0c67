@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 .mat-toolbar{
     background-color: black;
 }
-=======
 .mat-card-content {
     display: flex;
     justify-content: center;
@@ -76,4 +74,3 @@
     background-color: #f5f5f5;
     transition: background-color 0.3s ease;
   }
->>>>>>> 2792fb7a80a97530c689298accb04bb00bf54c26
