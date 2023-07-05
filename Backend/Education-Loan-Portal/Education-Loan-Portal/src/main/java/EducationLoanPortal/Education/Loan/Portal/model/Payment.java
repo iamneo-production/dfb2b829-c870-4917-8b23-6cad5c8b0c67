@@ -27,6 +27,16 @@ public class Payment {
     private Double amount;
     private LocalDate paymentDate;
 
+    public Long getLoan_id() {
+        return loan_id;
+    }
+
+    public void setLoan_id(Long loan_id) {
+        this.loan_id = loan_id;
+    }
+
+    private Long loan_id;
+
     public Payment() {
         // constructor
     }
@@ -36,7 +46,7 @@ public class Payment {
         loan_id = loanId;
         this.amount = amount;
         this.paymentDate = paymentDate;
-//        this.loanId = loan.getId(); // set loanId to the id of the loan object
+        this.loan_id = loan.getId(); // set loanId to the id of the loan object
     }
 
     public Long getId() {
@@ -53,18 +63,14 @@ public class Payment {
 
     public void setLoan(Loan loan) {
         this.loan = loan;
-//        this.loanId = loan.getId(); // set loanId to the id of the loan object
+        this.loan_id = loan.getId(); // set loanId to the id of the loan object
     }
 
-//    public Long getLoanId() {
-//        return loanId;
-//    }
 
 
 
-//    public void setLoanId(Long loanId) {
-//        this.loanId = loanId;
-//    }
+
+
 
     public Double getAmount() {
         return amount;
