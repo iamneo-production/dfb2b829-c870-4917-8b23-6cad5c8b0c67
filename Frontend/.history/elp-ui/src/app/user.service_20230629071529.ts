@@ -15,6 +15,7 @@ export class UserService {
   public updateUser(id: number, user: User) {
     return this.http.put(`http://localhost:8080/users/${id}`, user);
   }
-   
+  
+  
   
 }

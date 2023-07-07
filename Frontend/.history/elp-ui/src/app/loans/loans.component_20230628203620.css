@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-.mat-toolbar{
-    background-color: black;
-}
-=======
->>>>>>> 2792fb7a80a97530c689298accb04bb00bf54c26
 .mat-card-content {
     display: flex;
     justify-content: center;
@@ -76,8 +70,4 @@
   tbody tr:hover {
     background-color: #f5f5f5;
     transition: background-color 0.3s ease;
-<<<<<<< HEAD
   }
-=======
-  }
->>>>>>> 2792fb7a80a97530c689298accb04bb00bf54c26

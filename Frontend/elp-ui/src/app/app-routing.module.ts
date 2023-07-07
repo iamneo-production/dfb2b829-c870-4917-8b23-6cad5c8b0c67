@@ -8,6 +8,7 @@ import {ProfileComponent} from './profile/profile.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { PaymentComponent } from './payment/payment.component';
 import { AuthGuard } from './_auth/auth.guard';
+<<<<<<< HEAD
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AddLoanComponent } from './add-loan/add-loan.component';
 import { LoanDetailsComponent } from './loan-details/loan-details.component';
@@ -15,6 +16,13 @@ import { AdminLoanApplicationComponent } from './admin-loan-application/admin-lo
 import { AdminLoansComponent } from './admin-loans/admin-loans.component';
 import { LoginComponent } from './login/login.component';
 // import {ContactComponent} from './contact/contact.component';
+=======
+import { AdminLoansComponent } from './admin-loans/admin-loans.component';
+import { AdminLoanApplicationComponent } from './admin-loan-application/admin-loan-application.component';
+import { LoanDetailsComponent } from './loan-details/loan-details.component';
+import { AddLoanComponent } from './add-loan/add-loan.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+>>>>>>> 2792fb7a80a97530c689298accb04bb00bf54c26
 
 
 const routes: Routes = [
@@ -36,7 +44,10 @@ const routes: Routes = [
   {path:'loan-details',component:LoanDetailsComponent, canActivate:[AuthGuard], data:{roles:['User']} },
   {path:'add-loan',component:AddLoanComponent, canActivate:[AuthGuard], data:{roles:['Admin']} },
   {path:'adminHome',component:AdminHomeComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
+<<<<<<< HEAD
   {path:'add-payment' , component:PaymentComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
+=======
+>>>>>>> 2792fb7a80a97530c689298accb04bb00bf54c26
   {path:'forbidden',component:ForbiddenComponent}
   
 

@@ -1,0 +1,27 @@
+<mat-card>
+    <mat-card-title>Loans</mat-card-title>
+    <mat-card-content>
+      <table *ngIf="filteredLoans.length > 0">
+        <thead>
+          <tr>
+            <th>Loan ID</th>
+            <th>Loan Amount</th>
+            <th>Interest Rate</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let loan of filteredLoans">
+            <td>{{ loan.id }}</td>
+            <td>{{ loan.loanAmount }}</td>
+            <td>{{ loan.interestRate }}</td>
+            <td>{{ loan.startDate | date }}</td>
+            <td>{{ loan.endDate | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <div *ngIf="filteredLoans.length === 0">No loans found for the selected user ID.</div>
+    </mat-card-content>
+  </mat-card>

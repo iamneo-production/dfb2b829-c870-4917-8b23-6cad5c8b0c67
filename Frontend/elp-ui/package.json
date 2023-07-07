@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
     "bootstrap": "^5.3.0",
+    "file-saver": "^2.0.5",
     "jquery": "^3.7.0",
     "ngx-file-drop": "^15.0.0",
     "rxjs": "~7.8.0",
@@ -31,7 +32,12 @@
     "@angular-devkit/build-angular": "^15.2.1",
     "@angular/cli": "~15.2.8",
     "@angular/compiler-cli": "^15.2.0",
+<<<<<<< HEAD
     "@types/jasmine": "~4.3.4",
+=======
+    "@types/file-saver": "^2.0.5",
+    "@types/jasmine": "~4.3.0",
+>>>>>>> 2792fb7a80a97530c689298accb04bb00bf54c26
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
