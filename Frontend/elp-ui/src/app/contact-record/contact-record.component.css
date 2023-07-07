@@ -1,0 +1,54 @@
+
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .col-md-7 {
+        margin: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 24px;
+    }
+
+    hr {
+        margin: 10px 0;
+    }
+
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        border: 0px solid #ccc;
+        padding: 25px;
+    }
+
+    .btn {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+    }
+
+    .bg-light {
+        background-color: #f8f9fa;
+    }
+

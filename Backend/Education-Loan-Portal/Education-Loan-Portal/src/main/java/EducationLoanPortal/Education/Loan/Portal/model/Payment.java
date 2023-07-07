@@ -1,7 +1,6 @@
 package EducationLoanPortal.Education.Loan.Portal.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
@@ -20,21 +19,34 @@ public class Payment {
     @JoinColumn(name = "loan_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonBackReference
     private Loan loan;
+    @JsonProperty("loan_id")
+    private Long loan_id;
 
 
 
     private Double amount;
     private LocalDate paymentDate;
 
+    public Long getLoan_id() {
+        return loan_id;
+    }
+
+    public void setLoan_id(Long loan_id) {
+        this.loan_id = loan_id;
+    }
+
+    private Long loan_id;
+
     public Payment() {
         // constructor
     }
 
-    public Payment(Loan loan, Double amount, LocalDate paymentDate) {
+    public Payment(Loan loan, Long loanId, Double amount, LocalDate paymentDate) {
         this.loan = loan;
+        loan_id = loanId;
         this.amount = amount;
         this.paymentDate = paymentDate;
-//        this.loanId = loan.getId(); // set loanId to the id of the loan object
+        this.loan_id = loan.getId(); // set loanId to the id of the loan object
     }
 
     public Long getId() {
@@ -49,22 +61,16 @@ public class Payment {
         return loan;
     }
 
-    public void setUser(Loan loan) {
-        this.loan = loan;
-//        this.loanId = loan.getId(); // set loanId to the id of the loan object
-    }
-
-//    public Long getLoanId() {
-//        return loanId;
-//    }
-
     public void setLoan(Loan loan) {
         this.loan = loan;
+        this.loan_id = loan.getId(); // set loanId to the id of the loan object
     }
 
-//    public void setLoanId(Long loanId) {
-//        this.loanId = loanId;
-//    }
+
+
+
+
+
 
     public Double getAmount() {
         return amount;
@@ -92,4 +98,5 @@ public class Payment {
                 ", paymentDate=" + paymentDate +
                 '}';
     }
+
 }
