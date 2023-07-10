@@ -59,5 +59,16 @@ public class PaymentController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @PutMapping("/updateThePayment/{id}")
+    public ResponseEntity<Payment> updatePaymentStatus(@PathVariable("id") Long id, @RequestBody Payment updatedPayment) throws ResourceNotFoundException {
+        Payment payment = paymentService.getPaymentById(id);
+        if(payment!=null){
+            Payment newPayment = paymentService.updatePaymentStatusById(id,updatedPayment);
+            return new ResponseEntity<>(newPayment, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 }
