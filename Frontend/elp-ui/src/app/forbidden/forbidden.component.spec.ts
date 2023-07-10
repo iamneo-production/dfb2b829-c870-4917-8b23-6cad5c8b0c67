@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminLoanFormComponent } from './admin-loan-form.component';
+import { ForbiddenComponent } from './forbidden.component';
 
-describe('AdminLoanFormComponent', () => {
-  let component: AdminLoanFormComponent;
-  let fixture: ComponentFixture<AdminLoanFormComponent>;
+describe('ForbiddenComponent', () => {
+  let component: ForbiddenComponent;
+  let fixture: ComponentFixture<ForbiddenComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminLoanFormComponent ]
+      declarations: [ ForbiddenComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdminLoanFormComponent);
+    fixture = TestBed.createComponent(ForbiddenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

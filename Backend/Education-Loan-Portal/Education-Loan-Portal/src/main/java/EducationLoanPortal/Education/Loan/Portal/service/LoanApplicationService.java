@@ -112,13 +112,13 @@ public class LoanApplicationService {
         document.add(heading);
         document.add(Chunk.NEWLINE);
 
-        Paragraph subheading = new Paragraph("Loan Application Form Details");
+        Paragraph subheading = new Paragraph("Loan Application Form Receipt");
         subheading.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(subheading);
 
         document.add(Chunk.NEWLINE);
 
-        Paragraph subheading1= new Paragraph("User Detils");
+        Paragraph subheading1= new Paragraph("User Details");
         subheading.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(subheading1);
         document.add(Chunk.NEWLINE);
@@ -150,7 +150,7 @@ public class LoanApplicationService {
 
         // Add spacing between user table and loan table
         document.add(Chunk.NEWLINE);
-        Paragraph subheading2= new Paragraph("Loan application Deatils");
+        Paragraph subheading2= new Paragraph("Loan application Details");
         subheading.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(subheading2);
 

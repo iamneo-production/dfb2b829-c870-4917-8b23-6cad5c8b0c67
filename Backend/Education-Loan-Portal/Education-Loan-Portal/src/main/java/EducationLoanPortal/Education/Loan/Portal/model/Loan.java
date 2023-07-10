@@ -40,7 +40,7 @@ public class Loan {
     }
 
     public Loan(User user, Double loanAmount, Double interestRate, String status, LocalDate startDate,
-            LocalDate endDate) {
+                LocalDate endDate) {
         this.user = user;
         this.loanAmount = loanAmount;
         this.interestRate = interestRate;

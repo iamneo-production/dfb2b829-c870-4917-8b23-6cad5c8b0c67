@@ -20,73 +20,63 @@ public class UserController {
         this.userService = userService;
     }
 
-    //1. User management:
+    // 1. User management:
 
-   //- `POST /users`: Create a new user
-   @PostMapping("")
-   public ResponseEntity<User> addUser(@RequestBody User user) {
-       User newUser = userService.addUser(user);
-       return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-   }
+    // - `POST /users`: Create a new user
+    @PostMapping("")
+    public ResponseEntity<User> addUser(@RequestBody User user) {
+        User newUser = userService.addUser(user);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    }
 
-   //- `GET /users/{id}`: Retrieve a specific user by ID
-   @GetMapping("/{id}")
-   public ResponseEntity<User> getUserById(@PathVariable("id") Long id) throws UserNotFoundException {
-       User user = userService.findUserById(id);
-       return new ResponseEntity<>(user, HttpStatus.OK);
-   }
+    // - `GET /users/{id}`: Retrieve a specific user by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) throws UserNotFoundException {
+        User user = userService.findUserById(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 
+    // `PUT /users/{id}`: Update an existing user by ID
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@RequestBody User user) throws UserNotFoundException {
+        User updateUser = userService.updateUser(user);
+        return new ResponseEntity<>(updateUser, HttpStatus.OK);
+    }
 
+    // `DELETE /users/{id}`: Delete an existing user by ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
-   //`PUT /users/{id}`: Update an existing user by ID
-   @PutMapping("/{id}")
-   public ResponseEntity<User> updateUser(@RequestBody User user) throws UserNotFoundException {
-       User updateUser = userService.updateUser(user);
-       return new ResponseEntity<>(updateUser, HttpStatus.OK);
-   }
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.findAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
 
-   //`DELETE /users/{id}`: Delete an existing user by ID
-   @DeleteMapping("/{id}")
-   public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
-       userService.deleteUser(id);
-       return new ResponseEntity<>(HttpStatus.OK);
-   }
-
-   @GetMapping("/all")
-   public ResponseEntity<List<User>> getAllUsers() {
-       List<User> users = userService.findAllUsers();
-       return new ResponseEntity<>(users, HttpStatus.OK);
-   }
-
-
-
-    //for the spring jwt
+    // for the spring jwt
     @PostConstruct
     public void initRoleAndUser() {
         userService.initRoleAndUser();
     }
 
-    @PostMapping({"/registerNewUser"})
+    @PostMapping({ "/registerNewUser" })
     public User registerNewUser(@RequestBody User user) {
         return userService.registerNewUser(user);
     }
 
-    @GetMapping({"/forAdmin"})
+    @GetMapping({ "/forAdmin" })
     @PreAuthorize("hasRole('Admin')")
-    public String forAdmin(){
+    public String forAdmin() {
         return "This URL is only accessible to the admin";
     }
 
-    @GetMapping({"/forUser"})
+    @GetMapping({ "/forUser" })
     @PreAuthorize("hasRole('User')")
-    public String forUser(){
+    public String forUser() {
         return "This URL is only accessible to the user";
     }
-
-
-
-
-
-
 
 }

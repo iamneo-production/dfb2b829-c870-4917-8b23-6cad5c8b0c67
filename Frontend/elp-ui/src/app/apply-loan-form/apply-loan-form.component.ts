@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { UserAuthService } from '../_services/user-auth.service';
+
 
 import { url } from '../config';
 
@@ -18,9 +20,11 @@ export class ApplyLoanFormComponent {
   purpose: string = '';
   messageState: string = '';
 
-  constructor(private http: HttpClient, private dialog: MatDialog) {}
+  constructor(private http: HttpClient, private dialog: MatDialog,public userAuthService: UserAuthService) {}
 
   submitLoanForm(form: NgForm) {
+    const userDetails=this.userAuthService.getUserdetails()
+    const userId=userDetails.id;
     if (form.valid) {
       const loanData = {
         loanAmount: this.loanAmount,
@@ -28,7 +32,7 @@ export class ApplyLoanFormComponent {
         purpose: this.purpose,
         loanType: this.loanType,
         status: 'Applied',
-        user_id:'10'
+        user_id:userId
       };
 
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
