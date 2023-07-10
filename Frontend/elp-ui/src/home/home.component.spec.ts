@@ -12,5 +12,3 @@ describe('HomeComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
-
-  });

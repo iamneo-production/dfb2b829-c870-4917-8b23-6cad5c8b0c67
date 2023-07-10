@@ -46,7 +46,9 @@ import { AuthGuard } from './_auth/auth.guard';
 import { AuthInterceptor } from './_auth/auth.interceptor';
 import { UserService } from './_services/user.service';
 import { LoginComponent } from './login/login.component';
+
 import { PaymentComponent } from './payment/payment.component';
+
 import { MatListModule } from '@angular/material/list';
 
 import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/logout-confirmation-dialog.component';
@@ -73,7 +75,9 @@ import { DatePipe } from '@angular/common';
     AdminComponent,
     ForbiddenComponent,
     LoginComponent,
+
     PaymentComponent,
+
     LoanDetailsComponent,
     AddLoanComponent,
     AdminLoanApplicationComponent,
