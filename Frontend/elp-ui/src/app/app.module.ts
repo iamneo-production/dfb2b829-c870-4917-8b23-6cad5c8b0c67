@@ -79,6 +79,10 @@ import { UserPaymentComponent } from './user-payment/user-payment.component';
     LoginComponent,
 
     PaymentComponent,
+    LoanDetailsComponent,
+    AddLoanComponent,
+    AdminLoanApplicationComponent,
+    AdminLoansComponent,
 
     LoanDetailsComponent,
     AddLoanComponent,

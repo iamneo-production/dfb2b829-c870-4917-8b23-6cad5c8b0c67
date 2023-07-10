@@ -2,6 +2,7 @@
 
 
 import { Component, Injectable, OnInit } from '@angular/core';
+
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { UserAuthService } from '../_services/user-auth.service';
@@ -22,7 +23,6 @@ interface Payment {
   styleUrls: ['./user-payment.component.css']
 })
 export class UserPaymentComponent implements OnInit {
-
   payments: Payment[] = [];
   loan_id: number = 0;
   paymentAmount: number = 0;

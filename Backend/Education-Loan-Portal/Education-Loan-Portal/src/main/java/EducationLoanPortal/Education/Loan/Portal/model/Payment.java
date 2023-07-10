@@ -27,16 +27,38 @@ public class Payment {
     private Double amount;
     private LocalDate paymentDate;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private String status;
+
+    public Long getLoan_id() {
+        return loan_id;
+    }
+
+    public void setLoan_id(Long loan_id) {
+        this.loan_id = loan_id;
+    }
+
+
+
     public Payment() {
         // constructor
     }
 
-    public Payment(Loan loan, Long loanId, Double amount, LocalDate paymentDate) {
+    public Payment(Loan loan, Long loan_id, Double amount, LocalDate paymentDate,String status) {
+
         this.loan = loan;
-        loan_id = loanId;
+        this.loan_id = loan_id;
         this.amount = amount;
         this.paymentDate = paymentDate;
-//        this.loanId = loan.getId(); // set loanId to the id of the loan object
+        this.loan_id = loan.getId(); // set loanId to the id of the loan object
+        this.status = status;
     }
 
     public Long getId() {
@@ -53,18 +75,14 @@ public class Payment {
 
     public void setLoan(Loan loan) {
         this.loan = loan;
-//        this.loanId = loan.getId(); // set loanId to the id of the loan object
+        this.loan_id = loan.getId(); // set loanId to the id of the loan object
     }
 
-//    public Long getLoanId() {
-//        return loanId;
-//    }
 
 
 
-//    public void setLoanId(Long loanId) {
-//        this.loanId = loanId;
-//    }
+
+
 
     public Double getAmount() {
         return amount;
@@ -87,9 +105,10 @@ public class Payment {
         return "Payment{" +
                 "id=" + id +
                 ", loan=" + loan +
-                ", loanId=" + loan.getId() +
+                ", loan_id=" + loan.getId() +
                 ", amount=" + amount +
                 ", paymentDate=" + paymentDate +
+                ", status=" + status+
                 '}';
     }
 
