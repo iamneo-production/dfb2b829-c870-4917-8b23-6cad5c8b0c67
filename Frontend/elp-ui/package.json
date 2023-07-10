@@ -14,11 +14,7 @@
     "@angular/cdk": "^15.2.9",
     "@angular/common": "^15.2.0",
     "@angular/compiler": "^15.2.0",
-<<<<<<< HEAD
     "@angular/core": "^15.2.9",
-=======
-    "@angular/core": "^15.2.0",
->>>>>>> c11db1ccd5398ac98788da5864af3d203c531967
     "@angular/forms": "^15.2.9",
     "@angular/material": "^15.2.9",
     "@angular/platform-browser": "^15.2.0",
