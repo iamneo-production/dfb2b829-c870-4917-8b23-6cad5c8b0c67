@@ -22,11 +22,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public isLoggedIn(): boolean {
+  isLoggedIn(): boolean {
     return this.userAuthService.isLoggedIn();
   }
 
-  public logout(): void {
+  logout(): void {
     const dialogRef = this.dialog.open(LogoutConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  public toggleNavbar(): void {
+  toggleNavbar(): void {
     this.isNavbarOpen = !this.isNavbarOpen;
   }
 }
