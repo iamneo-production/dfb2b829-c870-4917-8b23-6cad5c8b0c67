@@ -1,13 +1,14 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ReactiveFormsModule} from "@angular/forms";
+
 
 import {NgxFileDropModule} from "ngx-file-drop";
 import {MatButtonModule} from "@angular/material/button";
@@ -39,6 +40,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { SignupComponent } from './signup/signup.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -46,6 +48,7 @@ import { AuthGuard } from './_auth/auth.guard';
 import { AuthInterceptor } from './_auth/auth.interceptor';
 import { UserService } from './_services/user.service';
 import { LoginComponent } from './login/login.component';
+import { PaymentComponent } from './payment/payment.component';
 import { MatListModule } from '@angular/material/list';
 
 import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/logout-confirmation-dialog.component';
@@ -56,6 +59,10 @@ import { AdminLoansComponent } from './admin-loans/admin-loans.component';
 
 
 import { DatePipe } from '@angular/common';
+import { UserPaymentComponent } from './user-payment/user-payment.component';
+import { VerifyAccountComponent } from './verify-account/verify-account.component';
+import { SetPasswordComponent } from './set-password/set-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -72,13 +79,19 @@ import { DatePipe } from '@angular/common';
     AdminComponent,
     ForbiddenComponent,
     LoginComponent,
+    PaymentComponent,
     LoanDetailsComponent,
     AddLoanComponent,
     AdminLoanApplicationComponent,
     AdminLoansComponent,
+    SignupComponent,
 
 
-    LogoutConfirmationDialogComponent
+    LogoutConfirmationDialogComponent,
+        UserPaymentComponent,
+        VerifyAccountComponent,
+        SetPasswordComponent,
+        ForgotPasswordComponent
     
   ],
 
@@ -86,7 +99,6 @@ import { DatePipe } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule,
     HttpClientModule,
     NgxFileDropModule,
     MatButtonModule,
@@ -113,6 +125,8 @@ import { DatePipe } from '@angular/common';
 
  
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [   AuthGuard,
@@ -127,4 +141,3 @@ import { DatePipe } from '@angular/common';
 })
 export class AppModule {
 }
-

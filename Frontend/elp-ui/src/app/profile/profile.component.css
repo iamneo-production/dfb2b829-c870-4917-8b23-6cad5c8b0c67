@@ -77,9 +77,62 @@
     opacity: 1;
     transform: translateY(0);
   }
+  width: 35%;
+  background-color: #f2f2f2;
+}
+
+.modal-details {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-container button[type="submit"] {
+  min-width: 120px;
+}
+
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 400px; /* Set a maximum height for the form container */
+}
+
+.form-field {
+  width: 100%;
+}
+
+/* Animation Effects */
+.form-container {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .field-name {
   font-weight: bold;
   margin-bottom: 8px;
 }
+
+.field-name {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+

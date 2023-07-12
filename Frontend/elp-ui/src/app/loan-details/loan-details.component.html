@@ -23,7 +23,9 @@
     <th (click)="sortTable('applicationDate')" [ngClass]="{'highlight': activeField === 'applicationDate'}">Application Date
       <mat-icon *ngIf="activeField === 'applicationDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
       <mat-icon *ngIf="activeField === 'applicationDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
-    </th >
+
+
+    </th>
     <th  [ngClass]="{'highlight': activeField === 'applicationDate'}">
        Reports
     </th>
@@ -43,4 +45,5 @@
     
     </tr>
   </tbody>
+
 </table>

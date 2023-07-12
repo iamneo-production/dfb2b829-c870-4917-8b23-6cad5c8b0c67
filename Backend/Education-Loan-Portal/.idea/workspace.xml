@@ -5,6 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1bc9fa4e-7ad9-41e4-bace-b08f758d272f" name="Changes" comment="">
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/elp-ui/src/app/header/header.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/elp-ui/src/app/header/header.component.css" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_4_7.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_4_7.xml" beforeDir="false" />
@@ -60,6 +65,11 @@
       <change beforePath="$PROJECT_DIR$/Education-Loan-Portal/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Education-Loan-Portal/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Frontend/elp-ui/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/elp-ui/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Frontend/elp-ui/src/app/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/elp-ui/src/app/profile/profile.component.ts" afterDir="false" />
+>>>>>>> b9af85be469af4ce08444962c6b45fe363db2bdd
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/elp-ui/sample.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/elp-ui/sample.java" afterDir="false" />
+>>>>>>> 27ca0545a4ab85415f4d7b878b279287c6e316de
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,18 +102,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;I:/spring boot/dfb2b829-c870-4917-8b23-6cad5c8b0c67/Backend/Education-Loan-Portal/Education-Loan-Portal&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+<<<<<<< HEAD
+    "last_opened_file_path": "C:/Users/Raghul S/Documents/GitHub/dfb2b829-c870-4917-8b23-6cad5c8b0c67/Backend/Education-Loan-Portal/Education-Loan-Portal",
+=======
+    "last_opened_file_path": "I:/spring boot/dfb2b829-c870-4917-8b23-6cad5c8b0c67/Backend/Education-Loan-Portal/Education-Loan-Portal",
+>>>>>>> 27ca0545a4ab85415f4d7b878b279287c6e316de
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
-}</component>
+}]]></component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean verify" />
