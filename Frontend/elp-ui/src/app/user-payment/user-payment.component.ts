@@ -44,11 +44,22 @@ export class UserPaymentComponent implements OnInit {
     const dialogRef = this.dialog.open(PaymentDialogComponent, {
       data: payment
     });
-
+  
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'confirm') {
         // Perform payment confirmation logic here
-        console.log('Payment confirmed!');
+        payment.status = 'completed'; // Update the payment status
+  
+        // Send an HTTP request to update the payment status on the backend
+        const url = `http://127.0.0.1:8080/payment/${payment.id}`;
+        this.http.put(url, payment).subscribe(
+          () => {
+            console.log('Payment confirmed!');
+          },
+          (error) => {
+            console.error('Failed to update payment status:', error);
+          }
+        );
       } else if (result === 'cancel') {
         // Perform payment cancellation logic here
         console.log('Payment cancelled.');

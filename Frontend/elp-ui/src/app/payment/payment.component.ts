@@ -15,7 +15,7 @@ export class PaymentComponent {
   loan_id: number = 0;
   paymentAmount: number = 0;
   paymentDate: string = '';
-  status: string=''
+  status: string='Ongoing'
   messageState: string = '';
 
   constructor(private http: HttpClient, private dialog: MatDialog, public userAuthService: UserAuthService) {}

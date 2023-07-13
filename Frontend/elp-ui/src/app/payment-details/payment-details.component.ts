@@ -7,10 +7,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.component';
 
 interface Payment {
+  id: number;
   loan_id: number;
   amount: number;
-  paymentDate: string|null;
-  status:string;
+  paymentDate: string | null;
+  status: string;
   [key: string]: any;
 }
 
@@ -21,9 +22,11 @@ interface Payment {
 })
 export class PaymentDetailsComponent implements OnInit {
   payments: Payment[] = [];
+  id: number = 0;
   loan_id: number = 0;
   paymentAmount: number = 0;
-  paymentDate: string ='';
+  paymentDate: string = '';
+  status : string = 'Ongoing'
   filteredPayments: Payment[] = [];
   searchTerm: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
@@ -36,18 +39,14 @@ export class PaymentDetailsComponent implements OnInit {
     private encryptionService: StringEncryptionService,
     private dialog: MatDialog
   ) {}
-  
-  ngOnInit() {
-    this.getPaymentsByLoanId();
-  }
-  
-  
 
-  getPaymentsByLoanId() {
-    const userDetails=this.userAuthService.getUserdetails()
-    this.loan_id=userDetails.loan_id;
-    // Assuming you have a way to get the loan ID
-    // this.loan_id = this.loan_id; // Replace with the actual loan ID
+  ngOnInit() {
+    this.getPaymentsByPaymentId();
+  }
+
+  getPaymentsByPaymentId() {
+    // Assuming you have a way to get the payment ID
+    const paymentId = this.id;
 
     const url = `http://127.0.0.1:8080/payment/all`;
     this.http.get<Payment[]>(url).subscribe(
@@ -62,7 +61,6 @@ export class PaymentDetailsComponent implements OnInit {
       }
     );
   }
-  
 
   private formatPaymentDate() {
     if (this.payments) {
@@ -85,6 +83,7 @@ export class PaymentDetailsComponent implements OnInit {
       this.filteredPayments = [...this.payments];
     }
   }
+
   sortTable(field: string) {
     if (field === this.activeField) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
@@ -104,6 +103,7 @@ export class PaymentDetailsComponent implements OnInit {
       }
     });
   }
+
   editPayment(payment: Payment) {
     // Implement the edit logic here
     // You can open a dialog or navigate to a different page for editing
@@ -111,9 +111,22 @@ export class PaymentDetailsComponent implements OnInit {
   }
 
   deletePayment(payment: Payment) {
-    this.http.delete('http://127.0.0.1:8080/payment/1')
-    // Implement the delete logic here
-    // You can prompt the user for confirmation and perform the delete operation
-    console.log('Deleting payment:', payment);
+    const confirmation = confirm('Are you sure you want to delete this payment?');
+
+    if (confirmation) {
+      const url = `http://127.0.0.1:8080/payment/${payment.id}`;
+
+      this.http.delete(url).subscribe(
+        () => {
+          // Remove the deleted payment from the payments array
+          this.payments = this.payments.filter((p) => p.id !== payment.id);
+          this.filteredPayments = [...this.payments];
+          console.log('Payment deleted successfully');
+        },
+        (error) => {
+          console.error('Failed to delete payment:', error);
+        }
+      );
+    }
   }
 }

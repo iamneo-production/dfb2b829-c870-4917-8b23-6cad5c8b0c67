@@ -5,6 +5,10 @@
 </div>
 <table class="mat-table mat-elevation-z8">
   <thead>
+    <th (click)="sortTable('loan_id')" [ngClass]="{'highlight': activeField === 'loan_id'}">Payment ID
+      <mat-icon *ngIf="activeField === 'loan_id' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'loan_id' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
     <th (click)="sortTable('loan_id')" [ngClass]="{'highlight': activeField === 'loan_id'}">Loan ID
       <mat-icon *ngIf="activeField === 'loan_id' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
       <mat-icon *ngIf="activeField === 'loan_id' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
@@ -17,15 +21,19 @@
       <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
       <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
     </th>
-    
-    
-   
-    
-
-  
+    <th (click)="sortTable('paymentDate')" [ngClass]="{'highlight': activeField === 'paymentDate'}">Edit
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('paymentDate')" [ngClass]="{'highlight': activeField === 'paymentDate'}">Delete
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
   </thead>
+
   <tbody>
     <tr *ngFor="let payment of filteredPayments">
+      <td>{{ payment.id }}</td>
       <td>{{ payment.loan_id }}</td>
       <td>{{ payment.amount }}</td>
       <td>{{ payment.paymentDate }}</td>
