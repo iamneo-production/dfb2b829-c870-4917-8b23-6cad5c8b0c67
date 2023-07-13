@@ -1,12 +1,8 @@
-
-
-
-import { Component, Injectable, OnInit } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { UserAuthService } from '../_services/user-auth.service';
-
+import { StringEncryptionService } from '../_services/string-encryption.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.component';
 
@@ -19,11 +15,11 @@ interface Payment {
 }
 
 @Component({
-  selector: 'app-user-payment',
-  templateUrl: './user-payment.component.html',
-  styleUrls: ['./user-payment.component.css']
+  selector: 'app-payment-details',
+  templateUrl: './payment-details.component.html',
+  styleUrls: ['./payment-details.component.css']
 })
-export class UserPaymentComponent implements OnInit {
+export class PaymentDetailsComponent implements OnInit {
   payments: Payment[] = [];
   loan_id: number = 0;
   paymentAmount: number = 0;
@@ -32,29 +28,15 @@ export class UserPaymentComponent implements OnInit {
   searchTerm: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   activeField: string = '';
-  
 
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,
     public userAuthService: UserAuthService,
+    private encryptionService: StringEncryptionService,
     private dialog: MatDialog
   ) {}
-  openPaymentDialog(payment: any) {
-    const dialogRef = this.dialog.open(PaymentDialogComponent, {
-      data: payment
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'confirm') {
-        // Perform payment confirmation logic here
-        console.log('Payment confirmed!');
-      } else if (result === 'cancel') {
-        // Perform payment cancellation logic here
-        console.log('Payment cancelled.');
-      }
-    });
-  }
+  
   ngOnInit() {
     this.getPaymentsByLoanId();
   }
@@ -67,7 +49,7 @@ export class UserPaymentComponent implements OnInit {
     // Assuming you have a way to get the loan ID
     // this.loan_id = this.loan_id; // Replace with the actual loan ID
 
-    const url = `http://127.0.0.1:8080/payment/findByLoanId/1`;
+    const url = `http://127.0.0.1:8080/payment/all`;
     this.http.get<Payment[]>(url).subscribe(
       (response) => {
         this.payments = response;
@@ -121,5 +103,17 @@ export class UserPaymentComponent implements OnInit {
         return this.sortDirection === 'asc' ? valueA - valueB : valueB - valueA;
       }
     });
+  }
+  editPayment(payment: Payment) {
+    // Implement the edit logic here
+    // You can open a dialog or navigate to a different page for editing
+    console.log('Editing payment:', payment);
+  }
+
+  deletePayment(payment: Payment) {
+    this.http.delete('http://127.0.0.1:8080/payment/1')
+    // Implement the delete logic here
+    // You can prompt the user for confirmation and perform the delete operation
+    console.log('Deleting payment:', payment);
   }
 }

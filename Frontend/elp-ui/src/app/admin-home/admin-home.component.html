@@ -23,7 +23,11 @@
           <mat-icon class="icon larger-icon">add_box</mat-icon>
           <span class="button-text">Add Payment </span>
         </button>
-        
-        
-  </div>
-  </div>
+    </div>
+    <div class="row">
+      <button mat-raised-button color="primary" [routerLink]="['/payment-details']" [queryParams]="{ showDialog: true }" class="flex-button">
+          <mat-icon class="icon larger-icon">add_box</mat-icon>
+          <span class="button-text">Payment Management</span>
+        </button>
+    </div>
+</div>

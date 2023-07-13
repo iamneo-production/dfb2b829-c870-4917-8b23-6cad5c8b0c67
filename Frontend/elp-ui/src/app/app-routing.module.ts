@@ -15,6 +15,7 @@ import { AddLoanComponent } from './add-loan/add-loan.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { PaymentComponent } from './payment/payment.component';
 import { UserPaymentComponent } from './user-payment/user-payment.component';
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path:'adminHome',component:AdminHomeComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
   {path:'add-payment' , component:PaymentComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
   {path:'user-payment', component:UserPaymentComponent},
+  {path:'payment-details', component:PaymentDetailsComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
   {path:'forbidden',component:ForbiddenComponent}
   
 
