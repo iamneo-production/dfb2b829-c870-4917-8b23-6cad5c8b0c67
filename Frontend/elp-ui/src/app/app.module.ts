@@ -63,6 +63,8 @@ import { UserPaymentComponent } from './user-payment/user-payment.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 import { SetPasswordComponent } from './set-password/set-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ContactComponent } from './contact/contact.component';
+import { ContactRecordComponent } from './contact-record/contact-record.component';
 
 
 @NgModule({
@@ -91,7 +93,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
         UserPaymentComponent,
         VerifyAccountComponent,
         SetPasswordComponent,
-        ForgotPasswordComponent
+        ForgotPasswordComponent,
+        ContactComponent,
+        ContactRecordComponent
     
   ],
 
