@@ -1,13 +1,19 @@
 package EducationLoanPortal.Education.Loan.Portal.controler;
 
+import EducationLoanPortal.Education.Loan.Portal.exception.UserNotFoundException;
 import EducationLoanPortal.Education.Loan.Portal.model.Loan;
 import EducationLoanPortal.Education.Loan.Portal.model.LoanApplication;
 import EducationLoanPortal.Education.Loan.Portal.service.LoanApplicationService;
 import EducationLoanPortal.Education.Loan.Portal.service.MailService;
+import EducationLoanPortal.Education.Loan.Portal.service.StringEncryptionEncoderDecoder;
+import com.itextpdf.text.DocumentException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.time.LocalDate;
@@ -28,26 +34,10 @@ public class LoanApplicationController {
     // - `POST /loan-applications`: Create a new loan application
 
     @PostMapping("")
-    public ResponseEntity<LoanApplication> addLoanApplication(@RequestBody LoanApplication loanApplication) {
+    public ResponseEntity<LoanApplication> addLoanApplication(@RequestBody LoanApplication loanApplication) throws UserNotFoundException {
         LoanApplication newLoanApplication = loanApplicationService.addLoanApplication(loanApplication);
-
-        // Extract loan details
-        Double loanAmount = newLoanApplication.getLoanAmount();
-        String purpose = newLoanApplication.getPurpose();
-        LocalDate applicationDate = newLoanApplication.getApplicationDate();
-
-        // Send email with loan details
-        String to = newLoanApplication.getUser().getEmail();
-        String subject = "Loan Application Created";
-        String body = "You have Successfully applied for the loan With the details\n\n" +
-                "Loan Amount: " + loanAmount + "\n" +
-                "Purpose: " + purpose + "\n" +
-                "Application Date: " + applicationDate;
-        mailService.sendMail(to, subject, body);
-
         return new ResponseEntity<>(newLoanApplication, HttpStatus.CREATED);
     }
-
 
     // `GET /loan-applications/{id}`: Retrieve a specific loan application
     // by ID
@@ -132,6 +122,27 @@ public class LoanApplicationController {
             // Return an error response
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("No loans Found");
+        }
+    }
+    @GetMapping("/download")
+    public ResponseEntity<byte[]> downloadPdf  (@RequestParam(required = false) String encodedId){
+        long id = StringEncryptionEncoderDecoder.decodeToLong(encodedId);
+        Optional<LoanApplication> loanApplication = loanApplicationService.findLoanApplicationById(id);
+        if (loanApplication.isPresent()) {
+            try {
+                byte[] pdfBytes = loanApplicationService.generateLoanApplicationPdf(loanApplication.get());
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_PDF);
+                headers.setContentDispositionFormData("attachment", "loan_application.pdf");
+
+                return ResponseEntity.ok().headers(headers).body(pdfBytes);
+            } catch (IOException e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            } catch (DocumentException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 

@@ -3,6 +3,7 @@ package EducationLoanPortal.Education.Loan.Portal.controler;
 import EducationLoanPortal.Education.Loan.Portal.exception.ResourceNotFoundException;
 import EducationLoanPortal.Education.Loan.Portal.exception.UserNotFoundException;
 import EducationLoanPortal.Education.Loan.Portal.model.Loan;
+import EducationLoanPortal.Education.Loan.Portal.model.LoanApplication;
 import EducationLoanPortal.Education.Loan.Portal.service.LoanService;
 import EducationLoanPortal.Education.Loan.Portal.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,27 +27,11 @@ public class LoanController {
     private MailService mailService;
 
     @PostMapping("")
-    public ResponseEntity<Loan> addLoan(@RequestBody Loan loan) {
+    public ResponseEntity<Loan> addLoan(@RequestBody Loan loan) throws UserNotFoundException {
         Loan addedLoan = loanService.addLoan(loan);
 
-        if (addedLoan != null) {
-            // Compose email message
-            String to = addedLoan.getUser().getEmail(); // Use the user's email address as the recipient
-            String subject = "Loan Added Successfully";
-            String body = "Loan has been added successfully.\n\n" +
-                    "Loan Details:\n" +
-                    "Loan Amount: " + addedLoan.getLoanAmount() + "\n" +
-                    "Start Date: " + addedLoan.getStartDate() + "\n" +
-                    "End Date: " + addedLoan.getEndDate() + "\n" +
-                    "Interest Rate: " + addedLoan.getInterestRate() + "\n";
 
-            // Send email
-            mailService.sendMail(to, subject, body);
-
-            return new ResponseEntity<>(addedLoan, HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity<>( addedLoan , HttpStatus.CREATED);
     }
 
 
