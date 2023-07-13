@@ -48,7 +48,7 @@ export class UserPaymentComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'confirm') {
         // Perform payment confirmation logic here
-        payment.status = 'completed'; // Update the payment status
+        payment.status = 'Completed'; // Update the payment status
   
         // Send an HTTP request to update the payment status on the backend
         const url = `http://127.0.0.1:8080/payment/${payment.id}`;
