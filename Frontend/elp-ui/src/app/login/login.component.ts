@@ -21,8 +21,10 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    this.userAuthService.clear(); // Clear storage when the component initializes
+  }
+  
   login(loginForm: NgForm) {
     this.errorMessage = '';
 
