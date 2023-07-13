@@ -10,10 +10,8 @@
 
 .row {
   display: flex;
-  justify-content: center; /* Add this line to center-align the buttons */
   margin-bottom: 16px;
 }
-
 
 .flex-button {
   display: flex;

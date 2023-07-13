@@ -13,15 +13,14 @@
       <i class="material-icons icon large-icon">list_alt</i>
       <span class="button-text">Loan Applications</span>
     </button>
-  </div>
-  <br>
-    <div class="row">
+  
     <button mat-raised-button color="primary" [routerLink]="['/add-loan']" [queryParams]="{ showDialog: true }" class="flex-button">
       <i class="material-icons icon large-icon">add_box</i>
       <span class="button-text">Add loan</span>
     </button>
+  </div>
 
-
+  <div class="row">
     <button mat-raised-button color="primary" [routerLink]="['/add-payment']" [queryParams]="{ showDialog: true }" class="flex-button">
       <i class="material-icons icon larger-icon">add_box</i>
       <span class="button-text">Add Payment</span>

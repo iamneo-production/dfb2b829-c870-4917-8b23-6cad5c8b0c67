@@ -10,10 +10,9 @@
 
 .row {
   display: flex;
-  justify-content: center; /* Add this line to center-align the buttons */
+
   margin-bottom: 16px;
 }
-
 
 .flex-button {
   display: flex;
@@ -33,6 +32,7 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   z-index: 1;
   transition: all 0.3s ease;
+
   width: calc(100% / 2);
   height: 50%;
 }
@@ -81,6 +81,9 @@
   position: absolute;
   top: 10%;
   left: 0;
+  /* //disabled after 10s
+  //animation-delay: 10s; */
+
 }
 
 @keyframes fade-in {
@@ -94,6 +97,18 @@
   }
 }
 
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 @keyframes slide-in-left {
   from {
     opacity: 0;
@@ -102,5 +117,27 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
