@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { UserAuthService } from '../_services/user-auth.service';
 import { StringEncryptionService } from '../_services/string-encryption.service';
-import { MatDialog } from '@angular/material/dialog';
-import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+import { PaymentService } from '../payment.service';
+import { DialogComponent } from '../dialog/dialog.component';
+
+
+
 
 interface Payment {
   id: number;
@@ -31,8 +36,13 @@ export class PaymentDetailsComponent implements OnInit {
   searchTerm: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   activeField: string = '';
+  dialogRef!: MatDialogRef<any>;
+  @ViewChild('editDialog') editDialog!: TemplateRef<any>;
+ 
+ 
 
   constructor(
+    private paymentService : PaymentService,
     private http: HttpClient,
     private datePipe: DatePipe,
     public userAuthService: UserAuthService,
@@ -105,9 +115,21 @@ export class PaymentDetailsComponent implements OnInit {
   }
 
   editPayment(payment: Payment) {
-    // Implement the edit logic here
-    // You can open a dialog or navigate to a different page for editing
-    console.log('Editing payment:', payment);
+    this.dialogRef = this.dialog.open(this.editDialog, {
+      width: '400px',
+      data: payment
+    });
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.updatePayment(result);
+      }
+    });
+  }
+  closeEditDialog() {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 
   deletePayment(payment: Payment) {
@@ -128,5 +150,24 @@ export class PaymentDetailsComponent implements OnInit {
         }
       );
     }
+  }
+  updatePayment(updatedPayment: Payment){
+    const id = updatedPayment.id;
+    this.paymentService.updatePayment(id,updatedPayment).subscribe(
+      (resp) => {
+        console.log(resp);
+        this.openDialog('Success', 'Payment details updated successfully');
+      },
+      (err) => {
+        console.log(err);
+        this.openDialog('Error', 'Failed to update the details');
+      }
+    )
+  }
+  openDialog(title: string, message: string) {
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: { title, message }
+    });
   }
 }

@@ -39,6 +39,34 @@
       <td>{{ payment.paymentDate }}</td>
       
       <td><button mat-button class="edit-button" (click)="editPayment(payment)">Edit</button></td>
+      <ng-template #editDialog let-payment>
+        <div class="dialog-close-button">
+          <button mat-icon-button (click)="closeEditDialog()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+  
+        <form (ngSubmit)="updatePayment(payment)">    
+        <div class="form-container">
+          <mat-label>Payment ID:</mat-label>
+          <mat-form-field class="form-field">
+            <input matInput placeholder="Payment ID" name="id" [(ngModel)]="payment.id">
+          </mat-form-field>
+         
+            <mat-label>Loan ID:</mat-label>
+            <mat-form-field class="form-field">
+              <input matInput placeholder="Loan ID" name="loan_id" [(ngModel)]="payment.loan_id">
+            </mat-form-field>
+            
+            <mat-label>Amount:</mat-label>
+            <mat-form-field class="form-field">
+              <input matInput placeholder="Amount" name="amount" [(ngModel)]="payment.amount">
+            </mat-form-field>
+  
+            <button mat-raised-button color="primary" type="submit">Save Changes</button>
+            </div>
+          </form>
+  </ng-template>
       <td><button mat-button class="delete-button" (click)="deletePayment(payment)">Delete</button></td>
       
     </tr>

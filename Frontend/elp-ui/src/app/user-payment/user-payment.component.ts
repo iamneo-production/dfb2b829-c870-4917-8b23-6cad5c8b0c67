@@ -9,6 +9,7 @@ import { UserAuthService } from '../_services/user-auth.service';
 
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.component';
+import { Router } from '@angular/router';
 
 interface Payment {
   loan_id: number;
@@ -32,13 +33,15 @@ export class UserPaymentComponent implements OnInit {
   searchTerm: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   activeField: string = '';
+
   
 
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,
     public userAuthService: UserAuthService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
   openPaymentDialog(payment: any) {
     const dialogRef = this.dialog.open(PaymentDialogComponent, {
@@ -51,10 +54,12 @@ export class UserPaymentComponent implements OnInit {
         payment.status = 'Completed'; // Update the payment status
   
         // Send an HTTP request to update the payment status on the backend
-        const url = `http://127.0.0.1:8080/payment/${payment.id}`;
+        const url = `http://127.0.0.1:8080/payment/updateThePayment/${payment.id}`;
         this.http.put(url, payment).subscribe(
           () => {
             console.log('Payment confirmed!');
+            this.router.navigate(['/userHome']); 
+            this.removeConfirmedPayment(payment);
           },
           (error) => {
             console.error('Failed to update payment status:', error);
@@ -78,7 +83,7 @@ export class UserPaymentComponent implements OnInit {
     // Assuming you have a way to get the loan ID
     // this.loan_id = this.loan_id; // Replace with the actual loan ID
 
-    const url = `http://127.0.0.1:8080/payment/findByLoanId/1`;
+    const url = `http://127.0.0.1:8080/payment/all`;
     this.http.get<Payment[]>(url).subscribe(
       (response) => {
         this.payments = response;
@@ -114,6 +119,7 @@ export class UserPaymentComponent implements OnInit {
       this.filteredPayments = [...this.payments];
     }
   }
+
   sortTable(field: string) {
     if (field === this.activeField) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
@@ -132,5 +138,12 @@ export class UserPaymentComponent implements OnInit {
         return this.sortDirection === 'asc' ? valueA - valueB : valueB - valueA;
       }
     });
+  }
+  removeConfirmedPayment(payment: any) {
+    const index = this.payments.findIndex((p) => p['id'] === payment.id);
+    if (index > -1) {
+      this.payments.splice(index, 1);
+      this.filteredPayments = [...this.payments];
+    }
   }
 }
