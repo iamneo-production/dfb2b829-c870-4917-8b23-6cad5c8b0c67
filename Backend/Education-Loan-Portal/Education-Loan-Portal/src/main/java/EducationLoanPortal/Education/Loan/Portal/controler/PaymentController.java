@@ -32,6 +32,16 @@ public class PaymentController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(List.of());
         }
     }
+    @GetMapping("/all")
+    public ResponseEntity<List<Payment>> getAllPayments(){
+        List<Payment> payments = paymentService.getAllPayments();
+        if(!payments.isEmpty()){
+            return ResponseEntity.ok(payments);
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(List.of());
+        }
+    }
 
 
     @PostMapping("")
@@ -48,6 +58,7 @@ public class PaymentController {
         }
         return payment;
     }
+
     @PutMapping("/updateById/{id}")
     public ResponseEntity<Payment> updatePayment(@PathVariable("id") Long id, @RequestBody Payment updatedPayment) throws ResourceNotFoundException {
         Payment payment = paymentService.getPaymentById(id);
@@ -71,4 +82,11 @@ public class PaymentController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePaymentById(@PathVariable Long id) throws ResourceNotFoundException {
+        paymentService.deletePaymentById(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Payment deleted successfully");
+    }
 }
+
+

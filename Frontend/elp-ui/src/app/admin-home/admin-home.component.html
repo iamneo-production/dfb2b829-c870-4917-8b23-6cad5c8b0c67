@@ -26,6 +26,10 @@
       <i class="material-icons icon larger-icon">add_box</i>
       <span class="button-text">Add Payment</span>
     </button>
+    <button mat-raised-button color="primary" [routerLink]="['/payment-details']" [queryParams]="{ showDialog: true }" class="flex-button">
+      <i class="material-icons icon larger-icon">add_box</i>
+      <span class="button-text">Payment Management</span>
+    </button>
   </div>
 </div>
 

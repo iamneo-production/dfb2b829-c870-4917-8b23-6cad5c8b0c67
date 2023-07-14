@@ -16,13 +16,23 @@
       <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
       <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
     </th>
+    
+    <th>Pay</th>
+   
+    
+
+  
   </thead>
   <tbody>
     <tr *ngFor="let payment of filteredPayments">
       <td>{{ payment.loan_id }}</td>
       <td>{{ payment.amount }}</td>
       <td>{{ payment.paymentDate }}</td>
+      
+      <td><button  (click)="openPaymentDialog(payment)" mat-button>Pay</button></td>
+      
     </tr>
+   
   </tbody>
 </table>
 

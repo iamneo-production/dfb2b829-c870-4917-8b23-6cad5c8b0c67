@@ -59,7 +59,13 @@ public class PaymentService {
             return paymentRepo.save(payment_var);
         }
     }
-//    public Payment updatePayment(Payment payment) {
-//        return paymentRepo.save(payment);
-//    }
+
+    public List<Payment> getAllPayments() {
+        return paymentRepo.findAll();
+    }
+
+    public void deletePaymentById(Long id) {
+        paymentRepo.deleteById(id);
+    }
+
 }

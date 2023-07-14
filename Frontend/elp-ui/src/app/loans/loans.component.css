@@ -1,13 +1,42 @@
+.mat-toolbar{
+  background-color: black;
+}
 .mat-card-content {
-  display: flex;
-  justify-content: center;
+display: flex;
+justify-content: center;
 }
 
 table {
-  width: 30%;
-  border-collapse: collapse;
-  margin: 0 auto 16px;
-  animation: fadeIn 0.5s ease-in-out;
+width: 30%;
+border-collapse: collapse;
+margin: 0 auto 16px;
+animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+from {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+}
+
+.mat-card-content > div {
+text-align: center;
+margin-bottom: 16px;
+animation: fadeIn 0.5s ease-in-out;
+}
+
+@media screen and (max-width: 600px) {
+.mat-card-content {
+  display: block;
+}
+
+table {
+  width: 100%;
 }
 
 @keyframes fadeIn {
@@ -70,4 +99,6 @@ tbody tr:nth-child(even) {
 tbody tr:hover {
   background-color: #f5f5f5;
   transition: background-color 0.3s ease;
+}
+
 }
