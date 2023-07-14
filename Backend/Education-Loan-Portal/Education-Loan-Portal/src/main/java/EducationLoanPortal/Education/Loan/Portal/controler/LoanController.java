@@ -8,9 +8,6 @@ import EducationLoanPortal.Education.Loan.Portal.service.LoanService;
 
 import EducationLoanPortal.Education.Loan.Portal.service.StringEncryptionEncoderDecoder;
 import com.itextpdf.text.DocumentException;
-
-import EducationLoanPortal.Education.Loan.Portal.service.MailService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,31 +28,13 @@ public class LoanController {
 
     @Autowired
     private LoanService loanService;
-    @Autowired
-    private MailService mailService;
 
     @PostMapping("")
-    public ResponseEntity<Loan> addLoan(@RequestBody Loan loan) {
+    public ResponseEntity<Loan> addLoan(@RequestBody Loan loan) throws UserNotFoundException {
         Loan addedLoan = loanService.addLoan(loan);
 
-        if (addedLoan != null) {
-            // Compose email message
-            String to = addedLoan.getUser().getEmail(); // Use the user's email address as the recipient
-            String subject = "Loan Added Successfully";
-            String body = "Loan has been added successfully.\n\n" +
-                    "Loan Details:\n" +
-                    "Loan Amount: " + addedLoan.getLoanAmount() + "\n" +
-                    "Start Date: " + addedLoan.getStartDate() + "\n" +
-                    "End Date: " + addedLoan.getEndDate() + "\n" +
-                    "Interest Rate: " + addedLoan.getInterestRate() + "\n";
 
-            // Send email
-            mailService.sendMail(to, subject, body);
-
-            return new ResponseEntity<>(addedLoan, HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity<>( addedLoan , HttpStatus.CREATED);
     }
 
 
@@ -119,18 +98,16 @@ public class LoanController {
         }
 
     }
-
-
     @GetMapping("/download")
     public ResponseEntity<byte[]> downloadPdf  (@RequestParam(required = false) String encodedId) throws UserNotFoundException {
         long id = StringEncryptionEncoderDecoder.decodeToLong(encodedId);
-        Long loan = loanService.getLoanById(id).getUser_id();
+
 
         try {
-            byte[] pdfBytes = loanService.generateLoanApplicationPdf(loan);
+            byte[] pdfBytes = loanService.generateLoanApplicationPdf(id);
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "loan_application.pdf");
+            headers.setContentDispositionFormData("attachment", "loans.pdf");
 
             return ResponseEntity.ok().headers(headers).body(pdfBytes);
         } catch (IOException e) {
@@ -142,5 +119,5 @@ public class LoanController {
     }
 
 
-
 }
+

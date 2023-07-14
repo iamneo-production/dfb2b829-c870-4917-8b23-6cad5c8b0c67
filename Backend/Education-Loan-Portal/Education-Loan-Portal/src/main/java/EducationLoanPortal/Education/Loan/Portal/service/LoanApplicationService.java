@@ -1,6 +1,8 @@
 package EducationLoanPortal.Education.Loan.Portal.service;
 
+import EducationLoanPortal.Education.Loan.Portal.exception.UserNotFoundException;
 import EducationLoanPortal.Education.Loan.Portal.model.LoanApplication;
+import EducationLoanPortal.Education.Loan.Portal.model.User;
 import EducationLoanPortal.Education.Loan.Portal.repository.LoanApplicationRepo;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,32 +25,84 @@ import java.util.Optional;
 public class LoanApplicationService {
 
     private final LoanApplicationRepo loanApplicationRepo;
+    private final MailService mailService;
 
-    public LoanApplicationService(LoanApplicationRepo loanApplicationRepo) {
+    private final UserService userService;
+
+    public LoanApplicationService(LoanApplicationRepo loanApplicationRepo, MailService mailService, UserService userService) {
         this.loanApplicationRepo = loanApplicationRepo;
+        this.mailService = mailService;
+        this.userService = userService;
+
     }
 
-    public LoanApplication addLoanApplication(LoanApplication loanApplication) {
-        return loanApplicationRepo.save(loanApplication);
-    }
+    public LoanApplication addLoanApplication(LoanApplication loanApplication) throws UserNotFoundException, UserNotFoundException {
+        LoanApplication newLoanApplication = loanApplicationRepo.save(loanApplication);
 
+        // Extract loan details
+        Double loanAmount = newLoanApplication.getLoanAmount();
+        String purpose = newLoanApplication.getPurpose();
+        LocalDate applicationDate = newLoanApplication.getApplicationDate();
+        System.out.println(newLoanApplication);
+
+        // Get user email based on user_id
+        Long userId = newLoanApplication.getUser_id();
+        Optional<User> userOptional = Optional.ofNullable(userService.findUserById(userId));
+
+            User user = userOptional.get();
+
+            // Send email with loan details
+            String to = user.getEmail();
+            String subject = "Loan Application Created";
+            String body = "You have Successfully applied for the loan With the details\n\n" +
+                    "Loan Amount: " + loanAmount + "\n" +
+                    "Purpose: " + purpose + "\n" +
+                    "Application Date: " + applicationDate;
+            mailService.sendMail(to, subject, body);
+
+
+        return newLoanApplication;
+    }
     public LoanApplication getLoanApplicationById(Long id) {
         return loanApplicationRepo.findLoanApplicationById(id)
                 .orElseThrow(() -> new RuntimeException("Loan application by id " + id + " was not found"));
     }
 
-    public LoanApplication updateLoanApplicationById(Long id, LoanApplication loanApplication) {
-        Optional<LoanApplication> existingLoanApplication = loanApplicationRepo.findById(id);
-        if (!existingLoanApplication.isPresent()) {
-            throw new RuntimeException("Loan application not found with id: " + id);
+    public LoanApplication updateLoanApplicationById(Long id, LoanApplication updatedLoanApplication, boolean sendNotification) {
+        LoanApplication existingLoanApplication = loanApplicationRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Loan application not found with id: " + id));
+
+        String currentStatus = existingLoanApplication.getStatus();
+        String updatedStatus = updatedLoanApplication.getStatus();
+
+        existingLoanApplication.setPurpose(updatedLoanApplication.getPurpose());
+        existingLoanApplication.setLoanAmount(updatedLoanApplication.getLoanAmount());
+        existingLoanApplication.setStatus(updatedLoanApplication.getStatus());
+        existingLoanApplication.setApplicationDate(updatedLoanApplication.getApplicationDate());
+
+        LoanApplication savedLoanApplication = loanApplicationRepo.save(existingLoanApplication);
+
+        // Check if the status has changed and send notification if required
+        if (!currentStatus.equalsIgnoreCase(updatedStatus)) {
+            String email = savedLoanApplication.getUser().getEmail();
+            String subject;
+            String body;
+
+            if (updatedStatus.equalsIgnoreCase("approved")) {
+                subject = "Loan Application Approved";
+                body = "Your loan application has been approved.";
+            } else if (updatedStatus.equalsIgnoreCase("rejected")) {
+                subject = "Loan Application Rejected";
+                body = "Your loan application has been rejected.";
+            } else {
+                // For any other status change, no notification will be sent
+                return savedLoanApplication;
+            }
+
+            mailService.sendMail(email, subject, body);
         }
 
-        LoanApplication loanApplication_var = existingLoanApplication.get();
-        loanApplication_var.setPurpose(loanApplication.getPurpose());
-        loanApplication_var.setLoanAmount(loanApplication.getLoanAmount());
-        loanApplication_var.setStatus(loanApplication.getStatus());
-        loanApplication_var.setApplicationDate(loanApplication.getApplicationDate());
-        return loanApplicationRepo.save(loanApplication_var);
+        return savedLoanApplication;
     }
 
     public List<LoanApplication> findAllLoanApplications() {

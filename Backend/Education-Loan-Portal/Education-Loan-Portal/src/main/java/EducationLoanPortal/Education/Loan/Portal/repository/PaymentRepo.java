@@ -19,4 +19,5 @@ public interface PaymentRepo extends JpaRepository<Payment, Long> {
 
     Optional<Payment> getPaymentById(Long id);
 
+    void deleteById(Long id);
 }

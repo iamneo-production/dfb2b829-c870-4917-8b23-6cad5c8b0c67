@@ -7,6 +7,7 @@ import EducationLoanPortal.Education.Loan.Portal.service.LoanApplicationService;
 import EducationLoanPortal.Education.Loan.Portal.service.MailService;
 import EducationLoanPortal.Education.Loan.Portal.service.StringEncryptionEncoderDecoder;
 import com.itextpdf.text.DocumentException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,11 +24,13 @@ import java.time.LocalDate;
 @RequestMapping("/loan-applications")
 public class LoanApplicationController {
     private LoanApplicationService loanApplicationService;
+
+    @Autowired
     private MailService mailService;
 
     public LoanApplicationController(LoanApplicationService loanApplicationService,MailService mailService) {
         this.loanApplicationService = loanApplicationService;
-        this.mailService = mailService;
+
     }
     //
     // 2. Loan application management:
@@ -54,42 +57,14 @@ public class LoanApplicationController {
 
     // PUT /loan-applications/{id}`: Update an existing loan application
     // by ID
-
     @PutMapping("/{id}")
     public ResponseEntity<LoanApplication> updateLoanApplication(@PathVariable("id") Long id,
-                                                                 @RequestBody LoanApplication updatedLoanApplication) {
-        LoanApplication loanApplication = loanApplicationService.getLoanApplicationById(id);
-        if (loanApplication != null) {
-            String currentStatus = loanApplication.getStatus();
-            String updatedStatus = updatedLoanApplication.getStatus();
-
-            LoanApplication newLoanApplication = loanApplicationService.updateLoanApplicationById(id, updatedLoanApplication);
-
-            // Check if the status has changed
-            if (!currentStatus.equalsIgnoreCase(updatedStatus)) {
-                String email = newLoanApplication.getUser().getEmail();
-                String subject;
-                String body;
-
-                if (updatedStatus.equalsIgnoreCase("approved")) {
-                    subject = "Loan Application Approved";
-                    body = "Your loan application has been approved.";
-                } else if (updatedStatus.equalsIgnoreCase("rejected")) {
-                    subject = "Loan Application Rejected";
-                    body = "Your loan application has been rejected.";
-                } else {
-                    // For any other status change, no notification will be sent
-                    return new ResponseEntity<>(newLoanApplication, HttpStatus.OK);
-                }
-
-                mailService.sendMail(email, subject, body);
-            }
-
-            return new ResponseEntity<>(newLoanApplication, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+                                                                 @RequestBody LoanApplication updatedLoanApplication,
+                                                                 @RequestParam(value = "sendNotification", defaultValue = "false") boolean sendNotification) {
+        LoanApplication newLoanApplication = loanApplicationService.updateLoanApplicationById(id, updatedLoanApplication, sendNotification);
+        return new ResponseEntity<>(newLoanApplication, HttpStatus.OK);
     }
+
 
 
     // delete loan application by id
@@ -147,5 +122,3 @@ public class LoanApplicationController {
     }
 
 }
-
-

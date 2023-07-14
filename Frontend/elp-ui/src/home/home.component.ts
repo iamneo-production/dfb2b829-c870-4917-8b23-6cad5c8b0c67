@@ -3,7 +3,6 @@ import { UserAuthService } from '../_services/user-auth.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutConfirmationDialogComponent } from '..//logout-confirmation-dialog/logout-confirmation-dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -11,13 +10,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  isDarkMode: boolean = false;
-
   constructor(
     public userAuthService: UserAuthService,
     private router: Router,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -44,5 +40,3 @@ export class HomeComponent implements OnInit {
     });
   }
 }
-
-

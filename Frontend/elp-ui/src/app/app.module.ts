@@ -48,7 +48,9 @@ import { AuthGuard } from './_auth/auth.guard';
 import { AuthInterceptor } from './_auth/auth.interceptor';
 import { UserService } from './_services/user.service';
 import { LoginComponent } from './login/login.component';
+
 import { PaymentComponent } from './payment/payment.component';
+
 import { MatListModule } from '@angular/material/list';
 
 import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/logout-confirmation-dialog.component';
@@ -59,7 +61,9 @@ import { AdminLoansComponent } from './admin-loans/admin-loans.component';
 
 
 import { DatePipe } from '@angular/common';
+import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
 import { UserPaymentComponent } from './user-payment/user-payment.component';
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 import { SetPasswordComponent } from './set-password/set-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -88,6 +92,13 @@ import { ContactRecordComponent } from './contact-record/contact-record.componen
     AdminLoansComponent,
     SignupComponent,
 
+    LoanDetailsComponent,
+    AddLoanComponent,
+    AdminLoanApplicationComponent,
+    AdminLoansComponent,
+    PaymentDialogComponent,
+    UserPaymentComponent,
+    PaymentDetailsComponent,
 
     LogoutConfirmationDialogComponent,
         UserPaymentComponent,
