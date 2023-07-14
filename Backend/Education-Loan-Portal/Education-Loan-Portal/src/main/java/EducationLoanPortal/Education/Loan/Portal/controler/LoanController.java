@@ -5,12 +5,20 @@ import EducationLoanPortal.Education.Loan.Portal.exception.UserNotFoundException
 import EducationLoanPortal.Education.Loan.Portal.model.Loan;
 import EducationLoanPortal.Education.Loan.Portal.model.LoanApplication;
 import EducationLoanPortal.Education.Loan.Portal.service.LoanService;
+
+import EducationLoanPortal.Education.Loan.Portal.service.StringEncryptionEncoderDecoder;
+import com.itextpdf.text.DocumentException;
+
 import EducationLoanPortal.Education.Loan.Portal.service.MailService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -27,11 +35,27 @@ public class LoanController {
     private MailService mailService;
 
     @PostMapping("")
-    public ResponseEntity<Loan> addLoan(@RequestBody Loan loan) throws UserNotFoundException {
+    public ResponseEntity<Loan> addLoan(@RequestBody Loan loan) {
         Loan addedLoan = loanService.addLoan(loan);
 
+        if (addedLoan != null) {
+            // Compose email message
+            String to = addedLoan.getUser().getEmail(); // Use the user's email address as the recipient
+            String subject = "Loan Added Successfully";
+            String body = "Loan has been added successfully.\n\n" +
+                    "Loan Details:\n" +
+                    "Loan Amount: " + addedLoan.getLoanAmount() + "\n" +
+                    "Start Date: " + addedLoan.getStartDate() + "\n" +
+                    "End Date: " + addedLoan.getEndDate() + "\n" +
+                    "Interest Rate: " + addedLoan.getInterestRate() + "\n";
 
-        return new ResponseEntity<>( addedLoan , HttpStatus.CREATED);
+            // Send email
+            mailService.sendMail(to, subject, body);
+
+            return new ResponseEntity<>(addedLoan, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
@@ -96,5 +120,27 @@ public class LoanController {
 
     }
 
-}
 
+    @GetMapping("/download")
+    public ResponseEntity<byte[]> downloadPdf  (@RequestParam(required = false) String encodedId) throws UserNotFoundException {
+        long id = StringEncryptionEncoderDecoder.decodeToLong(encodedId);
+        Long loan = loanService.getLoanById(id).getUser_id();
+
+        try {
+            byte[] pdfBytes = loanService.generateLoanApplicationPdf(loan);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "loan_application.pdf");
+
+            return ResponseEntity.ok().headers(headers).body(pdfBytes);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (DocumentException | ResourceNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+
+}
