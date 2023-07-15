@@ -1,4 +1,3 @@
-
 /* Styles for the loan applications table */
 table {
   width: 55%;
@@ -32,21 +31,8 @@ th {
 
 .field-name {
   font-weight: bold;
-  margin-top: 16px; /* Adjust the value to control the spacing between field names */
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  gap: 16px; /* Adjust the spacing between elements as needed */
-  margin-bottom: 16px; /* Add margin-bottom to create space between the dropdown and search bar */
-}
-
-
-
-
-.spacing {
-  margin-left: 8px; /* Adjust the spacing between buttons */
+  margin-top: 16px; 
+  margin-bottom: 8px;/* Adjust the value to control the spacing between field names */
 }
 
 .dialog-close-button {
@@ -93,5 +79,3 @@ button[type="submit"] {
     transform: translateY(0);
   }
 }
-
-

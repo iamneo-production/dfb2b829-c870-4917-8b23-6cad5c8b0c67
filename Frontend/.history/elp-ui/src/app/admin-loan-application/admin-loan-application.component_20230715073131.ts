@@ -39,8 +39,6 @@ export class AdminLoanApplicationComponent implements OnInit {
   searchTerm: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   activeField: string = '';
-  selectedStatus: string = 'Applied';
-  statuses: string[] = ['Applied','Approved', 'Rejected'];
 
   @ViewChild('loanApprovalDialog') loanApprovalDialog!: TemplateRef<any>;
 
@@ -51,7 +49,8 @@ export class AdminLoanApplicationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getLoanApplicationsByStatus(this.selectedStatus);
+    const status = 'applied';
+    this.getLoanApplicationsByStatus(status);
     
   }
 
@@ -68,11 +67,6 @@ export class AdminLoanApplicationComponent implements OnInit {
       }
     );
   }
-
-  onStatusChange() {
-    this.getLoanApplicationsByStatus(this.selectedStatus);
-  }
-
   onSearch() {
     const searchTerm = this.searchTerm.toLowerCase().trim();
   
@@ -246,5 +240,3 @@ export class AdminLoanApplicationComponent implements OnInit {
     }
   }
 }
-
-
