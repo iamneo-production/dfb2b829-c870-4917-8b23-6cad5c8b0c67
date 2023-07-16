@@ -87,7 +87,8 @@ export class PaymentDetailsComponent implements OnInit {
       this.filteredPayments = this.payments.filter((payment: Payment) =>
         String(payment.loan_id).toLowerCase().includes(searchTerm) ||
         String(payment.amount).toLowerCase().includes(searchTerm) ||
-        String(payment.paymentDate).toLowerCase().includes(searchTerm)
+        String(payment.paymentDate).toLowerCase().includes(searchTerm) ||
+        String(payment.status).toLowerCase().includes(searchTerm)
       );
     } else {
       this.filteredPayments = [...this.payments];
@@ -152,6 +153,12 @@ export class PaymentDetailsComponent implements OnInit {
     }
   }
   updatePayment(updatedPayment: Payment){
+    
+      if (this.status === 'Completed') {
+        updatedPayment.status = 'Completed';
+      } else {
+        updatedPayment.status = 'Ongoing';
+      }
     const id = updatedPayment.id;
     this.paymentService.updatePayment(id,updatedPayment).subscribe(
       (resp) => {

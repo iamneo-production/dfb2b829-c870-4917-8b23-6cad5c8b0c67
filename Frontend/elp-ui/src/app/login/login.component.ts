@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
   
   login(loginForm: NgForm) {
-    this.errorMessage = '';
+    this.errorMessage = 'form is invalid';
 
     if (loginForm.invalid) {
       return;

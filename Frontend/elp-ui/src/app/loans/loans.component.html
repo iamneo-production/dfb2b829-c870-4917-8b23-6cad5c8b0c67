@@ -26,11 +26,9 @@
         <mat-icon *ngIf="activeField === 'endDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
         <mat-icon *ngIf="activeField === 'endDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
       </th>
+
       <th>
-        Reports
-      </th>
-      <th>
-        Download
+        Report
       </th>
     </tr>
   </thead>
@@ -41,13 +39,9 @@
       <td>{{ loan.interestRate }}</td>
       <td>{{ loan.startDate | date }}</td>
       <td>{{ loan.endDate | date }}</td>
+
       <td>
-        <button mat-icon-button color="primary" (click)="generateReport(loan)">
-          <mat-icon>description</mat-icon>
-        </button>
-      </td>
-      <td>
-        <button mat-icon-button color="primary" (click)="downloadLoan(loan)">
+        <button mat-icon-button color="primary" (click)="downloadPdf(loan)">
           <mat-icon>file_download</mat-icon>
         </button>
       </td>

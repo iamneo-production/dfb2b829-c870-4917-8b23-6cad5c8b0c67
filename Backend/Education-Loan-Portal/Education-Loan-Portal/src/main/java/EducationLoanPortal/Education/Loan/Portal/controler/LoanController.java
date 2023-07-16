@@ -30,7 +30,7 @@ public class LoanController {
     private LoanService loanService;
 
     @PostMapping("")
-    public ResponseEntity<Loan> addLoan(@RequestBody Loan loan) throws UserNotFoundException {
+    public ResponseEntity<Loan> addLoan(@RequestBody Loan loan) throws UserNotFoundException, DocumentException, IOException, ResourceNotFoundException {
         Loan addedLoan = loanService.addLoan(loan);
 
 
@@ -104,7 +104,7 @@ public class LoanController {
 
 
         try {
-            byte[] pdfBytes = loanService.generateLoanApplicationPdf(id);
+            byte[] pdfBytes = loanService.generateLoanApplicationPdfWithPayments(id);
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDispositionFormData("attachment", "loans.pdf");

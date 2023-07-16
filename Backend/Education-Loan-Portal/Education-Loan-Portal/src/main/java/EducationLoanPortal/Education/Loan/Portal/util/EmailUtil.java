@@ -33,7 +33,7 @@ public class EmailUtil {
         mimeMessageHelper.setSubject("Set Password");
         mimeMessageHelper.setText(
                 "<div>" +
-                        "<a href=\"http://localhost:8080/set-password?email=" + email + "\" target=\"_blank\">click here to set password</a>" +
+                        "<a href=\"http://localhost:4200/set-password?email=" + email + "\" target=\"_blank\">click here to set password</a>" +
                         "</div>",
                 true
         );

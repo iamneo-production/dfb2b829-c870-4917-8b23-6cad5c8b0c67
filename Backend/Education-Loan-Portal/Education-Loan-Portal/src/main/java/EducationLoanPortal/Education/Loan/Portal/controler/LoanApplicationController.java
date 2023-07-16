@@ -37,7 +37,7 @@ public class LoanApplicationController {
     // - `POST /loan-applications`: Create a new loan application
 
     @PostMapping("")
-    public ResponseEntity<LoanApplication> addLoanApplication(@RequestBody LoanApplication loanApplication) throws UserNotFoundException {
+    public ResponseEntity<LoanApplication> addLoanApplication(@RequestBody LoanApplication loanApplication) throws UserNotFoundException, DocumentException, IOException {
         LoanApplication newLoanApplication = loanApplicationService.addLoanApplication(loanApplication);
         return new ResponseEntity<>(newLoanApplication, HttpStatus.CREATED);
     }
@@ -114,6 +114,8 @@ public class LoanApplicationController {
             } catch (IOException e) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             } catch (DocumentException e) {
+                throw new RuntimeException(e);
+            } catch (UserNotFoundException e) {
                 throw new RuntimeException(e);
             }
         } else {

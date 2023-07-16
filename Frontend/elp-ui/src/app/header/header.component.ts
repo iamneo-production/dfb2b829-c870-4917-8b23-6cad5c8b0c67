@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { UserAuthService } from '../_services/user-auth.service';
 import { UserService } from '../_services/user.service';
@@ -12,6 +12,7 @@ import { LogoutConfirmationDialogComponent } from '../logout-confirmation-dialog
 })
 export class HeaderComponent implements OnInit {
   isNavbarOpen: boolean = false;
+  currentRoute: string = '';
 
   constructor(
     private userAuthService: UserAuthService,
@@ -20,7 +21,13 @@ export class HeaderComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentRoute = event.urlAfterRedirects;
+      }
+    });
+  }
 
   isLoggedIn(): boolean {
     return this.userAuthService.isLoggedIn();
@@ -29,7 +36,7 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     const dialogRef = this.dialog.open(LogoutConfirmationDialogComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
         this.userAuthService.clear();
         this.router.navigate(['']);

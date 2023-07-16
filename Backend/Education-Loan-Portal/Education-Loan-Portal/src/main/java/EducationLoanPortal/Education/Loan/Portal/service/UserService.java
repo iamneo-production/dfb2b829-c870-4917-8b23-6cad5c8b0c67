@@ -49,7 +49,7 @@ public class UserService {
         return userRepo.save(existingUser);
     }
 
-    public User findUserById(Long id) throws UserNotFoundException {
+    public  User findUserById(Long id) throws UserNotFoundException {
         return userRepo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User with ID " + id + " not found"));
     }
@@ -86,37 +86,37 @@ public class UserService {
     }
 
     public void initRoleAndUser() {
-        Role adminRole = (Role) roleRepo.findByRoleName("Admin").orElseGet(() -> {
-            Role role = new Role();
-            role.setRoleName("Admin");
-            role.setRoleDescription("Admin role");
-            return roleRepo.save(role);
-        });
-
-        Role userRole = (Role) roleRepo.findByRoleName("User").orElseGet(() -> {
-            Role role = new Role();
-            role.setRoleName("User");
-            role.setRoleDescription("Default role for newly created record");
-            return roleRepo.save(role);
-        });
-
-        User adminUser = new User();
-        adminUser.setPassword(getEncodedPassword("admin@pass"));
-        adminUser.setEmail("admin");
-        adminUser.setLastName("admin");
-        Set<Role> adminRoles = new HashSet<>();
-        adminRoles.add(adminRole);
-        adminUser.setRole(adminRoles);
-        userRepo.save(adminUser);
-
-        User user = new User();
-        user.setEmail("udayagiricharankumar@gmail.com");
-        user.setPassword(getEncodedPassword("udayagiricharankumar@gmail.com"));
-        user.setFirstName("Charan");
-        user.setLastName("Udayagiri");
-        Set<Role> userRoles = new HashSet<>();
-        userRoles.add(userRole);
-        user.setRole(userRoles);
-        userRepo.save(user);
+//        Role adminRole = (Role) roleRepo.findByRoleName("Admin").orElseGet(() -> {
+//            Role role = new Role();
+//            role.setRoleName("Admin");
+//            role.setRoleDescription("Admin role");
+//            return roleRepo.save(role);
+//        });
+//
+//        Role userRole = (Role) roleRepo.findByRoleName("User").orElseGet(() -> {
+//            Role role = new Role();
+//            role.setRoleName("User");
+//            role.setRoleDescription("Default role for newly created record");
+//            return roleRepo.save(role);
+//        });
+//
+//        User adminUser = new User();
+//        adminUser.setPassword(getEncodedPassword("admin@pass"));
+//        adminUser.setEmail("admin");
+//        adminUser.setLastName("admin");
+//        Set<Role> adminRoles = new HashSet<>();
+//        adminRoles.add(adminRole);
+//        adminUser.setRole(adminRoles);
+//        userRepo.save(adminUser);
+//
+//        User user = new User();
+//        user.setEmail("udayagiricharankumar@gmail.com");
+//        user.setPassword(getEncodedPassword("udayagiricharankumar@gmail.com"));
+//        user.setFirstName("Charan");
+//        user.setLastName("Udayagiri");
+//        Set<Role> userRoles = new HashSet<>();
+//        userRoles.add(userRole);
+//        user.setRole(userRoles);
+//        userRepo.save(user);
     }
 }

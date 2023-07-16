@@ -57,28 +57,8 @@ public class OtpService {
             throw new RuntimeException("Phone number already exists");
         }
 
-        // Create a new User entity
-        User newUser = new User();
-        newUser.setFirstName(otp.getFirstName());
-        newUser.setLastName(otp.getLastName());
-        newUser.setEmail(otp.getEmail());
-        newUser.setPassword(passwordEncoder.encode(otp.getPassword()));
-        newUser.setAddress(otp.getAddress());
-        newUser.setPhoneNumber(otp.getPhoneNumber());
-
-        Role defaultRole = (Role) roleRepo.findByRoleName("User")
-                .orElseThrow(() -> new RuntimeException("Default role not found"));
-        Set<Role> userRoles = new HashSet<>();
-        userRoles.add(defaultRole);
-
-        newUser.setRole(userRoles);
-
-        // Save the new User
-        newUser = userRepo.save(newUser);
-
         // Create a new Otp entity
         Otp newOtp = new Otp();
-        newOtp.setUser(newUser);
         newOtp.setFirstName(otp.getFirstName());
         newOtp.setLastName(otp.getLastName());
         newOtp.setEmail(otp.getEmail());
@@ -95,15 +75,35 @@ public class OtpService {
         return "User registration successful.";
     }
 
-    public String verifyAccount (String email, String otp){
+    public String verifyAccount(String email, String otp) {
         Otp newotp = otpRepo.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found with email"));
         if (newotp.getOtp().equals(otp) && Duration.between(newotp.getOtpGeneratedTime(), LocalDateTime.now())
                 .getSeconds() < (500)) {
             newotp.setActive(true);
             otpRepo.save(newotp);
-            return "otp verified you can login";
+
+            // Create a new User entity
+            User newUser = new User();
+            newUser.setFirstName(newotp.getFirstName());
+            newUser.setLastName(newotp.getLastName());
+            newUser.setEmail(newotp.getEmail());
+            newUser.setPassword(newotp.getPassword());
+            newUser.setAddress(newotp.getAddress());
+            newUser.setPhoneNumber(newotp.getPhoneNumber());
+
+            Role defaultRole = (Role) roleRepo.findByRoleName("User")
+                    .orElseThrow(() -> new RuntimeException("Default role not found"));
+            Set<Role> userRoles = new HashSet<>();
+            userRoles.add(defaultRole);
+
+            newUser.setRole(userRoles);
+
+            // Save the new User
+            userRepo.save(newUser);
+
+            return "Account verified. You can login now.";
         }
-        return "please regenerate otp and try again";
+        return "Please regenerate OTP and try again.";
     }
 
     public String regenerateOtp(String email){
