@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit {
       this.userService.deleteUser(user.id).subscribe(
         () => {
           console.log('User deleted successfully');
-          this.router.navigate(['/login']);
+          this.router.navigate(['/signup']);
         },
         (error) => {
           console.error('Failed to delete user:', error);

@@ -80,16 +80,15 @@
   
 }
 
-.spacing {
-  margin-left: 8px; /* Adjust the spacing between buttons */
-}
-
 .modal-details {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px; /* Add margin-bottom for spacing */
 }
-
+.button-space {
+  margin-right: 10px; /* Add margin-right for spacing */
+}
 
 
 

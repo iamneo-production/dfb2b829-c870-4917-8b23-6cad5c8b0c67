@@ -80,10 +80,6 @@
   
 }
 
-.spacing {
-  margin-left: 8px; /* Adjust the spacing between buttons */
-}
-
 .modal-details {
   display: flex;
   justify-content: center;
