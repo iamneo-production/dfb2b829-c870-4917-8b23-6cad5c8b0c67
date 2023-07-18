@@ -121,7 +121,7 @@ resendOTP() {
         } else {
           this.showSnackBar('An unexpected error occurred. Please try again later.'); // Display error message
         }
-       // Enable the resend button after the error response is received
+        this.showResend = true; // Enable the resend button after the error response is received
       }
     );
 }

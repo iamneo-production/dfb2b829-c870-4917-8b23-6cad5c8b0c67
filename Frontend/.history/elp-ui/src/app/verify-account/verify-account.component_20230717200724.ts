@@ -93,7 +93,6 @@ export class VerifyAccountComponent implements OnDestroy {
       }
     );
 }
-
 resendOTP() {
   this.showResend = false;
   this.remainingTime = 60;
@@ -107,7 +106,6 @@ resendOTP() {
     .subscribe(
       response => {
         this.showSnackBar(response.toString()); // Convert response to string and display success message
-        this.showResend = true; // Enable the resend button after the response is received
       },
       (error: HttpErrorResponse) => {
         console.error(error);
@@ -121,11 +119,10 @@ resendOTP() {
         } else {
           this.showSnackBar('An unexpected error occurred. Please try again later.'); // Display error message
         }
-       // Enable the resend button after the error response is received
+        
       }
     );
 }
-
 
 
   showSnackBar(message: string) {

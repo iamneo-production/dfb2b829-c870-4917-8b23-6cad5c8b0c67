@@ -93,7 +93,6 @@ export class VerifyAccountComponent implements OnDestroy {
       }
     );
 }
-
 resendOTP() {
   this.showResend = false;
   this.remainingTime = 60;
@@ -107,13 +106,12 @@ resendOTP() {
     .subscribe(
       response => {
         this.showSnackBar(response.toString()); // Convert response to string and display success message
-        this.showResend = true; // Enable the resend button after the response is received
       },
       (error: HttpErrorResponse) => {
         console.error(error);
         if (error.status === 200) {
           const errorMessage = error.error.toString(); // Convert error.error to string
-          if (errorMessage.includes('OTP regeneration limit exceeded for today. Please try again tomorrow.')) {
+          if (errorMessage.includes('OTP regeneration limit exceeded')) {
             this.showSnackBar(errorMessage); // Display error message from backend
           } else {
             this.showSnackBar('An unexpected error occurred. Please try again later.'); // Display generic error message
@@ -121,11 +119,9 @@ resendOTP() {
         } else {
           this.showSnackBar('An unexpected error occurred. Please try again later.'); // Display error message
         }
-       // Enable the resend button after the error response is received
       }
     );
 }
-
 
 
   showSnackBar(message: string) {
