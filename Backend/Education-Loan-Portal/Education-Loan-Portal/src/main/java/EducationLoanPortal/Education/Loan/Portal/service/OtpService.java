@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,13 +25,13 @@ public class OtpService {
     private final OtpUtil otpUtil;
     private final EmailUtil emailUtil;
     private final OtpRepo otpRepo;
-    private final UserRepo userRepo; // Add User repository
+    private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
-
     private final RoleRepo roleRepo;
 
     @Autowired
-    public OtpService(OtpUtil otpUtil, EmailUtil emailUtil, OtpRepo otpRepo, UserRepo userRepo,PasswordEncoder passwordEncoder,RoleRepo roleRepo) {
+    public OtpService(OtpUtil otpUtil, EmailUtil emailUtil, OtpRepo otpRepo, UserRepo userRepo,
+                      PasswordEncoder passwordEncoder, RoleRepo roleRepo) {
         this.otpUtil = otpUtil;
         this.emailUtil = emailUtil;
         this.otpRepo = otpRepo;
@@ -40,24 +41,21 @@ public class OtpService {
     }
 
     public String register(Otp otp) {
-        String otp1 = otpUtil.generateOtp();
+        String generatedOtp = otpUtil.generateOtp();
         try {
-            emailUtil.sendOtpEmail(otp.getEmail(), otp1);
+            emailUtil.sendOtpEmail(otp.getEmail(), generatedOtp);
         } catch (Exception e) {
             throw new RuntimeException("Unable to send OTP. Please try again.");
         }
 
-        // Check if the user already exists by email
         if (userRepo.existsByEmail(otp.getEmail())) {
-            throw new RuntimeException("Email already exists");
+            throw new RuntimeException("Email already exists.");
         }
 
-        // Check if the user already exists by phone number
         if (userRepo.existsByPhoneNumber(otp.getPhoneNumber())) {
-            throw new RuntimeException("Phone number already exists");
+            throw new RuntimeException("Phone number already exists.");
         }
 
-        // Create a new Otp entity
         Otp newOtp = new Otp();
         newOtp.setFirstName(otp.getFirstName());
         newOtp.setLastName(otp.getLastName());
@@ -66,86 +64,97 @@ public class OtpService {
         newOtp.setAddress(otp.getAddress());
         newOtp.setPhoneNumber(otp.getPhoneNumber());
         newOtp.setActive(otp.isActive());
-        newOtp.setOtp(otp1);
+        newOtp.setOtp(generatedOtp);
         newOtp.setOtpGeneratedTime(LocalDateTime.now());
 
-        // Save the new Otp
         otpRepo.save(newOtp);
 
         return "User registration successful.";
     }
 
     public String verifyAccount(String email, String otp) {
-        Otp newotp = otpRepo.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found with email"));
-        if (newotp.getOtp().equals(otp) && Duration.between(newotp.getOtpGeneratedTime(), LocalDateTime.now())
+        Otp newOtp = otpRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email."));
+        if (newOtp.getOtp().equals(otp) && Duration.between(newOtp.getOtpGeneratedTime(), LocalDateTime.now())
                 .getSeconds() < (500)) {
-            newotp.setActive(true);
-            otpRepo.save(newotp);
+            newOtp.setActive(true);
 
-            // Create a new User entity
             User newUser = new User();
-            newUser.setFirstName(newotp.getFirstName());
-            newUser.setLastName(newotp.getLastName());
-            newUser.setEmail(newotp.getEmail());
-            newUser.setPassword(newotp.getPassword());
-            newUser.setAddress(newotp.getAddress());
-            newUser.setPhoneNumber(newotp.getPhoneNumber());
+            newUser.setFirstName(newOtp.getFirstName());
+            newUser.setLastName(newOtp.getLastName());
+            newUser.setEmail(newOtp.getEmail());
+            newUser.setPassword(newOtp.getPassword());
+            newUser.setAddress(newOtp.getAddress());
+            newUser.setPhoneNumber(newOtp.getPhoneNumber());
 
             Role defaultRole = (Role) roleRepo.findByRoleName("User")
-                    .orElseThrow(() -> new RuntimeException("Default role not found"));
+                    .orElseThrow(() -> new RuntimeException("Default role not found."));
             Set<Role> userRoles = new HashSet<>();
             userRoles.add(defaultRole);
 
             newUser.setRole(userRoles);
 
-            // Save the new User
             userRepo.save(newUser);
 
-            return "Account verified. You can login now.";
+            otpRepo.delete(newOtp);
+
+            return "Account verified. You can log in now.";
         }
+
+        long otpCount = otpRepo.countByEmailAndOtpGeneratedTimeBetween(email,
+                LocalDateTime.now().with(LocalTime.MIN), LocalDateTime.now().with(LocalTime.MAX));
+        if (otpCount >= 5) {
+            return "You have reached the maximum OTP generation limit for today. Please try again tomorrow.";
+        }
+
         return "Please regenerate OTP and try again.";
     }
 
-    public String regenerateOtp(String email){
-        Otp newotp = otpRepo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found with this email"));
+    public String regenerateOtp(String email) {
+        Otp existingOtp = otpRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with this email."));
 
-        String otp =otpUtil.generateOtp();
-
-        try{
-            emailUtil.sendOtpEmail(email ,otp);
-
-        }
-        catch(Exception e){
-            throw new RuntimeException("unable to send otp please try again");
+        long otpCount = otpRepo.countByEmailAndOtpGeneratedTimeBetween(email,
+                LocalDateTime.now().with(LocalTime.MIN), LocalDateTime.now().with(LocalTime.MAX));
+        if (otpCount >= 5) {
+            return "You have reached the maximum OTP generation limit for today. Please try again tomorrow.";
         }
 
-        newotp.setOtp(otp);
-        newotp.setOtpGeneratedTime(LocalDateTime.now());
-        otpRepo.save(newotp);
-        return "Email sent....  please verify account";
+        String newOtp = otpUtil.generateOtp();
+
+        try {
+            emailUtil.sendOtpEmail(email, newOtp);
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to send OTP. Please try again.");
+        }
+
+        existingOtp.setOtp(newOtp);
+        existingOtp.setOtpGeneratedTime(LocalDateTime.now());
+        otpRepo.save(existingOtp);
+
+        return "New OTP generated and sent to your email address.";
     }
 
+    public String forgotPassword(String email) {
+        Otp existingOtp = otpRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with this email."));
 
-    public String forgotPassword(String email) throws MessagingException {
-        Otp newotp = otpRepo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found with this email"));
-        try{
+        try {
             emailUtil.sendSetPasswordEmail(email);
-        }
-        catch(MessagingException e){
-            throw new RuntimeException("Unable to send set password mail try again");
+        } catch (MessagingException e) {
+            throw new RuntimeException("Unable to send set password email. Please try again.");
         }
 
-        return "please check your mail to set new password to your account";
+        return "Please check your email to set a new password for your account.";
     }
 
     public String setPassword(String email, String newPassword) {
-        Otp newotp = otpRepo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found with this email"));
-        newotp.setPassword(newPassword);
-        otpRepo.save(newotp);
-        return "New password set successfully login with new password";
+        Otp existingOtp = otpRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with this email."));
+
+        existingOtp.setPassword(passwordEncoder.encode(newPassword));
+        otpRepo.save(existingOtp);
+
+        return "New password set successfully. You can now log in with the new password.";
     }
 }
-
