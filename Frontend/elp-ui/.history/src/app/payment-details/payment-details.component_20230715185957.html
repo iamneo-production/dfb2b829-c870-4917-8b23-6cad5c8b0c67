@@ -1,0 +1,80 @@
+<h1>Payment Details</h1>
+<div class="search"><mat-form-field>
+  <input  matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup)="onSearch()">
+</mat-form-field>
+</div>
+<table class="mat-table mat-elevation-z8">
+  <thead>
+    <th (click)="sortTable('loan_id')" [ngClass]="{'highlight': activeField === 'loan_id'}">Payment ID
+      <mat-icon *ngIf="activeField === 'loan_id' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'loan_id' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('loan_id')" [ngClass]="{'highlight': activeField === 'loan_id'}">Loan ID
+      <mat-icon *ngIf="activeField === 'loan_id' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'loan_id' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('amount')" [ngClass]="{'highlight': activeField === 'amount'}">Amount
+      <mat-icon *ngIf="activeField === 'amount' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'amount' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('paymentDate')" [ngClass]="{'highlight': activeField === 'paymentDate'}">Payment Date
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('paymentDate')" [ngClass]="{'highlight': activeField === 'paymentDate'}">Status
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('paymentDate')" [ngClass]="{'highlight': activeField === 'paymentDate'}">Edit
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('paymentDate')" [ngClass]="{'highlight': activeField === 'paymentDate'}">Delete
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let payment of filteredPayments">
+      <td>{{ payment.id }}</td>
+      <td>{{ payment.loan_id }}</td>
+      <td>{{ payment.amount }}</td>
+      <td>{{ payment.paymentDate }}</td>
+      <td>{{ payment.status }}</td>
+      
+      <td><button mat-button class="edit-button" (click)="editPayment(payment)">Edit</button></td>
+      <ng-template #editDialog let-payment>
+        <div class="dialog-close-button">
+          <button mat-icon-button (click)="closeEditDialog()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+  
+        <form (ngSubmit)="updatePayment(payment)">    
+        <div class="form-container">
+          <mat-label>Payment ID:</mat-label>
+          <mat-form-field class="form-field">
+            <input matInput placeholder="Payment ID" name="id" [(ngModel)]="payment.id">
+          </mat-form-field>
+         
+            <mat-label>Loan ID:</mat-label>
+            <mat-form-field class="form-field">
+              <input matInput placeholder="Loan ID" name="loan_id" [(ngModel)]="payment.loan_id">
+            </mat-form-field>
+            
+            <mat-label>Amount:</mat-label>
+            <mat-form-field class="form-field">
+              <input matInput placeholder="Amount" name="amount" [(ngModel)]="payment.amount">
+            </mat-form-field>
+  
+            <button mat-raised-button color="primary" type="submit">Save Changes</button>
+            </div>
+          </form>
+  </ng-template>
+      <td><button mat-button class="delete-button" (click)="deletePayment(payment)">Delete</button></td>
+      
+    </tr>
+   
+  </tbody>
+</table>

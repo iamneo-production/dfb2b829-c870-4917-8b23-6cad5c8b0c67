@@ -1,0 +1,166 @@
+<div class="container">
+  <div class="carousel">
+    <div class="banner">
+      <img src="banner1.jpg" alt="Banner 1">
+      <div class="banner-content">
+        <h2>Simple Interest</h2>
+        <p>Payment Plan: 8%</p>
+        <p>Amount Payment starts after 1 year of study</p>
+        <p>Additional matter related to Simple Interest</p>
+      </div>
+    </div>
+    <div class="banner">
+      <img src="banner2.jpg" alt="Banner 2">
+      <div class="banner-content">
+        <h2>Floating Interest</h2>
+        <p>Payment Plan: 4%</p>
+        <p>Amount Payment starts after 1 year of study</p>
+        <p>Additional matter related to Floating Interest</p>
+      </div>
+    </div>
+    <div class="banner">
+      <img src="banner3.jpg" alt="Banner 3">
+      <div class="banner-content">
+        <h2>Compound Interest</h2>
+        <p>Payment Plan: 6%</p>
+        <p>Amount Payment starts after 1 year of study</p>
+        <p>Additional matter related to Compound Interest</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-content">
+    <h1>Apply Loan</h1>
+
+    <form id="loanForm" #loanForm="ngForm" (ngSubmit)="submitLoanForm(loanForm)">
+      <div class="form-container">
+        <div class="form-group">
+          <mat-form-field class="form-field">
+            <mat-label>Loan Amount</mat-label>
+            <input matInput type="number" required name="loanAmount" [(ngModel)]="loanAmount">
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="form-field">
+            <mat-label>Loan Apply Date</mat-label>
+            <input matInput [matDatepicker]="loanDatePicker" required name="loanApplyDate" [(ngModel)]="loanApplyDate">
+            <mat-datepicker-toggle matSuffix [for]="loanDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #loanDatePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="form-field">
+            <mat-label>Purpose</mat-label>
+            <input matInput required name="purpose" [(ngModel)]="purpose">
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="form-field">
+            <mat-label>Loan Type</mat-label>
+            <select matNativeControl required name="loanType" [(ngModel)]="loanType">
+              <option value="">Select Loan Type</option>
+              <option value="simple">Simple Interest (7.8%)</option>
+              <option value="floating">Floating Interest (5.6%)</option>
+              <option value="compound">Compound Interest (6.4%)</option>
+            </select>
+          </mat-form-field>
+        </div>
+        
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel {
+  width: 400px;
+  margin-right: 50px;
+}
+
+.banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+}
+
+.banner-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  color: #fff;
+}
+
+.banner-content h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.banner-content p {
+  margin-bottom: 5px;
+}
+
+.form-content {
+  flex: 1;
+}
+
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+button[type="submit"] {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Animation Effects */
+.form-container {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>

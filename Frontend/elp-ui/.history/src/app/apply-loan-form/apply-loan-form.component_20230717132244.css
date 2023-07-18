@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.side-banners {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.banner {
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  animation: fadeInLeft 0.5s ease-in-out;
+}
+
+.form-content {
+  flex: 1;
+}
+
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+  animation: fadeInRight 0.5s ease-in-out;
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+button[type="submit"] {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Other existing styles... */

@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <div class="card">
+    <h2 class="login-heading">Login</h2>
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="login-form">
+      <div class="input-group">
+        <h3>User Email :</h3>
+        <input matInput type="email" required name="userEmail" [(ngModel)]="userEmail" class="email-input">
+      </div>
+      <div class="input-group">
+        <h3>Password :</h3>
+        <input matInput type="password" required name="userPassword" [(ngModel)]="userPassword" class="password-input">
+      </div>
+      <br>
+      <br>
+      <button mat-raised-button color="primary" type="submit" class="login-button">
+        Login
+      </button>
+      <p class="error-message" *ngIf="loginForm.submitted && loginForm.invalid">User email or password is incorrect.</p>
+    </form>
+  </div>
+</div>
