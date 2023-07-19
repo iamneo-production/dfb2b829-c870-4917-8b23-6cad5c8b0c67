@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-contact',
@@ -7,4 +10,44 @@ import { Component } from '@angular/core';
 })
 export class ContactComponent {
 
+  name: String="";
+  email: String="";
+  message: String="";
+
+  constructor(private http: HttpClient){
+
+  }
+
+  contact()
+  {
+
+    let bodyData = {
+      "fullname" : this.name,
+      "email" : this.email,
+      "message" : this.message
+    };
+
+    this.http.post("http://localhost:8080/contact/save",bodyData).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      alert("Submitted Successfully")
+
+      this.name = '';
+      this.email = '';
+      this.message = ''
+    });
+  }
+
+  save()
+  {
+    this.contact();
+  }
+ 
+  
+  onSubmit()
+  {
+    console.log("form is submitted");
 }
+
+}
+

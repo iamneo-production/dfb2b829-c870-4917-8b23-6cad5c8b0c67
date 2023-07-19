@@ -20,7 +20,8 @@ import { SignupComponent } from './signup/signup.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SetPasswordComponent } from './set-password/set-password.component';
-
+import { ContactComponent } from './contact/contact.component';
+import { ContactRecordComponent } from './contact-record/contact-record.component';
 
 const routes: Routes = [
 
@@ -44,8 +45,11 @@ const routes: Routes = [
   {path:'signup',component:SignupComponent},
   {path:'verify-account',component:VerifyAccountComponent},
   {path:'forgot-password',component:ForgotPasswordComponent},
-  {path:'set-password',component:SetPasswordComponent}
+  {path:'set-password',component:SetPasswordComponent},
 
+  {path:'contact',component:ContactComponent, canActivate:[AuthGuard], data:{roles:['User']} },
+  {path:'contact-record',component:ContactRecordComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
+  
   
 
 ]
