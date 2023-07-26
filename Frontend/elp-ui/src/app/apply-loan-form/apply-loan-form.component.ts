@@ -6,8 +6,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { UserAuthService } from '../_services/user-auth.service';
 
 
-import { url } from '../config';
-
+import { url } from '../config/url'; 
 @Component({
   selector: 'app-apply-loan-form',
   templateUrl: './apply-loan-form.component.html',
@@ -38,7 +37,7 @@ export class ApplyLoanFormComponent {
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       const options = { headers: headers };
 
-      this.http.post(`${url}/loan-applications`, loanData, options)
+      this.http.post(`${url}loan-applications`, loanData, options)
         .subscribe(
           (res) => {
             console.log(res);

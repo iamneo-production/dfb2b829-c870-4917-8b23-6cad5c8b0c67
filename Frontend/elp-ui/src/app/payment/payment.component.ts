@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { UserAuthService } from '../_services/user-auth.service';
-import { url } from '../config';
+import { url } from '../config/url'; 
 
 @Component({
   selector: 'app-payment',
@@ -35,7 +35,7 @@ export class PaymentComponent {
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       const options = { headers: headers };
 
-      this.http.post(`${url}/payment`, paymentData, options).subscribe(
+      this.http.post(`${url}payment`, paymentData, options).subscribe(
         (res) => {
           console.log(res);
           this.openDialog('Success', 'Payment added successfully');

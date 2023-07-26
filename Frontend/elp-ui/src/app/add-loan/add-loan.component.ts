@@ -1,7 +1,7 @@
 import { Component, TemplateRef, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-import { url } from '../config';
+import { url } from '../config/url'; 
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
@@ -51,7 +51,7 @@ export class AddLoanComponent implements AfterViewInit {
   }
 
   submitLoanApprovalForm() {
-    const addLoanUrl = `${url}/loans`;
+    const addLoanUrl = `${url}loans`;
     this.http.post<Loan>(addLoanUrl, this.loan).subscribe(
       (res: Loan) => {
         console.log(res);

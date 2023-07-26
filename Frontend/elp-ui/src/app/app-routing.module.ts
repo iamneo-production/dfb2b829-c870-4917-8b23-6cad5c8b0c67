@@ -48,7 +48,7 @@ const routes: Routes = [
   {path:'set-password',component:SetPasswordComponent},
 
   {path:'contact',component:ContactComponent, canActivate:[AuthGuard], data:{roles:['User']} },
-  {path:'contact-record',component:ContactRecordComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
+  {path:'contact_record',component:ContactRecordComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
   
   
 

@@ -60,6 +60,7 @@ public class PaymentController {
     }
 
     @PutMapping("/updateById/{id}")
+
     public ResponseEntity<Payment> updatePayment(@PathVariable("id") Long id, @RequestBody Payment updatedPayment) throws ResourceNotFoundException {
         Payment payment = paymentService.getPaymentById(id);
         if(payment!=null){

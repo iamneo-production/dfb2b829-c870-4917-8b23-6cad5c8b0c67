@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -58,6 +59,7 @@ public class LoanApplicationController {
     // PUT /loan-applications/{id}`: Update an existing loan application
     // by ID
     @PutMapping("/{id}")
+//    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<LoanApplication> updateLoanApplication(@PathVariable("id") Long id,
                                                                  @RequestBody LoanApplication updatedLoanApplication,
                                                                  @RequestParam(value = "sendNotification", defaultValue = "false") boolean sendNotification) {
@@ -69,6 +71,7 @@ public class LoanApplicationController {
 
     // delete loan application by id
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<String> deleteLoanApplication(@PathVariable("id") Long id) {
         // LoanApplication existingLoanApplication =
         // loanApplicationService.getLoanApplicationById(id);

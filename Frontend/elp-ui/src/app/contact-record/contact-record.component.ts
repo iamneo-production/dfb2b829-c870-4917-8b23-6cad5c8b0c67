@@ -54,7 +54,7 @@ export class ContactRecordComponent {
        this.contact();
      }
      setDelete(data: any){
-      this.http.delete("http://localhost:8080/contact/delete"+"/"+data.studentid,{responseType: 'text'}).subscribe((resultData: any)=>
+      this.http.delete("http://localhost:8080/contact/delete"+"/"+data.id,{responseType: 'text'}).subscribe((resultData: any)=>
       {
         console.log(resultData);
         alert("Record Delete")

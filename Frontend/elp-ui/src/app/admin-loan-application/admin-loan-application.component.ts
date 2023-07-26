@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-import { url } from '../config';
+import { url } from '../config/url'; 
 
 interface LoanApplication {
   id: number;
@@ -56,7 +56,7 @@ export class AdminLoanApplicationComponent implements OnInit {
   }
 
   getLoanApplicationsByStatus(status: string): void {
-    const apiUrl = `${url}/loan-applications?status=${status}`;
+    const apiUrl = `${url}loan-applications?status=${status}`;
     this.http.get<LoanApplication[]>(apiUrl).subscribe(
       (res: LoanApplication[]) => {
         this.loanApplications = res;
@@ -178,7 +178,7 @@ export class AdminLoanApplicationComponent implements OnInit {
   }
 
   updateLoanApplication(loanId: number, updatedLoanApplication: LoanApplication) {
-    const apiUrl = `${url}/loan-applications/${loanId}`; // Construct the URL with the loan ID
+    const apiUrl = `${url}loan-applications/${loanId}`; // Construct the URL with the loan ID
     return this.http.put<LoanApplication>(apiUrl, updatedLoanApplication);
   }
 
@@ -196,7 +196,7 @@ export class AdminLoanApplicationComponent implements OnInit {
         interestRate,
       };
 
-      const addLoanUrl = `${url}/loans`;
+      const addLoanUrl = `${url}loans`;
       this.http.post<Loan>(addLoanUrl, loan).subscribe(
         (res: Loan) => {
           console.log(res);

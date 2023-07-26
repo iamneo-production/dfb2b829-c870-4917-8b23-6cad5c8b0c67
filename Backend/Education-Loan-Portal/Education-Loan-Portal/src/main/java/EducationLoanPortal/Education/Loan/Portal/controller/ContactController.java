@@ -4,6 +4,8 @@ package EducationLoanPortal.Education.Loan.Portal.controler;
 import EducationLoanPortal.Education.Loan.Portal.model.Contact;
 import EducationLoanPortal.Education.Loan.Portal.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +22,9 @@ public class ContactController {
     @PostMapping(path = "/save")
     public String saveContact(@RequestBody Contact contact)
     {
-       String id = contactService.addContact(contact);
-       return id;
+       Contact details= contactService.addContact(contact);
+
+        return String.valueOf(new ResponseEntity<>(details, HttpStatus.CREATED));
     }
 
 

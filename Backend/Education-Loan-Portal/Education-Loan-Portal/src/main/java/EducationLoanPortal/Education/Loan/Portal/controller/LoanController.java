@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -50,6 +51,7 @@ public class LoanController {
     }
 
     // update loan by id
+//    @PreAuthorize("hasRole('Admin')")
     @PutMapping("/{id}")
     public Optional<Loan> updateLoan(@PathVariable("id") Long id, @RequestBody Loan loan)
             throws ResourceNotFoundException, UserNotFoundException {
@@ -62,7 +64,7 @@ public class LoanController {
 
     // delete loan by id
     @DeleteMapping("/{id}")
-
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<Object> deleteLoan(@PathVariable("id") Long id) throws ResourceNotFoundException, UserNotFoundException {
         Loan existingLoan = loanService.getLoanById(id);
         if (existingLoan == null) {
@@ -96,6 +98,7 @@ public class LoanController {
                         .body("No loans found");
             }
         }
+
 
     }
     @GetMapping("/download")
