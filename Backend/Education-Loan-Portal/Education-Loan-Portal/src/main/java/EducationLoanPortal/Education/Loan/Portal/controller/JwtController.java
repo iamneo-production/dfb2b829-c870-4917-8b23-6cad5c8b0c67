@@ -1,4 +1,4 @@
-package EducationLoanPortal.Education.Loan.Portal.controler;
+package EducationLoanPortal.Education.Loan.Portal.controller;
 
 import EducationLoanPortal.Education.Loan.Portal.model.JwtRequest;
 import EducationLoanPortal.Education.Loan.Portal.model.JwtResponse;

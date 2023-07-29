@@ -1,4 +1,4 @@
-package EducationLoanPortal.Education.Loan.Portal.controler;
+package EducationLoanPortal.Education.Loan.Portal.controller;
 
 import org.springframework.http.HttpStatus;
 

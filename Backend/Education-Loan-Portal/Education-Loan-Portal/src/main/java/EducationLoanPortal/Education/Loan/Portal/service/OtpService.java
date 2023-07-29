@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Base64;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -48,7 +50,7 @@ public class OtpService {
             throw new RuntimeException("Unable to send OTP. Please try again.");
         }
 
-        if (userRepo.existsByEmail(otp.getEmail())) {
+        if (UserRepo.existsByEmail(otp.getEmail())) {
             throw new RuntimeException("Email already exists.");
         }
 
@@ -134,27 +136,90 @@ public class OtpService {
 
         return "New OTP generated and sent to your email address.";
     }
-
     public String forgotPassword(String email) {
-        Otp existingOtp = otpRepo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found with this email."));
-
-        try {
-            emailUtil.sendSetPasswordEmail(email);
-        } catch (MessagingException e) {
-            throw new RuntimeException("Unable to send set password email. Please try again.");
+        User existingUser = (User) userRepo.findByEmail(email).orElse(null);
+        if (existingUser == null) {
+            throw new RuntimeException("User not found with this email.");
         }
 
-        return "Please check your email to set a new password for your account.";
+        Optional<Otp> existingOtp = otpRepo.findByEmail(email);
+
+        // Generate a new OTP
+        String generatedOtp = otpUtil.generateOtp();
+        LocalDateTime now = LocalDateTime.now();
+
+        if (!existingOtp.isPresent()) {
+            // If no OTP exists, create a new one
+            Otp newOtp = new Otp();
+            newOtp.setEmail(email);
+            newOtp.setOtp(generatedOtp);
+            newOtp.setOtpGeneratedTime(now);
+            otpRepo.save(newOtp);
+        } else {
+            // If an OTP already exists, update it
+            Otp existingOtp1 = existingOtp.get();
+            existingOtp1.setOtp(generatedOtp);
+            existingOtp1.setOtpGeneratedTime(now);
+            otpRepo.save(existingOtp1);
+        }
+
+        try {
+            emailUtil.sendSetPasswordEmail(email, generatedOtp);
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to send OTP. Please try again.");
+        }
+
+        return "Please check your email for the OTP to reset your password.";
     }
 
-    public String setPassword(String email, String newPassword) {
-        Otp existingOtp = otpRepo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found with this email."));
 
-        existingOtp.setPassword(passwordEncoder.encode(newPassword));
-        otpRepo.save(existingOtp);
 
-        return "New password set successfully. You can now log in with the new password.";
+
+    public String setPassword(String email, String otp, String newPassword) {
+        Otp existingOtp = otpRepo.findByEmail(email).orElse(null);
+        if (existingOtp == null) {
+            return "Invalid or expired OTP. Please regenerate OTP and try again.";
+        }
+
+        if (!existingOtp.getOtp().equals(otp) || isOtpExpired(existingOtp)) {
+            return "Invalid or expired OTP. Please regenerate OTP and try again.";
+        }
+
+        User existingUser = (User) userRepo.findByEmail(email).orElse(null);
+        if (existingUser == null) {
+            return "User not found with this email.";
+        }
+
+
+        existingUser.setPassword(passwordEncoder.encode(newPassword));
+        userRepo.save(existingUser);
+
+        otpRepo.delete(existingOtp);
+
+        return "Password reset successful. You can now log in with your new password.";
     }
+
+    // Helper method to check if the OTP is expired
+    private boolean isOtpExpired(Otp otp) {
+        Duration duration = Duration.between(otp.getOtpGeneratedTime(), LocalDateTime.now());
+        return duration.getSeconds() >= 500; // Replace 500 with the desired OTP expiration time in seconds
+    }
+
+//    // Helper method to encode the token (email and encryption key)
+//    private String encodeToken(String email, String encryptionKey) {
+//        String token = email + "|" + encryptionKey;
+//        byte[] tokenBytes = token.getBytes(StandardCharsets.UTF_8);
+//        return Base64.getEncoder().encodeToString(tokenBytes);
+//    }
+//
+//    // Helper method to decode the token and extract email and encryption key
+//    private String decodeToken(String encodedToken) {
+//        try {
+//            byte[] tokenBytes = Base64.getDecoder().decode(encodedToken);
+//            return new String(tokenBytes, StandardCharsets.UTF_8);
+//        } catch (IllegalArgumentException e) {
+//            // If the token is not a valid Base64 encoded string, return null
+//            return null;
+//        }
+//    }
 }

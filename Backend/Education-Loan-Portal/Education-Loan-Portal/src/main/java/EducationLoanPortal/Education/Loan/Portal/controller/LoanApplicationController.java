@@ -1,7 +1,6 @@
-package EducationLoanPortal.Education.Loan.Portal.controler;
+package EducationLoanPortal.Education.Loan.Portal.controller;
 
 import EducationLoanPortal.Education.Loan.Portal.exception.UserNotFoundException;
-import EducationLoanPortal.Education.Loan.Portal.model.Loan;
 import EducationLoanPortal.Education.Loan.Portal.model.LoanApplication;
 import EducationLoanPortal.Education.Loan.Portal.service.LoanApplicationService;
 import EducationLoanPortal.Education.Loan.Portal.service.MailService;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.time.LocalDate;
 
 
 @RestController

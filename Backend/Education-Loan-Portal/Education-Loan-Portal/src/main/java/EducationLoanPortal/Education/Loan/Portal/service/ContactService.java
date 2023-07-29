@@ -1,6 +1,7 @@
 package EducationLoanPortal.Education.Loan.Portal.service;
 
 
+import EducationLoanPortal.Education.Loan.Portal.exception.UserNotFoundException;
 import EducationLoanPortal.Education.Loan.Portal.model.Contact;
 import EducationLoanPortal.Education.Loan.Portal.repository.ContactRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,10 @@ public class ContactService {
         this.contactRepo = contactRepo;
     }
 
-    public String addContact(Contact contact) {
+    public Contact addContact(Contact contact) {
 
 
-
-
-
-        contactRepo.save(contact);
-
-        return contact.getFullname();
+        return contactRepo.save(contact);
     }
 
     public List<Contact> getAllContact() {
@@ -49,18 +45,14 @@ public class ContactService {
         return contactList;
     }
 
-    public boolean deleteContact(int id) {
+    public boolean deleteContact(int id) throws UserNotFoundException {
 
-        if(contactRepo.existsById(id)){
 
+        try {
             contactRepo.deleteById(id);
+        } catch (Exception e) {
+            throw new UserNotFoundException("contact by id " + id + " was not found");
         }
-        else{
-            System.out.println("Contact ID not found");
-        }
-
-
-
         return true;
     }
 

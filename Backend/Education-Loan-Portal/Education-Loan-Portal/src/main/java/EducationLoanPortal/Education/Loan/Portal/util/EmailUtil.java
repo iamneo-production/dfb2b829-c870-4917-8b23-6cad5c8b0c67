@@ -26,19 +26,23 @@ public class EmailUtil {
         javaMailSender.send(mimeMessage);
     }
 
-    public void sendSetPasswordEmail(String email) throws MessagingException{
-        MimeMessage mimeMessage= javaMailSender.createMimeMessage();
-        MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage);
+    public void sendSetPasswordEmail(String email, String token) throws MessagingException {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         mimeMessageHelper.setTo(email);
         mimeMessageHelper.setSubject("Set Password");
+
+        // Construct the password reset link with the token
+        String setPasswordLink = "http://localhost:4200/set-password?token=" + token + "&email=" + email;
+
         mimeMessageHelper.setText(
                 "<div>" +
-                        "<a href=\"http://localhost:4200/set-password?email=" + email + "\" target=\"_blank\">click here to set password</a>" +
+                        "<a href=\"" + setPasswordLink + "\" target=\"_blank\">Click here to set password</a>" +
                         "</div>",
                 true
         );
+
         javaMailSender.send(mimeMessage);
     }
-
 }
 

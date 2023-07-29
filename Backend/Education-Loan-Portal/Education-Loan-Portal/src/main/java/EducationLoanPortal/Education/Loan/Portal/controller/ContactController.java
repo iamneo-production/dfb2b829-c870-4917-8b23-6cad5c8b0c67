@@ -1,6 +1,7 @@
-package EducationLoanPortal.Education.Loan.Portal.controler;
+package EducationLoanPortal.Education.Loan.Portal.controller;
 
 
+import EducationLoanPortal.Education.Loan.Portal.exception.UserNotFoundException;
 import EducationLoanPortal.Education.Loan.Portal.model.Contact;
 import EducationLoanPortal.Education.Loan.Portal.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,10 @@ public class ContactController {
     private ContactService contactService;
 
     @PostMapping(path = "/save")
-    public String saveContact(@RequestBody Contact contact)
-    {
-       Contact details= contactService.addContact(contact);
-
-        return String.valueOf(new ResponseEntity<>(details, HttpStatus.CREATED));
+    public ResponseEntity<Contact> saveContact(@RequestBody Contact contact) {
+        Contact details = contactService.addContact(contact);
+        return new ResponseEntity<>(details, HttpStatus.CREATED);
     }
-
 
     @GetMapping(path = "getAllContact")
     public List<Contact> getAllContact() {
@@ -35,9 +33,14 @@ public class ContactController {
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public String deleteContact(@PathVariable(value = "id") int id) {
-        boolean deleteContact = contactService.deleteContact(id);
-        return "delete";
+    public String deleteContact(@PathVariable(value = "id") int id) throws UserNotFoundException {
+
+        if (contactService.deleteContact(id)) {
+            // return new ResponseEntity<>(HttpStatus.OK);
+            return String.valueOf(new ResponseEntity<>(HttpStatus.OK));
+        } else {
+            return String.valueOf(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+        }
     }
 
 
