@@ -1,0 +1,41 @@
+<div class="bootstrap-wrapper">
+  <div class="container mt">
+
+      <div class="row">
+          <div class="col-md-6 offset-md-3">
+              <div class="container text-center">
+
+              <img class="img-fluid" style="width: 100px;" src="/assets/Contact-Us-PNG.png" alt="" />
+
+              </div>
+
+              <h1 class="text-center">Contact Us !!</h1>
+              <p>Fill up the form our team will get back to you within in 24 hours</p> 
+
+              <form (ngSubmit)="onSubmit()">
+                   <mat-form-field class="full-width">
+                         <mat-label>Fullname</mat-label>
+                         <input type="text" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" class="form-control" id="name"  placeholder="Enter Name" matInput/>
+                   </mat-form-field>
+
+                   <mat-form-field class="full-width">
+                      <mat-label>Email</mat-label>
+                      <input type="text" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="form-control" id="email"  placeholder="Enter Email" matInput/>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <mat-label>Message</mat-label>
+                  <input type="text" [(ngModel)]="message" [ngModelOptions]="{standalone: true}" class="form-control" id="message"  placeholder="Enter message"matInput/>
+            </mat-form-field>
+
+            <div class="container">
+
+              <button type="submit" mat-raised-button color="primary" (click)="contact()">Submit</button>
+            </div>
+
+              </form>
+          </div>
+      </div>
+
+  </div>
+</div>

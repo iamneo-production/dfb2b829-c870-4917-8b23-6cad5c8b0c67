@@ -2,11 +2,12 @@ package EducationLoanPortal.Education.Loan.Portal.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Loan {
@@ -21,10 +22,12 @@ public class Loan {
     @JsonBackReference
     private User user;
 
+    @OneToMany(mappedBy = "loan", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Payment> PaymentList;
 
-    @JsonProperty("user_id")
+
     private Long user_id;
-
 
     private Double loanAmount;
     private Double interestRate;
@@ -37,7 +40,7 @@ public class Loan {
     }
 
     public Loan(User user, Double loanAmount, Double interestRate, String status, LocalDate startDate,
-            LocalDate endDate) {
+                LocalDate endDate) {
         this.user = user;
         this.loanAmount = loanAmount;
         this.interestRate = interestRate;

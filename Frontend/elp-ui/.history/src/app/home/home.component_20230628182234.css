@@ -1,0 +1,101 @@
+container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.flex-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8px;
+  padding: 24px 48px;
+}
+
+.icon {
+  font-size: 64px;
+  margin-right: 8px;
+}
+
+.large-icon {
+  font-size: 80px;
+}
+
+.larger-icon {
+  font-size: 96px;
+}
+
+.button-text {
+  font-size: 28px;
+}
+
+.large-button {
+  min-width: 300px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.flex-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8px;
+  padding: 24px 48px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.icon {
+  font-size: 64px;
+  margin-right: 8px;
+}
+
+.large-icon {
+  font-size: 80px;
+}
+
+.larger-icon {
+  font-size: 96px;
+}
+
+.button-text {
+  font-size: 28px;
+}
+
+.large-button {
+  min-width: 300px;
+}
+
+.greeting {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.greeting-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fade-in 1s forwards;
+}

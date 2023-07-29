@@ -1,0 +1,11 @@
+
+  
+  .spacer {
+    margin-right: 10px; /* Adjust the value as needed */
+  }
+
+.mat-toolbar .login-button,
+.mat-toolbar .signup-button {
+  margin-right: 10px; /* Adjust the value as needed */
+}
+

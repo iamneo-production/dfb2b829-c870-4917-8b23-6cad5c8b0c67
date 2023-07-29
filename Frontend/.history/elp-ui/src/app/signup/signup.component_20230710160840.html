@@ -1,0 +1,100 @@
+
+<body style="background-color:#3e4bdc">
+  <br><br><br>
+  <div>
+    <form (ngSubmit)="register(f)" #f="ngForm" style="background-color:white">
+      <h3>Register here!</h3>
+        <div class="label1 form-group">
+        <label >ID:</label><br>
+        <input type="number" ngModel name="id1" id="id1" class="form-control"  required><br>
+        <span *ngIf="f.controls['id2']?.['invalid'] && f.controls['id2']?.['touched']">ID is requried</span>
+    </div><br><br><br>
+
+    <div class="label1 form-group">
+        <label >First name:</label><br>
+        <input type="text" class="form-control"  pattern="[ A-Za-z]*"  ngModel name="fname" required><br>
+        <div *ngIf="f.controls['fname']?.['invalid'] && (f.controls['fname']?.['dirty'] || f.controls['fname']?.['touched'])">
+          <div class="span1" *ngIf="f.controls['fname']?.['errors']?.['required']">
+            First name is required
+          </div>
+          <div  class="span1" *ngIf="f.controls['fname']?.['errors']?.['pattern']">
+            Enter valid First name
+          </div>
+        </div>
+    </div><br><br><br>
+
+    <div class="label1 form-group">
+        <label>Last name:</label><br>
+        <input type="lname" ngModel name="lname"  pattern="[ A-Za-z]" class="form-control"  required><br>
+        <div *ngIf="f.controls['lname']?.['invalid'] && (f.controls['lname']?.['dirty'] || f.controls['lname']?.['touched'])">
+          <div class="span1" *ngIf="f.controls['lname']?.['errors']?.['required']">
+            Last name is required
+          </div>
+          <div  class="span1" *ngIf="f.controls['lname']?.['errors']?.['pattern']">
+            Enter valid Last name
+          </div>
+          </div>
+        
+    </div><br><br><br>
+
+        <div class="label1 form-group">
+        <label >Email:</label><br>
+        <input type="text" email class="form-control" ngModel name="mail"  required><br>
+        <div *ngIf="f.controls['mail']?.['invalid'] && (f.controls['mail']?.['dirty'] || f.controls['mail']?.['touched'])">
+          <div class="span1" *ngIf="f.controls['mail']?.['errors']?.['required']">
+            Email is required.
+          </div>
+          <div  class="span1" *ngIf="f.controls['mail']?.['errors']?.['email']">
+            Enter valid email
+          </div>
+          </div>
+        </div><br><br><br>
+        
+
+ <div class="label1 form-group">
+        <label >Password:</label><br>
+        <input type="password" ngModel name="password" class="form-control"  required minlength="8" maxlength="8" >
+        <div *ngIf="f.controls['password']?.['invalid'] && (f.controls['password']?.['dirty'] ||f.controls['password']?.['touched'])">
+            <div class="span1" *ngIf="f.controls['password']?.['errors']?.['required']">
+              Password is required.
+            </div>
+            <div  class="span1" *ngIf="f.controls['password']?.['errors']?.['minlength']">
+              Password should be at least 8 characters long.
+            </div>
+            <div  class="span1" *ngIf="f.controls['password']?.['errors']?.['maxlength']">
+              Password should not exceed 8 characters.
+            </div>
+          </div>
+          
+
+ </div><br><br><br>
+
+
+ <div class="label1 form-group">
+        <label >Address:</label><br>
+        <input type="text" ngModel name="addr"  class="form-control" required><br>
+        <span *ngIf="f.controls['addr']?.['invalid'] && f.controls['addr']?.['touched']">Address is requried</span>
+ </div><br><br><br>
+
+ <div class="label1 form-group" >
+        <label>Phone number:</label><br>
+        <input type="number" class="form-control" ngModel name="phoneno"  pattern="[0-9]{10}"   required><br>
+        <div *ngIf="f.controls['phoneno']?.['invalid'] && (f.controls['phoneno']?.['dirty'] || f.controls['phoneno']?.['touched'])">
+          <div class="span1" *ngIf="f.controls['phoneno']?.['errors']?.['required']">
+            Phonenumber is required.
+          </div>
+          <div  class="span1" *ngIf="f.controls['phoneno']?.['errors']?.['pattern']">
+            Enter valid Phonenumber
+          </div>
+          </div>
+ </div><br><br><br>
+        
+        
+       <button class="btn btn-primary" value="submit" >Submit</button><br>
+       <p>If you already have a account? Login</p>
+
+    </form>
+  </div>
+</body>
+
+

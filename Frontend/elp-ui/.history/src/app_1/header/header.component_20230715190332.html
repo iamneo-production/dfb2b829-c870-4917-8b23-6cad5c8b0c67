@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+  <span class="navbar-brand">Education Loan Portal</span>
+
+  <span class="spacer"></span>
+
+  <mat-toolbar color="primary" class="sub-toolbar" *ngIf="userService.roleMatch(['Admin'])">
+    <button mat-button routerLink="/adminHome">Admin Dashboard</button>
+  </mat-toolbar>
+
+  <mat-toolbar color="primary" class="sub-toolbar" *ngIf="userService.roleMatch(['User'])">
+    <button mat-button routerLink="/userHome">User Dashboard</button>
+  </mat-toolbar>
+
+  <ng-container *ngIf="!isLoggedIn(); else loggedInTemplate">
+    <button mat-raised-button color="accent" routerLink="/signup">signup</button>
+  </ng-container>
+  <ng-template #loggedInTemplate>
+    <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+  </ng-template>
+  
+  <button mat-icon-button routerLink="/profile" *ngIf="isLoggedIn()">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>

@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: calc(100% / 2);
+  padding-top: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: center; /* Add this line to center-align the buttons */
+  margin-bottom: 16px;
+}
+
+
+.flex-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px;
+  padding: 12px 24px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #3f51b5;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  transition: all 0.3s ease;
+  width: calc(100% / 2);
+  height: 50%;
+}
+
+.flex-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+  font-size: 40px;
+  margin-right: 8px;
+  animation: slide-in-left 1s forwards;
+}
+
+.large-icon {
+  font-size: 50px;
+}
+
+.larger-icon {
+  font-size: 60px;
+}
+
+.button-text {
+  font-size: 20px;
+  opacity: 0;
+  animation: fade-in 1s forwards;
+  animation-delay: 0.5s;
+}
+
+.greeting {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.greeting-text {
+  font-size: 24px;
+  font-weight: inherit;
+  color: #333;
+  text-transform: capitalize;
+  opacity: 0;
+  animation: slide-in-left 1s forwards;
+  animation-delay: 1s;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  position: absolute;
+  top: 10%;
+  left: 0;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
