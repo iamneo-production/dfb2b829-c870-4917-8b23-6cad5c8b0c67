@@ -46,10 +46,7 @@ export class UserService {
   public roleMatch(allowedRoles: string[]): boolean {
     let isMatch = false;
     const userRoles: any = this.userAuthService.getRoles();
-    console.log('userRoles');
-    console.log(userRoles);
-    console.log('allowedRoles');
-    console.log(allowedRoles);
+
 
     if (userRoles != null && userRoles) {
       for (let i = 0; i < userRoles.length; i++) {

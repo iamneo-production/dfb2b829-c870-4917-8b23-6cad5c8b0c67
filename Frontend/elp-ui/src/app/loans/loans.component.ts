@@ -55,7 +55,7 @@ export class LoansComponent implements OnInit {
     this.filteredLoans = this.loans.filter(loan =>
       String(loan.id).toLowerCase().includes(searchTerm) ||
       String(loan.loanAmount).toLowerCase().includes(searchTerm) ||
-      String(loan.interestRate).toLowerCase().includes(searchTerm) ||
+      String(loan.interestRate).toLowerCase().includes(searchTerm) ||    
       loan.startDate.toLowerCase().includes(searchTerm) ||
       loan.endDate.toLowerCase().includes(searchTerm)
     );

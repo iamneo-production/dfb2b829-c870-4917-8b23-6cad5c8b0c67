@@ -69,7 +69,8 @@ import { SetPasswordComponent } from './set-password/set-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactRecordComponent } from './contact-record/contact-record.component';
-import { SlickCarouselModule } from 'ngx-slick-carousel'; 
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { AddLoanUserIdComponent } from './add-loan-user-id/add-loan-user-id.component'; 
 
 
 @NgModule({
@@ -107,7 +108,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
         SetPasswordComponent,
         ForgotPasswordComponent,
         ContactComponent,
-        ContactRecordComponent
+        ContactRecordComponent,
+        AddLoanUserIdComponent
     
   ],
 
