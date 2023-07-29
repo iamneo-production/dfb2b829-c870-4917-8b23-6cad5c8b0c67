@@ -1,8 +1,4 @@
-
-
-
-
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,12 +9,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './set-password.component.html',
   styleUrls: ['./set-password.component.css']
 })
-export class SetPasswordComponent {
+export class SetPasswordComponent implements OnInit {
   setPasswordForm: FormGroup;
   errorMessage: string = '';
   email: string = '';
+  token: string = '';
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router,private snackBar: MatSnackBar) {
+  constructor(
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
     this.setPasswordForm = this.formBuilder.group({
       newPassword: ['', Validators.required],
       confirmPassword: ['', Validators.required]
@@ -27,49 +30,52 @@ export class SetPasswordComponent {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
+      this.token = params['token'];
       this.email = params['email'];
     });
   }
 
   onSubmit() {
     if (this.setPasswordForm.invalid) {
-      // Handle invalid form submission
       return;
     }
 
     if (this.setPasswordForm.value.newPassword !== this.setPasswordForm.value.confirmPassword) {
-      // Passwords do not match, handle error
       return;
     }
 
     const newPassword = this.setPasswordForm.value.newPassword;
+
+    if (!this.token) {
+      console.error('Token not found in URL.');
+      return;
+    }
+
+    // Prepare the headers with the token and newPassword
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'newPassword': newPassword // Include the newPassword header
+      'Token': this.token,
+      'NewPassword': newPassword,
+      'Email': this.email
     });
 
-    this.http.put('http://localhost:8080/otp/set-password', null, {
-      params: { email: this.email },
-      headers: headers,
-      responseType: 'text'
-    }).subscribe(
+    const url = 'http://localhost:8080/otp/set-password';
+
+    // Send the request with headers
+    this.http.post<string>(url, {}, { headers: headers }).subscribe(
       response => {
         console.log(response);
-        this.snackBar.open(response.toString(), 'Close', { duration: 3000 });
-        // Handle success response
-        this.router.navigate(['/login']); // Redirect to login page
+        this.snackBar.open(response, 'Close', { duration: 3000 });
+        this.router.navigate(['/login']);
       },
       (error: HttpErrorResponse) => {
         console.error(error);
         if (error.status === 200) {
-          console.log(error.error); 
-          // Assuming the success message is returned in the error.error field
-          // Handle success response
-          this.snackBar.open(error.error.toString(), 'Close',{ duration: 3000 });
-          this.router.navigate(['/login']); // Redirect to login page
+          console.log(error.error);
+          this.snackBar.open(error.error, 'Close', { duration: 3000 });
+          this.router.navigate(['/login']);
         } else {
           this.errorMessage = 'An unexpected error occurred. Please try again later.';
-          this.snackBar.open(this.errorMessage, 'Close',{ duration: 3000 });
+          this.snackBar.open(this.errorMessage, 'Close', { duration: 3000 });
         }
       }
     );

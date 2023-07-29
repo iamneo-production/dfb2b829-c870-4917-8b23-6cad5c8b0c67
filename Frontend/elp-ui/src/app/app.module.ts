@@ -69,6 +69,7 @@ import { SetPasswordComponent } from './set-password/set-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactRecordComponent } from './contact-record/contact-record.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel'; 
 
 
 @NgModule({
@@ -119,6 +120,7 @@ import { ContactRecordComponent } from './contact-record/contact-record.componen
     MatButtonModule,
     MatToolbarModule,
 
+
     // FlexLayoutModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -141,7 +143,8 @@ import { ContactRecordComponent } from './contact-record/contact-record.componen
  
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SlickCarouselModule 
 
   ],
   providers: [   AuthGuard,
