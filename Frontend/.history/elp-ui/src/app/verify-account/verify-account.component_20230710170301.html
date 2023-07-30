@@ -1,0 +1,21 @@
+<div class="container mt-5">
+    <div class="card">
+      <h2 class="login-heading">Verify Account</h2>
+      <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="input-group">
+          <h3>OTP:</h3>
+          <mat-form-field class="input-container">
+            <input matInput placeholder="OTP" formControlName="otp" required>
+          </mat-form-field>
+          <button [disabled]="verifyForm.invalid" mat-raised-button color="primary" type="submit" class="login-button">
+            Verify
+          </button>
+        </div>
+        <button *ngIf="showResend" mat-raised-button color="primary" (click)="resendOTP()" [disabled]="remainingTime > 0">
+          Resend
+        </button>
+        <p *ngIf="showResend" class="error-message">Didn't receive the OTP? Resend in {{ remainingTime }} seconds.</p>
+      </form>
+    </div>
+  </div>
+  

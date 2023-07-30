@@ -1,0 +1,133 @@
+<div class="container">
+  <div class="side-banners">
+    <div class="banner">
+      <img src="banner1.jpg" alt="Banner 1">
+      <div class="banner-content">
+        <h2>Simple Interest</h2>
+        <p>Payment Plan: 8%</p>
+        <p>Amount Payment starts after 1 year of study</p>
+        <p>Payment Duration: 8 years</p>
+        <p>Monthly Payment: ₹12,500</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Principal Amount</th>
+              <th>Interest Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>₹10,00,000</td>
+              <td>₹80,000</td>
+            </tr>
+            <!-- Add more rows for each year -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="banner">
+      <img src="banner2.jpg" alt="Banner 2">
+      <div class="banner-content">
+        <h2>Floating Interest</h2>
+        <p>Payment Plan: 4%</p>
+        <p>Amount Payment starts after 1 year of study</p>
+        <p>Payment Duration: 10 years</p>
+        <p>Monthly Payment: ₹10,000</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Principal Amount</th>
+              <th>Interest Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>₹10,00,000</td>
+              <td>₹40,000</td>
+            </tr>
+            <!-- Add more rows for each year -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="banner">
+      <img src="banner3.jpg" alt="Banner 3">
+      <div class="banner-content">
+        <h2>Compound Interest</h2>
+        <p>Payment Plan: 6%</p>
+        <p>Amount Payment starts after 1 year of study</p>
+        <p>Payment Duration: 12 years</p>
+        <p>Monthly Payment: ₹8,000</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Principal Amount</th>
+              <th>Interest Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>₹10,00,000</td>
+              <td>₹60,000</td>
+            </tr>
+            <!-- Add more rows for each year -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- Rest of the form content -->
+</div>
+
+
+  <div class="form-content">
+    <h1>Apply Loan</h1>
+
+    <form id="loanForm" #loanForm="ngForm" (ngSubmit)="submitLoanForm(loanForm)">
+      <div class="form-container">
+        <div class="form-group">
+          <mat-form-field class="form-field">
+            <mat-label>Loan Amount</mat-label>
+            <input matInput type="number" required name="loanAmount" [(ngModel)]="loanAmount">
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="form-field">
+            <mat-label>Loan Apply Date</mat-label>
+            <input matInput [matDatepicker]="loanDatePicker" required name="loanApplyDate" [(ngModel)]="loanApplyDate">
+            <mat-datepicker-toggle matSuffix [for]="loanDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #loanDatePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="form-field">
+            <mat-label>Purpose</mat-label>
+            <input matInput required name="purpose" [(ngModel)]="purpose">
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="form-field">
+            <mat-label>Loan Type</mat-label>
+            <select matNativeControl required name="loanType" [(ngModel)]="loanType">
+              <option value="">Select Loan Type</option>
+              <option value="simple">Simple Interest (7.8%)</option>
+              <option value="floating">Floating Interest (5.6%)</option>
+              <option value="compound">Compound Interest (6.4%)</option>
+            </select>
+          </mat-form-field>
+        </div>
+        
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="banner bg-light p-4 mb-4 text-center">
+          <h2 class="mb-4">Simple Interest</h2>
+          <p class="mb-0">Payment Plan: 8%</p>
+          <p class="mb-0">Amount Payment starts after 1 year of study</p>
+          <table style="width: 100%; margin-top: 20px;">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Principal Amount</th>
+                <th>Interest Amount</th>
+                <th>Monthly Payment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>₹1,00,000</td>
+                <td>₹8,000</td>
+                <td>₹1,766</td>
+              </tr>
+              <!-- Add more rows for each year -->
+            </tbody>
+          </table>
+          <p class="mt-4">Monthly payment: ₹1,766</p>
+          <p>Yearly payment for ₹1,00,000: ₹1,766 * 12 = ₹21,192</p>
+          <p>8-year payment for ₹1,00,000: ₹21,192 * 8 = ₹1,69,536</p>
+          <p>Total payment for 8 years: ₹1,69,536</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="banner bg-light p-4 mb-4 text-center">
+          <h2>Floating Interest</h2>
+          <p class="mb-0">Payment Plan: 4%</p>
+          <p class="mb-0">Amount Payment starts after 1 year of study</p>
+          <table style="width: 100%; margin-top: 20px;">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Principal Amount</th>
+                <th>Interest Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>4%</td>
+                <td>₹8,000</td>
+              </tr>
+            
+            </tbody>
+          </table>
+          <p class="mt-4">Monthly payment: ₹1,200</p>
+          <p>Yearly payment for based on Market Interest   </p>
+          <p>8-year payment for based on Market Interest </p>
+  
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="banner bg-light p-4 mb-4 text-center">
+          <h2>Compound Interest</h2>
+          <p class="mb-0">Payment Plan: 6%</p>
+          <p class="mb-0">Amount Payment starts after 1 year of study</p>
+          <table style="width: 100%; margin-top: 20px;">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Principal Amount</th>
+                <th>Interest Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>6%</td>
+                <td>₹10,000</td>
+              </tr>
+            
+            </tbody>
+          </table>
+          <p class="mt-4">Monthly payment: ₹1,500</p>
+          <p>Yearly payment for ₹1,00,000: ₹1,500 * 12 = ₹18000</p>
+          <p>8-year payment for ₹1,00,000: ₹18000 * 8 + compount interest= ₹1,76,362</p>
+          <p>Total payment for 8 years: ₹1,69,536</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+  <div class="form-content">
+    <h1>Apply Loan</h1>
+
+    <form id="loanForm" #loanForm="ngForm" (ngSubmit)="submitLoanForm(loanForm)">
+      <div class="form-container">
+        <div class="form-group">
+          <mat-form-field class="form-field">
+            <mat-label>Loan Amount</mat-label>
+            <input matInput type="number" required name="loanAmount" [(ngModel)]="loanAmount">
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="form-field">
+            <mat-label>Loan Apply Date</mat-label>
+            <input matInput [matDatepicker]="loanDatePicker" required name="loanApplyDate" [(ngModel)]="loanApplyDate">
+            <mat-datepicker-toggle matSuffix [for]="loanDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #loanDatePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="form-field">
+            <mat-label>Purpose</mat-label>
+            <input matInput required name="purpose" [(ngModel)]="purpose">
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="form-field">
+            <mat-label>Loan Type</mat-label>
+            <select matNativeControl required name="loanType" [(ngModel)]="loanType">
+              <option value="">Select Loan Type</option>
+              <option value="simple">Simple Interest (7.8%)</option>
+              <option value="floating">Floating Interest (5.6%)</option>
+              <option value="compound">Compound Interest (6.4%)</option>
+            </select>
+          </mat-form-field>
+        </div>
+        
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

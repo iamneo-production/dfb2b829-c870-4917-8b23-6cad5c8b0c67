@@ -1,0 +1,47 @@
+<h1>Loan Applications Table</h1>
+<mat-form-field>
+  <input matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup)="onSearch()">
+</mat-form-field>
+<table class="mat-table mat-elevation-z8">
+  <thead>
+    <th (click)="sortTable('id')" [ngClass]="{'highlight': activeField === 'id'}">LoanApplication Id
+      <mat-icon *ngIf="activeField === 'id' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'id' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('purpose')" [ngClass]="{'highlight': activeField === 'purpose'}">Purpose
+      <mat-icon *ngIf="activeField === 'purpose' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'purpose' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('loanAmount')" [ngClass]="{'highlight': activeField === 'loanAmount'}">Loan Amount
+      <mat-icon *ngIf="activeField === 'loanAmount' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'loanAmount' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('status')" [ngClass]="{'highlight': activeField === 'status'}">Status
+      <mat-icon *ngIf="activeField === 'status' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'status' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('applicationDate')" [ngClass]="{'highlight': activeField === 'applicationDate'}">Application Date
+      <mat-icon *ngIf="activeField === 'applicationDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'applicationDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th >
+    <th  [ngClass]="{'highlight': activeField === 'applicationDate'}">
+       Reports
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let loanApplication of filteredLoans">
+      <td>{{ loanApplication.id }}</td>
+      <td>{{ loanApplication.purpose }}</td>
+      <td>{{ loanApplication.loanAmount }}</td>
+      <td>{{ loanApplication.status }}</td>
+      <td>{{ loanApplication.applicationDate }}</td>
+      <td>
+        <button mat-icon-button color="primary" (click)="downloadPdf(loanApplication)">
+          <mat-icon>file_download</mat-icon>
+        </button>
+      </td>
+    
+    </tr>
+  </tbody>
+
+</table>

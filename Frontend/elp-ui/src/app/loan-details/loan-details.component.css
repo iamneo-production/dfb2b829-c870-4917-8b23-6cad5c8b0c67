@@ -1,0 +1,89 @@
+.mat-table {
+  width: 30%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-family: 'Arial', sans-serif;
+}
+
+.mat-table th,
+.mat-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.mat-table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: #333;
+}
+
+.mat-table th:nth-child(1) {
+  background-color: #3f51b5; 
+  color: white;
+}
+
+.mat-table th:nth-child(2) {
+  background-color: #3f51b5; 
+  color: white;
+}
+
+.mat-table th:nth-child(3) {
+  background-color: #3f51b5; 
+  color: white;
+}
+
+.mat-table th:nth-child(4) {
+  background-color: #3f51b5; 
+  color: white;
+}
+
+.mat-table th:nth-child(5) {
+  background-color: #3f51b5; 
+  color: white;
+}
+.mat-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.mat-table tbody tr:hover {
+  background-color: #f5f5f5;
+  transition: background-color 0.3s ease;
+}
+
+.mat-card {
+  margin: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.mat-card-content {
+  padding: 0;
+  overflow-x: auto;
+}
+
+.mat-table {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.mat-table th,
+.mat-table td {
+  white-space: nowrap;
+}
+
+.mat-table tbody tr td:first-child {
+  font-weight: bold;
+}
+
+.mat-table tbody tr:hover {
+  background-color: #f5f5f5;
+  transition: background-color 0.3s ease;
+}
+
+@media screen and (max-width: 600px) {
+  .mat-table {
+    width: 100%;
+  }
+}

@@ -1,0 +1,67 @@
+.mat-elevation-z8 {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .field-name {
+    font-weight: bold;
+    margin-top: 16px; /* Adjust the value to control the spacing between field names */
+  }
+  
+  .dialog-close-button {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Animation and keyframes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .table-row {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+  }
+  
+  .form-field {
+    width: 100%;
+  }
+  
+  button[type="submit"] {
+    display: block;
+    margin: 20px auto 0;
+    width: 100%;
+  }
+  
+  /* Animation Effects */
+  .form-container {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .field-name {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  

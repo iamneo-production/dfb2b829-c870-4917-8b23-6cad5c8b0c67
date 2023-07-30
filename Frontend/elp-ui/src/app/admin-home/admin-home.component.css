@@ -1,0 +1,108 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: calc(100% / 3);
+  padding-top: 20px;
+  background-color: #fff; /* Set the background color as desired */
+  color: #333; /* Set the text color as desired */
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.flex-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  background-color: #3f51b5;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  width: calc(100% / 3);
+  height: 120px;
+}
+
+.flex-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+.button-text {
+  font-size: 16px;
+  opacity: 0;
+  animation: fade-in 1s forwards;
+  animation-delay: 0.5s;
+}
+
+.greeting {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.greeting-text {
+  font-size: 24px;
+  font-weight: inherit;
+  color: #333;
+  text-transform: capitalize;
+  opacity: 0;
+  animation: slide-in-left 1s forwards;
+  animation-delay: 1s;
+  margin-bottom: 20px;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Add your dark mode styles here, if needed */
+.container.dark-mode {
+  /* dark mode styles */
+}
+
+.container.dark-mode .dark-mode-toggle {
+  /* dark mode toggle styles */
+}
+
+.container.dark-mode .toggle-button {
+  /* dark mode toggle button styles */
+}
+
+.container.dark-mode .toggle-inner-circle {
+  /* dark mode toggle inner circle styles */
+}

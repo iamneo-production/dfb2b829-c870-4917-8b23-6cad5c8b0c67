@@ -1,0 +1,67 @@
+.mat-card {
+  margin: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.mat-card-title {
+  background-color: #3f51b5; 
+  color: white;
+  padding: 16px;
+  font-weight: bold;
+}
+
+.mat-card-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loans-table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: 0 auto; 
+}
+.loans-table th {
+  background-color: #3f51b5; 
+  color: white;
+  padding: 8px;
+  min-width: 100px;
+  text-align: center;
+}
+.loans-table th,
+.loans-table td {
+  border: 1px solid black;
+  padding: 8px;
+  min-width: 100px; /* Adjust the minimum width as needed */
+}
+
+.loans-table td:last-child {
+  padding-right: 0; /* Remove right padding for the last cell */
+}
+
+.dialog-close-button {
+  display: flex;
+  justify-content: center;
+}
+
+.field-name {
+  font-weight: bold;
+  margin-top: 16px; /* Adjust the value to control the spacing between field names */
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* Adjust the spacing between elements as needed */
+}
+
+.highlight {
+  color: red;
+}
+
+.spacing {
+  margin-left: 8px; /* Adjust the spacing between buttons */
+}

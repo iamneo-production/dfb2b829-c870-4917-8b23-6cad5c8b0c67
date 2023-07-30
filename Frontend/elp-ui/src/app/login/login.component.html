@@ -1,0 +1,24 @@
+<div class="container mt-5">
+  <div class="card">
+    <h2 class="login-heading">Login</h2>
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="login-form">
+      <div class="input-group">
+        <h3>User Email:</h3>
+        <input matInput type="email" required name="userEmail" [(ngModel)]="userEmail" class="email-input">
+      </div>
+      <div class="input-group">
+        <h3>Password:</h3>
+        <input matInput type="password" required name="userPassword" [(ngModel)]="userPassword" class="password-input">
+      </div>
+      <br>
+      <br>
+      <button mat-raised-button color="primary" type="submit" class="login-button">
+        Login
+      </button>
+      <!-- Use the errorMessage property to show the error message -->
+      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <button mat-button color="primary" routerLink="/forgot-password">Forgot Password</button>
+      <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+.header-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-brand {
+    font-weight: bold;
+  }
+  
+  .sub-toolbar {
+    margin-left: 10px;
+  }
+  
+  .signup-button,
+  .login-button,
+  .logout-button,
+  .profile-button {
+    margin-left: 10px;
+  }
+  
+  .spacer {
+    flex-grow: 1;
+  }
+  .header-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-brand {
+    font-weight: bold;
+  }
+  
+  .sub-toolbar {
+    margin-left: 10px;
+  }
+  
+  .signup-button,
+  .login-button,
+  .logout-button,
+  .profile-button {
+    margin-left: 10px;
+  }
+  
+  .spacer {
+    flex-grow: 1;
+  }
+  
