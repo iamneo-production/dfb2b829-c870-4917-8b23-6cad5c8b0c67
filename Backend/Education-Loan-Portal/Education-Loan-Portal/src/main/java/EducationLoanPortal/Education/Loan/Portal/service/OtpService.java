@@ -205,21 +205,4 @@ public class OtpService {
         return duration.getSeconds() >= 500; // Replace 500 with the desired OTP expiration time in seconds
     }
 
-//    // Helper method to encode the token (email and encryption key)
-//    private String encodeToken(String email, String encryptionKey) {
-//        String token = email + "|" + encryptionKey;
-//        byte[] tokenBytes = token.getBytes(StandardCharsets.UTF_8);
-//        return Base64.getEncoder().encodeToString(tokenBytes);
-//    }
-//
-//    // Helper method to decode the token and extract email and encryption key
-//    private String decodeToken(String encodedToken) {
-//        try {
-//            byte[] tokenBytes = Base64.getDecoder().decode(encodedToken);
-//            return new String(tokenBytes, StandardCharsets.UTF_8);
-//        } catch (IllegalArgumentException e) {
-//            // If the token is not a valid Base64 encoded string, return null
-//            return null;
-//        }
-//    }
 }
