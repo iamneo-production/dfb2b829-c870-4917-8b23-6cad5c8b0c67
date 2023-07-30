@@ -1,0 +1,38 @@
+<h1>Payment Table</h1>
+<mat-form-field>
+  <input matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup)="onSearch()">
+</mat-form-field>
+<table class="mat-table mat-elevation-z8">
+  <thead>
+    <th (click)="sortTable('loan_id')" [ngClass]="{'highlight': activeField === 'loan_id'}">Loan ID
+      <mat-icon *ngIf="activeField === 'loan_id' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'loan_id' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('amount')" [ngClass]="{'highlight': activeField === 'amount'}">Amount
+      <mat-icon *ngIf="activeField === 'amount' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'amount' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    <th (click)="sortTable('paymentDate')" [ngClass]="{'highlight': activeField === 'paymentDate'}">Payment Date
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="activeField === 'paymentDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+    </th>
+    
+    <th>Pay</th>
+   
+    
+
+  
+  </thead>
+  <tbody>
+    <tr *ngFor="let payment of filteredPayments">
+      <td>{{ payment.loan_id }}</td>
+      <td>{{ payment.amount }}</td>
+      <td>{{ payment.paymentDate }}</td>
+      
+      <td><button  (click)="openPaymentDialog(payment)" mat-button>Pay</button></td>
+      
+    </tr>
+   
+  </tbody>
+</table>
+

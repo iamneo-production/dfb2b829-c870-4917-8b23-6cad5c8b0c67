@@ -1,17 +1,11 @@
 package EducationLoanPortal.Education.Loan.Portal.model;
 
-import EducationLoanPortal.Education.Loan.Portal.model.User;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-import java.time.LocalDate;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 public class LoanApplication implements Serializable {

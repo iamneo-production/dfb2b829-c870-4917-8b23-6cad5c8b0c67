@@ -1,0 +1,44 @@
+<!-- <div class="container mt-5">
+  <div class="card signup-card">
+    <h2 class="login-heading signup-title">Sign Up</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="input-group">
+        <h3>First Name:</h3>
+        <input matInput placeholder="First Name" formControlName="firstName" required class="signup-field">
+        <mat-error *ngIf="signupForm.get('firstName')?.touched && signupForm.get('firstName')?.errors?.['required']">First Name is required</mat-error>
+      </div>
+      <div class="input-group">
+        <h3>Last Name:</h3>
+        <input matInput placeholder="Last Name" formControlName="lastName" required class="signup-field">
+        <mat-error *ngIf="signupForm.get('lastName')?.touched && signupForm.get('lastName')?.errors?.['required']">lastName is required</mat-error>
+      </div>
+      <div class="input-group">
+        <h3>Email:</h3>
+        <input matInput type="email" placeholder="Email" formControlName="email" class="signup-field">
+        <mat-error *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.errors?.['required']">Email is required</mat-error>
+        <mat-error *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+      </div>
+      <div class="input-group">
+        <h3>Password:</h3>
+        <input matInput type="password" placeholder="Password" formControlName="password" class="signup-field">
+        <mat-error *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.errors?.['required']">Password is required</mat-error>
+      </div>
+      <div class="input-group">
+        <h3>Address:</h3>
+        <textarea matInput placeholder="Address" formControlName="address" required class="signup-field"></textarea>
+      </div>
+      <div class="input-group">
+        <h3>Phone Number:</h3>
+        <input matInput placeholder="Phone Number" formControlName="phoneNumber" required class="signup-field">
+        <mat-error *ngIf="signupForm.get('phoneNumber')?.touched && signupForm.get('phoneNumber')?.errors?.['required']">Phone number is required</mat-error>
+        <mat-error *ngIf="signupForm.get('phoneNumber')?.touched && signupForm.get('phoneNumber')?.errors?.['pattern']">Phone number must be a 10-digit number</mat-error>
+      </div>
+      <br>
+      <br>
+      <button [disabled]="signupForm.invalid" mat-raised-button color="primary" type="submit" class="signup-button">
+        Sign Up
+      </button>
+      <p>Already registered? <a href="#">Login</a></p>
+    </form>
+  </div>
+</div> -->

@@ -1,0 +1,36 @@
+ <ng-template #loanApprovalDialog let-dialogRef>
+  <h1>Add Loan</h1>
+    <div class="dialog-close-button">
+        <button mat-icon-button (click)="closeLoanApprovalDialog()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    <form (ngSubmit)="submitLoanApprovalForm()">
+      <div class="form-container">
+        <mat-label>Loan Amount</mat-label>
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Loan Amount" name="loanAmount" [(ngModel)]="loan.loanAmount" required>
+        </mat-form-field>
+        
+        <mat-label>Start Date</mat-label>
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Start Date" name="startDate" [(ngModel)]="loan.startDate" required [matDatepicker]="startDatePicker">
+          <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+        </mat-form-field>
+        <mat-label>End Date</mat-label>
+        <mat-form-field class="form-field">
+          <input matInput placeholder="End Date" name="endDate" [(ngModel)]="loan.endDate" required [matDatepicker]="endDatePicker">
+          <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #endDatePicker></mat-datepicker>
+        </mat-form-field>
+        <mat-label>Interest Rate</mat-label>
+        <mat-form-field class="form-field">
+          <input matInput type="number" placeholder="Interest Rate" name="interestRate" [(ngModel)]="loan.interestRate" required>
+        </mat-form-field>
+    
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </div>
+    </form>
+  </ng-template>
+  

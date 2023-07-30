@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-md-7">
+        <h1>Contact-Record !!</h1>
+        <hr/>
+        <div class="card card-body bg-light">
+               <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Option</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ContactItem of ContactArray">
+                        <th scope="row">{{ContactItem.id}}</th>
+                        <td>{{ContactItem.fullname}}</td>
+                        <td>{{ContactItem.email}}</td>
+                        <td>{{ContactItem.message}}</td>
+                        <td>
+                            <button class="btn btn-primary" (click)="setDelete(ContactItem)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+               </table>
+        </div>
+    </div>
+</div>

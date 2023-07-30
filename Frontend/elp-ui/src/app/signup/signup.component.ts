@@ -1,8 +1,11 @@
+
+
 import { Component } from '@angular/core';
-import {NgForm} from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import {HttpClient} from  '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-signup',
@@ -10,55 +13,54 @@ import {HttpClient} from  '@angular/common/http';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  
-  constructor(private http: HttpClient){}
 
-  id1: string='';
-    fname: string='';
-    lname:string='';
-    mail: string='';
-    password: string='';
-    addr:string='';
-    phoneno:string=''
-    
+  signupForm: FormGroup;
 
-  register(f:NgForm):void
-  {
-  
-    if (f.invalid) {
-      f.control.markAllAsTouched();
-      return;
-    }
-
-    let bodyData = {
-      "id" : this.id1,
-      "firstName" : this.fname,
-      "lastName" : this.lname,
-      "email" : this.mail,
-      "password" : this.password,
-      "address" : this.addr,
-      "phoneNumber" : this.phoneno
-    };
- 
-    this.http.post("http://localhost:8080/users/",bodyData).subscribe((resultData: any)=>
-    {
-        console.log(resultData);
-        alert("User Registered Successfully")
-        
-        this.id1 = '';
-        this.fname = '';
-       this.lname = '';
-       this.mail = '';
-       this.password = '';
-       this.addr= '';
-       this.phoneno = '';
+  constructor(
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
+    this.signupForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      address: ['', Validators.required],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]]
     });
   }
 
+  onSubmit() {
+    if (this.signupForm.invalid) {
+      // Handle invalid form submission
+      return;
+    }
 
+    const userData = this.signupForm.value;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const options = { headers: headers, responseType: 'text' as 'json' };
 
-
-  
-
-  
-}
+    this.http.post('http://localhost:8080/otp/register', userData, options)
+      .subscribe(
+        (response: any) => { // Specify the response type as 'any'
+          console.log(response);
+          this.snackBar.open(response, 'Close', {
+            duration: 3000
+          });
+          // Handle success response
+          this.router.navigate(['/verify-account'], { queryParams: { email: userData.email } }); // Navigate to verify-account page with email as a query parameter
+        },
+        (error: HttpErrorResponse) => {
+          console.error(error);
+          let errorMessage = 'An unexpected error occurred. Please try again';
+          if (error.status === 200) {
+            errorMessage = error.error; // Assuming the error message is returned in the error.error field
+          }
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 3000
+          });
+        }
+      );
+  }

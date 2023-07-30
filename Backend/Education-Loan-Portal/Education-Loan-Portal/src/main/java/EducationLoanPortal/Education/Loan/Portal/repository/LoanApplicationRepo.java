@@ -12,7 +12,10 @@ public interface LoanApplicationRepo extends JpaRepository<LoanApplication, Long
 
     LoanApplication save(LoanApplication loanApplication);
 
-    List<LoanApplication> findByUserId(Long user_id);
+    // delete loan application by id
+    void deleteLoanApplicationById(Long id);
+
+    List<LoanApplication> findAllByUserId(Long user_id);
 
     List<LoanApplication> findAllByStatus(String status);
 }

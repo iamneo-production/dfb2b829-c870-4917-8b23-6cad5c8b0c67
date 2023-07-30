@@ -1,0 +1,10 @@
+.mat-toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .spacer {
+    margin-right: 10px; /* Adjust the value as needed */
+  }
+  

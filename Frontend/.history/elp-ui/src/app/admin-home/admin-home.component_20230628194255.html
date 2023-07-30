@@ -1,0 +1,25 @@
+<<<<<<< HEAD
+<p>admin-home works!</p>
+=======
+<div class="container">
+    <div class="row">
+      <button mat-raised-button color="primary" routerLink="/admin-loans" class="flex-button">
+        <mat-icon class="icon large-icon">view_list</mat-icon>
+        <span class="button-text">Loans</span>
+      </button>
+  
+      <button mat-raised-button color="primary" routerLink="/admin-loan-application" class="flex-button">
+        <mat-icon class="icon large-icon">list_alt</mat-icon>
+        <span class="button-text">Loan Applications</span>
+      </button>
+    </div>
+  
+    <div class="row">
+        <button mat-raised-button color="primary" [routerLink]="['/add-loan']" [queryParams]="{ showDialog: true }" class="flex-button">
+            <mat-icon class="icon larger-icon">add_box</mat-icon>
+            <span class="button-text">Add loan</span>
+          </button>
+          
+    </div>
+  </div>
+>>>>>>> 4b2657ac (added admin panel)

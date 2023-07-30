@@ -1,0 +1,39 @@
+<div class="container">
+    <h1>Add Payment</h1>
+  
+    <form id="paymentForm" #paymentForm="ngForm" (ngSubmit)="submitPaymentForm(paymentForm)">
+      <div class="form-container">
+        
+        <div class="form-group">
+        <mat-form-field>
+          <mat-label class="label">Loan ID</mat-label>
+          
+          <input matInput class="input" type="text" matInput required [(ngModel)]="loan_id" name="loan_id">
+        </mat-form-field>
+        </div>
+        
+        
+        <div class="form-group">
+            <mat-form-field>
+          <mat-label class="label">Payment Amount</mat-label>
+          <input class="input" type="text" matInput required [(ngModel)]="paymentAmount" name="paymentAmount">
+        </mat-form-field>
+        </div>
+       
+        
+        <div class="form-group">
+            <mat-form-field>
+          <mat-label class="label">Payment Date</mat-label>
+        
+          <input class="input" type="text" matInput [matDatepicker]="paymentDatePicker" required [(ngModel)]="paymentDate" name="paymentDate">
+        </mat-form-field>
+          <mat-datepicker-toggle class="datepicker-toggle" matSuffix [for]="paymentDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #paymentDatePicker></mat-datepicker>
+        </div>
+        
+  
+        <button mat-button type="submit">Submit</button>
+    
+      </div>
+    </form>
+  </div>
