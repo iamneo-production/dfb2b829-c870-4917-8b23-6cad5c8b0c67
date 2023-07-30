@@ -25,6 +25,7 @@ import { ContactRecordComponent } from './contact-record/contact-record.componen
 import { AddLoanUserIdComponent } from './add-loan-user-id/add-loan-user-id.component'; 
 const routes: Routes = [
 
+
   {path:'',component:LoginComponent},
   {path:'login',component:LoginComponent},
   { path: 'userHome', component: HomeComponent ,canActivate:[AuthGuard], data:{roles:['User']} },

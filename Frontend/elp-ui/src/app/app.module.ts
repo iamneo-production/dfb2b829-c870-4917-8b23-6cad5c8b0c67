@@ -36,6 +36,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { LoansComponent } from './loans/loans.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatCardModule } from '@angular/material/card';
+import { SignupComponent } from './signup/signup.component';
 
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { UserComponent } from './user/user.component';
@@ -113,6 +114,7 @@ import { AddLoanUserIdComponent } from './add-loan-user-id/add-loan-user-id.comp
         ContactComponent,
         ContactRecordComponent,
         AddLoanUserIdComponent
+
     
 
   ],

@@ -1,9 +1,11 @@
 
+
 import { Component } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-signup',
@@ -11,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
+
   signupForm: FormGroup;
 
   constructor(
@@ -61,4 +64,3 @@ export class SignupComponent {
         }
       );
   }
-}
