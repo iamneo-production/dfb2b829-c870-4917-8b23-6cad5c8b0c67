@@ -9,9 +9,16 @@ public interface UserRepo extends JpaRepository<User, Long> {
     void deleteUserById(Long id);
 
     Optional<User> findUserById(Long id);
+
     Optional<User> findUserByEmail(String email);
 
     boolean existsByPhoneNumber(String phoneNumber);
 
-    boolean existsByEmail(String email);
+    static boolean existsByEmail(String email) {
+        return false;
+    }
+
+
+    Optional<Object> findByEmail(String email);
+
 }

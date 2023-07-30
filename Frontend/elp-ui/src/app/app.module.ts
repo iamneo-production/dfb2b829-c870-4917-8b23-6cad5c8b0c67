@@ -36,6 +36,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { LoansComponent } from './loans/loans.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatCardModule } from '@angular/material/card';
+import { SignupComponent } from './signup/signup.component';
 
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { UserComponent } from './user/user.component';
@@ -71,6 +72,8 @@ import { SetPasswordComponent } from './set-password/set-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactRecordComponent } from './contact-record/contact-record.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { AddLoanUserIdComponent } from './add-loan-user-id/add-loan-user-id.component'; 
 
 
 @NgModule({
@@ -109,7 +112,9 @@ import { ContactRecordComponent } from './contact-record/contact-record.componen
         SetPasswordComponent,
         ForgotPasswordComponent,
         ContactComponent,
-        ContactRecordComponent
+        ContactRecordComponent,
+        AddLoanUserIdComponent
+
     
 
   ],
@@ -122,6 +127,7 @@ import { ContactRecordComponent } from './contact-record/contact-record.componen
     NgxFileDropModule,
     MatButtonModule,
     MatToolbarModule,
+
 
     // FlexLayoutModule,
     MatFormFieldModule,
@@ -145,7 +151,8 @@ import { ContactRecordComponent } from './contact-record/contact-record.componen
  
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SlickCarouselModule 
 
   ],
   providers: [   AuthGuard,

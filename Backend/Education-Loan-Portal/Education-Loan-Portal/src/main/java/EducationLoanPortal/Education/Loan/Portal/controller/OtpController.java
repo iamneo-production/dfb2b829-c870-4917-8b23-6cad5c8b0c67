@@ -1,4 +1,4 @@
-package EducationLoanPortal.Education.Loan.Portal.controler;
+package EducationLoanPortal.Education.Loan.Portal.controller;
 
 import EducationLoanPortal.Education.Loan.Portal.model.Otp;
 import EducationLoanPortal.Education.Loan.Portal.service.OtpService;
@@ -39,9 +39,9 @@ public class OtpController {
         return new ResponseEntity<>(otpService.forgotPassword(email), HttpStatus.OK);
     }
 
-    @PutMapping("/set-password")
-    public ResponseEntity<String> setPassword(@RequestParam String email, @RequestHeader String newPassword) throws MessagingException {
-        return new ResponseEntity<>(otpService.setPassword(email,newPassword), HttpStatus.OK);
-    }
+    @PostMapping("/set-password")
+    public ResponseEntity<String> setPassword(@RequestHeader String Token, @RequestHeader String NewPassword,@RequestHeader String Email) throws MessagingException {
 
+        return new ResponseEntity<>(otpService.setPassword(Email,Token, NewPassword), HttpStatus.OK);
+    }
 }

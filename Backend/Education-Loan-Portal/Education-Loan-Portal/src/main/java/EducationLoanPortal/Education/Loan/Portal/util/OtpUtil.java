@@ -1,8 +1,10 @@
 package EducationLoanPortal.Education.Loan.Portal.util;
 
+
 import org.springframework.stereotype.Component;
 
 import java.util.Random;
+
 
 @Component
 public class OtpUtil {
@@ -15,4 +17,7 @@ public class OtpUtil {
         }
         return output;
     }
+
+
+
 }

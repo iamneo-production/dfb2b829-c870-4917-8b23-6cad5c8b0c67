@@ -22,8 +22,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { SetPasswordComponent } from './set-password/set-password.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactRecordComponent } from './contact-record/contact-record.component';
-
+import { AddLoanUserIdComponent } from './add-loan-user-id/add-loan-user-id.component'; 
 const routes: Routes = [
+
 
   {path:'',component:LoginComponent},
   {path:'login',component:LoginComponent},
@@ -35,7 +36,7 @@ const routes: Routes = [
   {path:'admin-loans',component:AdminLoansComponent, canActivate:[AuthGuard], data:{roles:['Admin']} },
   {path:'admin-loan-application',component:AdminLoanApplicationComponent, canActivate:[AuthGuard], data:{roles:['Admin']} },
   {path:'loan-details',component:LoanDetailsComponent, canActivate:[AuthGuard], data:{roles:['User']} },
-  {path:'add-loan',component:AddLoanComponent, canActivate:[AuthGuard], data:{roles:['Admin']} },
+  {path:'add-loan',component:AddLoanUserIdComponent , canActivate:[AuthGuard], data:{roles:['Admin']} },
   {path:'adminHome',component:AdminHomeComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
   {path:'add-payment' , component:PaymentComponent,canActivate:[AuthGuard], data:{roles:['Admin']} },
   {path:'user-payment', component:UserPaymentComponent},
