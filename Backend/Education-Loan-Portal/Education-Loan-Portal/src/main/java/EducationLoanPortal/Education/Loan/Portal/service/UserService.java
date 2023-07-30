@@ -49,7 +49,7 @@ public class UserService {
         return userRepo.save(existingUser);
     }
 
-    public User findUserById(Long id) throws UserNotFoundException {
+    public  User findUserById(Long id) throws UserNotFoundException {
         return userRepo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User with ID " + id + " not found"));
     }
@@ -59,7 +59,7 @@ public class UserService {
     }
     public User registerNewUser(User user) {
         // Check if email already exists
-        if (userRepo.existsByEmail(user.getEmail())) {
+        if (UserRepo.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Email already exists");
         }
 
@@ -76,6 +76,7 @@ public class UserService {
 
         user.setRole(userRoles);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
 
         return userRepo.save(user);
     }
@@ -114,6 +115,8 @@ public class UserService {
         user.setPassword(getEncodedPassword("udayagiricharankumar@gmail.com"));
         user.setFirstName("Charan");
         user.setLastName("Udayagiri");
+        user.setPhoneNumber("9123456789");
+        user.setAddress(" Block 10, 7th &5th Floor, DLF IT Park, Rd, Manapakkam, Chennai, Tamil Nadu 600125");
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(userRole);
         user.setRole(userRoles);

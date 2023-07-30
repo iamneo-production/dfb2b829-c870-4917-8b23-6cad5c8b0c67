@@ -1,0 +1,139 @@
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.table-container table {
+  border-collapse: collapse;
+  width: 27%;
+}
+
+.dialog-close-button {
+  display: flex;
+  justify-content: center;
+}
+
+.table-container th,
+.table-container td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd; /* Add border on the right side */
+}
+
+.table-container th:last-child,
+.table-container td:last-child {
+  border-right: 1px solid #ddd; /* Keep border on the right side for the last column */
+}
+
+.table-container th {
+  width: 35%;
+  background-color: #f2f2f2;
+}
+
+.modal-details {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-container button[type="submit"] {
+  min-width: 120px;
+}
+
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 400px; /* Set a maximum height for the form container */
+}
+
+.form-field {
+  width: 100%;
+}
+
+/* Animation Effects */
+.form-container {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+}
+
+.modal-details {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px; /* Add margin-bottom for spacing */
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-container button[type="submit"] {
+  min-width: 120px;
+}
+
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 400px; /* Set a maximum height for the form container */
+}
+
+.form-field {
+  width: 100%;
+}
+
+/* Animation Effects */
+.form-container {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.field-name {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.field-name {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+

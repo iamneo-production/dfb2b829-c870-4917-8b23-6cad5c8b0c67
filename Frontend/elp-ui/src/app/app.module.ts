@@ -1,13 +1,14 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ReactiveFormsModule} from "@angular/forms";
+
 
 import {NgxFileDropModule} from "ngx-file-drop";
 import {MatButtonModule} from "@angular/material/button";
@@ -39,6 +40,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { SignupComponent } from './signup/signup.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -62,6 +64,13 @@ import { DatePipe } from '@angular/common';
 import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
 import { UserPaymentComponent } from './user-payment/user-payment.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { VerifyAccountComponent } from './verify-account/verify-account.component';
+import { SetPasswordComponent } from './set-password/set-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ContactComponent } from './contact/contact.component';
+import { ContactRecordComponent } from './contact-record/contact-record.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { AddLoanUserIdComponent } from './add-loan-user-id/add-loan-user-id.component'; 
 
 
 @NgModule({
@@ -78,12 +87,12 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
     AdminComponent,
     ForbiddenComponent,
     LoginComponent,
-
     PaymentComponent,
     LoanDetailsComponent,
     AddLoanComponent,
     AdminLoanApplicationComponent,
     AdminLoansComponent,
+    SignupComponent,
 
     LoanDetailsComponent,
     AddLoanComponent,
@@ -94,7 +103,13 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
     PaymentDetailsComponent,
 
     LogoutConfirmationDialogComponent,
-      
+        UserPaymentComponent,
+        VerifyAccountComponent,
+        SetPasswordComponent,
+        ForgotPasswordComponent,
+        ContactComponent,
+        ContactRecordComponent,
+        AddLoanUserIdComponent
     
   ],
 
@@ -102,11 +117,11 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule,
     HttpClientModule,
     NgxFileDropModule,
     MatButtonModule,
     MatToolbarModule,
+
 
     // FlexLayoutModule,
     MatFormFieldModule,
@@ -129,6 +144,9 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
 
  
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SlickCarouselModule 
 
   ],
   providers: [   AuthGuard,
@@ -143,4 +161,3 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
 })
 export class AppModule {
 }
-

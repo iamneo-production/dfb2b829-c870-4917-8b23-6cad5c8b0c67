@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { LoanService } from '../loan.service';
 import { UserAuthService } from '../_services/user-auth.service';
+import { StringEncryptionService } from '../_services/string-encryption.service';
 
+interface Loan {
+  id: number;
+  loanAmount: number;
+  interestRate: number;
+  startDate: string;
+  endDate: string;
+  [key: string]: any; // Add an index signature to allow arbitrary string keys
+}
 
 @Component({
   selector: 'app-loans',
@@ -10,23 +19,27 @@ import { UserAuthService } from '../_services/user-auth.service';
 })
 export class LoansComponent implements OnInit {
   userId: number = 0; // User ID to fetch loans for
-  loans: any[] = [];
-  filteredLoans: any[] = [];
+  loans: Loan[] = [];
+  filteredLoans: Loan[] = [];
   searchTerm: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   activeField: string = '';
 
-  constructor(private loanService: LoanService,public userAuthService: UserAuthService) {}
+  constructor(
+    private loanService: LoanService,
+    public userAuthService: UserAuthService,
+    private encryptionService: StringEncryptionService
+  ) {}
 
   ngOnInit() {
+    const userDetails = this.userAuthService.getUserdetails();
+    this.userId = userDetails.id;
     this.getLoansByUserId(this.userId);
   }
 
   getLoansByUserId(userId: number) {
-    const userDetails=this.userAuthService.getUserdetails()
-    this.userId=userDetails.id;
-    this.loanService.getLoansByUserId(this.userId).subscribe(
-      (loans: any[]) => {
+    this.loanService.getLoansByUserId(userId).subscribe(
+      (loans: Loan[]) => {
         this.loans = loans;
         this.filteredLoans = loans;
       },
@@ -35,20 +48,19 @@ export class LoansComponent implements OnInit {
       }
     );
   }
+
   onSearch() {
     const searchTerm = this.searchTerm.toLowerCase().trim();
-  
+
     this.filteredLoans = this.loans.filter(loan =>
       String(loan.id).toLowerCase().includes(searchTerm) ||
-      String(loan.user_id).toLowerCase().includes(searchTerm) ||
       String(loan.loanAmount).toLowerCase().includes(searchTerm) ||
-      String(loan.interestRate).toLowerCase().includes(searchTerm) ||
-      String(loan.startDate).toLowerCase().includes(searchTerm) ||
-      String(loan.endDate).toLowerCase().includes(searchTerm)
+      String(loan.interestRate).toLowerCase().includes(searchTerm) ||    
+      loan.startDate.toLowerCase().includes(searchTerm) ||
+      loan.endDate.toLowerCase().includes(searchTerm)
     );
-  
-    console.log('Filtered Loans:', this.filteredLoans);
   }
+
   sortTable(field: string) {
     if (field === this.activeField) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
@@ -67,5 +79,22 @@ export class LoansComponent implements OnInit {
         return this.sortDirection === 'asc' ? valueA - valueB : valueB - valueA;
       }
     });
+  }
+
+  generateReport(loan: Loan) {
+    // Generate report for the loan
+    console.log('Generating report for loan:', loan);
+  }
+
+  downloadPdf(loan: Loan) {
+    const loanId = loan.id;
+    const encodedId = this.encryptionService.encodeString(loanId.toString());
+    const url = `http://localhost:8080/loans/download?encodedId=${encodedId}`;
+
+    // Trigger the file download by creating a link and clicking it programmatically
+    const link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.click();
   }
 }

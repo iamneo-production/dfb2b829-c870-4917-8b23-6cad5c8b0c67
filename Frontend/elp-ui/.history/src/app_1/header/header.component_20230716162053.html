@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+  <span class="navbar-brand">Education Loan Portal</span>
+
+  <span class="spacer"></span>
+
+  <mat-toolbar color="primary" class="sub-toolbar" *ngIf="userService.roleMatch(['Admin'])">
+    <button mat-button routerLink="/adminHome" [class.active]="currentRoute === '/adminHome'">Admin Dashboard</button>
+  </mat-toolbar>
+
+  <mat-toolbar color="primary" class="sub-toolbar" *ngIf="userService.roleMatch(['User'])">
+    <button mat-button routerLink="/userHome" [class.active]="currentRoute === '/userHome'">User Dashboard</button>
+  </mat-toolbar>
+
+  <div class="spacer"></div> <!-- Added gap -->
+  
+  <ng-template #loggedInTemplate>
+    <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+  </ng-template>
+  
+  <ng-container *ngIf="!isLoggedIn(); else loggedInTemplate">
+    <ng-container *ngIf="currentRoute !== '/signup'">
+      <button mat-raised-button color="accent" routerLink="/signup" [class.active]="currentRoute === '/signup'">Sign Up</button>
+    </ng-container>
+    <ng-container *ngIf="currentRoute === '/signup'">
+      <button mat-raised-button color="primary" routerLink="/login">Login</button>
+    </ng-container>
+  </ng-container>
+
+
+  
+  <button mat-icon-button routerLink="/profile" *ngIf="isLoggedIn()" [class.active]="currentRoute === '/profile'">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>

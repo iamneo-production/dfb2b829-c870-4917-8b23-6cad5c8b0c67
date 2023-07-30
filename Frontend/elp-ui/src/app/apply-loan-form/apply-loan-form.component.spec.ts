@@ -22,4 +22,3 @@ describe('ApplyLoanFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});

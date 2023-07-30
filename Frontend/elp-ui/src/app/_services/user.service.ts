@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserAuthService } from './user-auth.service';
+import { url } from '../config/url'; 
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  PATH_OF_API = 'http://localhost:8080';
+  PATH_OF_API = url;
 
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
   constructor(
@@ -15,19 +16,19 @@ export class UserService {
   ) {}
 
   public login(loginData: any) {
-    return this.httpclient.post(this.PATH_OF_API + '/authenticate', loginData, {
+    return this.httpclient.post(this.PATH_OF_API + 'authenticate', loginData, {
       headers: this.requestHeader,
     });
   }
 
   public forUser() {
-    return this.httpclient.get(this.PATH_OF_API + '/forUser', {
+    return this.httpclient.get(this.PATH_OF_API + 'forUser', {
       responseType: 'text',
     });
   }
 
   public forAdmin() {
-    return this.httpclient.get(this.PATH_OF_API + '/forAdmin', {
+    return this.httpclient.get(this.PATH_OF_API + 'forAdmin', {
       responseType: 'text',
     });
   }
@@ -45,10 +46,7 @@ export class UserService {
   public roleMatch(allowedRoles: string[]): boolean {
     let isMatch = false;
     const userRoles: any = this.userAuthService.getRoles();
-    console.log('userRoles');
-    console.log(userRoles);
-    console.log('allowedRoles');
-    console.log(allowedRoles);
+
 
     if (userRoles != null && userRoles) {
       for (let i = 0; i < userRoles.length; i++) {

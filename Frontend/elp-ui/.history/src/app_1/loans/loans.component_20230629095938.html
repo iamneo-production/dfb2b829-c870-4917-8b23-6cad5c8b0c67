@@ -1,0 +1,41 @@
+<h1>Loans Table</h1>
+<mat-form-field>
+    <input matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup)="onSearch()">
+  </mat-form-field>
+      <table *ngIf="filteredLoans.length > 0">
+        <thead>
+          <tr>
+            <th (click)="sortTable('id')" [ngClass]="{'highlight': activeField === 'id'}">Loan Id
+                <mat-icon *ngIf="activeField === 'id' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="activeField === 'id' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+            </th>
+            <th (click)="sortTable('loanAmount')" [ngClass]="{'highlight': activeField === 'loanAmount'}">Loan Amount
+                <mat-icon *ngIf="activeField === 'loanAmount' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="activeField === 'loanAmount' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+              </th>
+              <th (click)="sortTable('interestRate')" [ngClass]="{'highlight': activeField === 'interestRate'}">Interest Rate
+                <mat-icon *ngIf="activeField === 'interestRate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="activeField === 'interestRate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+              </th>
+              <th (click)="sortTable('startDate')" [ngClass]="{'highlight': activeField === 'startDate'}">Start Date
+                <mat-icon *ngIf="activeField === 'startDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="activeField === 'startDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+              </th>
+              <th (click)="sortTable('endDate')" [ngClass]="{'highlight': activeField === 'endDate'}">End Date
+                <mat-icon *ngIf="activeField === 'endDate' && sortDirection === 'asc'">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="activeField === 'endDate' && sortDirection === 'desc'">arrow_drop_down</mat-icon>
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let loan of filteredLoans">
+            <td>{{ loan.id }}</td>
+            <td>{{ loan.loanAmount }}</td>
+            <td>{{ loan.interestRate }}</td>
+            <td>{{ loan.startDate | date }}</td>
+            <td>{{ loan.endDate | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <div *ngIf="filteredLoans.length === 0">No loans found for the selected user ID.</div>

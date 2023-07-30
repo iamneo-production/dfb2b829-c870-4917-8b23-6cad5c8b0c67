@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="greeting">
+    <p class="greeting-text">Hello {{ userAuthService.getUserdetails()?.firstName }} {{ userAuthService.getUserdetails()?.lastName }}</p>
+  </div>
+
+  <div class="row">
+    <button mat-raised-button color="primary" routerLink="/admin-loans" class="flex-button">
+      <i class="material-icons icon large-icon">view_list</i>
+      <span class="button-text">Loans</span>
+    </button>
+  
+    <button mat-raised-button color="primary" routerLink="/admin-loan-application" class="flex-button">
+      <i class="material-icons icon large-icon">list_alt</i>
+      <span class="button-text">Loan Applications</span>
+    </button>
+  
+    <button mat-raised-button color="primary" [routerLink]="['/add-loan']" [queryParams]="{ showDialog: true }" class="flex-button">
+      <i class="material-icons icon large-icon">add_box</i>
+      <span class="button-text">Add loan</span>
+    </button>
+  </div>
+
+  <div class="row">
+    <button mat-raised-button color="primary" [routerLink]="['/add-payment']" [queryParams]="{ showDialog: true }" class="flex-button">
+      <i class="material-icons icon larger-icon">add_box</i>
+      <span class="button-text">Add Payment</span>
+    </button>
+  </div>
+</div>
+
+
