@@ -11,9 +11,11 @@ import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -254,5 +256,4 @@ public class LoanApplicationService {
         return outputStream.toByteArray();
     }
 }
-
 

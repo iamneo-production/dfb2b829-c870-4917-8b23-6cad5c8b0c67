@@ -36,6 +36,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { LoansComponent } from './loans/loans.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatCardModule } from '@angular/material/card';
+
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
@@ -48,6 +49,7 @@ import { AuthGuard } from './_auth/auth.guard';
 import { AuthInterceptor } from './_auth/auth.interceptor';
 import { UserService } from './_services/user.service';
 import { LoginComponent } from './login/login.component';
+
 
 import { PaymentComponent } from './payment/payment.component';
 
@@ -82,6 +84,7 @@ import { AddLoanUserIdComponent } from './add-loan-user-id/add-loan-user-id.comp
     DialogComponent,
     LoansComponent,
     ProfileComponent,
+
     AdminHomeComponent,
     UserComponent,
     AdminComponent,
@@ -111,6 +114,7 @@ import { AddLoanUserIdComponent } from './add-loan-user-id/add-loan-user-id.comp
         ContactRecordComponent,
         AddLoanUserIdComponent
     
+
   ],
 
   imports: [
